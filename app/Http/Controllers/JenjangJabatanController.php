@@ -18,7 +18,8 @@ class JenjangJabatanController extends Controller
 
     public function index()
     {
-        return view('jenjangJabatan.index');
+        $jenJab = jenjangJabatan::paginate(5);
+        return view('jenjangJabatan.index', compact('jenJab'));
     }
 
     public function listjenjangJabatan(Request $request)

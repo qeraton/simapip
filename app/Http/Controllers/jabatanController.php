@@ -17,7 +17,8 @@ class jabatanController extends Controller
 {
     public function index()
     {
-        return view('jabatan.index');
+        $jabatan = jabatan::paginate(5);
+        return view('jabatan.index', compact('jabatan'));
     }
 
     public function listJabatan(Request $request)

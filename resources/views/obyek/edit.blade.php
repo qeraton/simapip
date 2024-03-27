@@ -90,8 +90,8 @@
                                     </div>
                                 </div>
                                 <div class="nftmax__item-button--group">
-                                    <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/obyek') }}" type="submit">Cancel</a>
-                                    <button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn" type="submit">Update Data</button>
+                                    <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/obyek') }}" type="submit">Batal</a>
+                                    <button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn" type="submit">Perbarui Data</button>
                                 </div>
                         </div>
                     </div>
