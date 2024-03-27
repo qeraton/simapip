@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     jenjangJabatanController as jenJabatan,
     jabatanController as jabatan,
     pangkatController as pangkat,
+    profileController as profile,
 };
 
 /*
@@ -88,7 +89,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [jenJabatan::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [jenJabatan::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [jenJabatan::class, 'destroy'])->name('delete');
-    })->name('obyek');
+    })->name('jenjangJabatan');
 
     Route::group(['prefix' => 'jabatan', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [jabatan::class, 'index'])->name('index');
@@ -98,7 +99,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [jabatan::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [jabatan::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [jabatan::class, 'destroy'])->name('delete');
-    })->name('obyek');
+    })->name('jabatan');
 
     Route::group(['prefix' => 'pangkat', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [pangkat::class, 'index'])->name('index');
@@ -108,6 +109,16 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [pangkat::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [pangkat::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [pangkat::class, 'destroy'])->name('delete');
-    })->name('obyek');
+    })->name('pangkat');
+
+    Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [profile::class, 'index'])->name('index');
+        Route::get('/list', [profile::class, 'listPangkat'])->name('list');
+        Route::get('/create', [profile::class, 'create'])->name('create');
+        Route::post('/store', [profile::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [profile::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [profile::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [profile::class, 'destroy'])->name('delete');
+    })->name('my-profile');
 
 })->name("simapip");
