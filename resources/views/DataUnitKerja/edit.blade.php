@@ -75,7 +75,7 @@
                                         href="{{ url('/unit-kerja') }}">Batal</a>
                                     <button
                                         class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius "
-                                        type="submit">Ubah
+                                        type="submit">Perbaharui
                                     </button>
                                 </div>
                             </div>
