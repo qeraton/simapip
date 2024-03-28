@@ -160,11 +160,30 @@
                                 <div class="col-12">
                                     <div class="row nftmax-gap-sq30">
                                         <div id="pegawai-container"></div>
-                                        <div id="pegawai-pagination-container" class="pull-left"></div>
+                                        <div id="pegawai-pagination-container" class="pull-left">
+                                            @if($jenis->lastPage() > 1)
+                                                {{ $jenis->links() }}
+                                            @else
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link text-secondary"><</span>
+                                                        </li>
+                                                        <li class="page-item active" aria-current="page">
+                                                            <span class="page-link">1</span>
+                                                        </li>
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link text-secondary">></span>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- End Welcome CTA -->
                     </div>
                     <!-- End Dashboard Inner -->

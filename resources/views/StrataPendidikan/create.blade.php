@@ -58,4 +58,7 @@
                     <!-- End Dashboard Inner -->
                 </div>
             </div>
-            @include('Layout.Template.Footer')
+        </div>
+    </div>
+</section>
+@include('Layout.Template.Footer')

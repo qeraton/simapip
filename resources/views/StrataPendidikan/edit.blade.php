@@ -32,7 +32,7 @@
                                         href="{{ url('/strata-pendidikan') }}">Batal</a>
                                     <button
                                         class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius "
-                                        type="submit">Edit
+                                        type="submit">Perbaharui
                                     </button>
                                 </div>
                             </form>

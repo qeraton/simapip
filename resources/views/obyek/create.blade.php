@@ -68,15 +68,11 @@
 																	
 																	<div class="nftmax__item-form--group">
 																		<label class="nftmax__item-label">Pimpinan</label>
+																		<input class="nftmax__item-input" type="text" name="pimpinan" id="pimpinan" placeholder="Input Pimpinan" required="required">
 																	</div>
 																	<div>
-																		<input class="nftmax__item-input" type="text" name="pimpinan" id="pimpinan" placeholder="Input Pimpinan" required="required">
-																		<br>
-																		<input class="nftmax__item-input" type="text" name="nip_pimpinan" id="nip_pimpinan" placeholder="Input NIP Pimpinan" required="required">
-																	
-
-																
-															</div>
+																		<input class="nftmax__item-input mt-10" type="number" name="nip_pimpinan" id="nip_pimpinan" placeholder="Input NIP Pimpinan" required="required" minlength="18" maxlength="18">
+																	</div>
 														</div>
 													</div>
 													<div class="nftmax__item-button--group">

@@ -17,5 +17,9 @@ class UnitKerja extends Model
             'nama_singkatan',
             'alamat',
             'pimpinan',
+            'nomor_telepon',
+            'email',
+            'website',
+            'nomor_urut',
         ];
 }

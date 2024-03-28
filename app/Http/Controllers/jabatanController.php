@@ -17,7 +17,8 @@ class jabatanController extends Controller
 {
     public function index()
     {
-        return view('jabatan.index');
+        $jabatan = jabatan::paginate(5);
+        return view('jabatan.index', compact('jabatan'));
     }
 
     public function listJabatan(Request $request)
@@ -69,7 +70,7 @@ class jabatanController extends Controller
 
             ]);
 
-            return redirect()->route('index')->with('success', 'Berhasil Menambahkan Data!');
+            return Redirect::to('/jabatan')->with('success', 'Berhasil mengubah data!');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
@@ -107,7 +108,7 @@ class jabatanController extends Controller
             'kelompok_jabatan' => $request->kelompok_jabatan,
         ]);
 
-        return redirect()->route('index')->with('success', 'Berhasil mengubah data!');
+        return Redirect::to('/jabatan')->with('success', 'Berhasil mengubah data!');
     }
 
     public function destroy(jabatan $jabatanController, $id)

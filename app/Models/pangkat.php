@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Obyek extends Model
+class pangkat extends Model
 {
     use HasFactory;
+
+    protected $table = 'ref_pangkat';
 
     protected $fillable = [
         'kode',
         'nama',
-        'alamat',
-        'no_telp',
-        'email',
-        'website',
-        'pimpinan',
-        'nip_pimpinan',
+        'golongan_kode',
+        'golongan',
+        'urutan',
     ];
-    protected $table = 'ref_obyek';
 }

@@ -39,7 +39,7 @@
 
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">ID Jabatan </label>
-                                                <input class="nftmax__item-input" type="text" name="ref_jabatan_id"
+                                                <input class="nftmax__item-input" type="number" name="ref_jabatan_id"
                                                     id="ref_jabatan_id" placeholder="Edit ID Jabatan" required="required"
                                                     value="{{ $jenjangJabatanEdit['ref_jabatan_id'] }}">
                                             </div>
@@ -60,7 +60,7 @@
 
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Level </label>
-                                                <input class="nftmax__item-input" type="text" name="level"
+                                                <input class="nftmax__item-input" type="number" name="level"
                                                     id="level" placeholder="Edit Level"
                                                     required="required" value="{{ $jenjangJabatanEdit['level'] }}">
                                             </div>

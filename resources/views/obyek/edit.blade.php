@@ -38,57 +38,60 @@
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">Kode </label>
                                                     <input class="nftmax__item-input rounded-0" type="text" name="kode"
-                                                        id="kode" placeholder="Input Kode" required="required" value="{{ $obyekEdit['kode'] }}"> 
+                                                        id="kode" placeholder="Edit Kode" required="required" value="{{ $obyekEdit['kode'] }}"> 
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">Nama Lengkap </label>
                                                     <input class="nftmax__item-input" type="text" name="nama"
-                                                        id="nama" placeholder="Input Nama Lengkap"
+                                                        id="nama" placeholder="Edit Nama Lengkap"
                                                         required="required" value="{{ $obyekEdit['nama'] }}">
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">Alamat </label>
                                                     <input class="nftmax__item-input" type="text" name="alamat"
-                                                        id="alamat" placeholder="https:yoursite.lo/imte/item_name123"
+                                                        id="alamat" placeholder="Edit Alamat"
                                                         required="required" value="{{ $obyekEdit['alamat'] }}">
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">No Telphone </label>
                                                     <input class="nftmax__item-input" type="text" name="no_telp"
-                                                        id="no_telp" placeholder="https:yoursite.lo/imte/item_name123"
+                                                        id="no_telp" placeholder="Edit No. Telp"
                                                         required="required" value="{{ $obyekEdit['no_telp'] }}">
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">Email </label>
                                                     <input class="nftmax__item-input" type="email" name="email"
-                                                        id="email" placeholder="https:yoursite.lo/imte/item_name123"
+                                                        id="email" placeholder="Edit Email"
                                                         required="required" value="{{ $obyekEdit['email'] }}">
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
                                                     <label class="nftmax__item-label">Website </label>
                                                     <input class="nftmax__item-input" type="text" name="website"
-                                                        id="website" placeholder="https:yoursite.lo/imte/item_name123"
+                                                        id="website" placeholder="Edit Website"
                                                         required="required" value="{{ $obyekEdit['website'] }}">
                                                 </div>
 
                                                 <div class="nftmax__item-form--group">
-                                                    <label class="nftmax__item-label">Pimpinan </label>
-                                                    <input class="nftmax__item-input" type="text" name="pimpinan"
-                                                        id="pimpinan" placeholder="https:yoursite.lo/imte/item_name123"
-                                                        required="required" value="{{ $obyekEdit['pimpinan'] }}">
-                                                </div>
+												    <label class="nftmax__item-label">Pimpinan</label>
+												    <input class="nftmax__item-input" type="text" name="pimpinan" id="pimpinan" placeholder="Edit Pimpinan" required="required" value="{{ $obyekEdit['pimpinan'] }}">
+												</div>
+												<div>
+													<input class="nftmax__item-input mt-10" type="number" name="nip_pimpinan" id="nip_pimpinan" placeholder="Edit NIP Pimpinan" required="required" minlength="18" maxlength="18" value="{{ $obyekEdit['nip_pimpinan'] }}">
+												</div>
+                                                
+                                                
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="nftmax__item-button--group">
-                                    <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/obyek') }}" type="submit">Cancel</a>
-                                    <button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn" type="submit">Update Data</button>
+                                    <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/obyek') }}" type="submit">Batal</a>
+                                    <button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn" type="submit">Perbarui Data</button>
                                 </div>
                         </div>
                     </div>

@@ -18,7 +18,8 @@ class JenjangJabatanController extends Controller
 
     public function index()
     {
-        return view('jenjangJabatan.index');
+        $jenJab = jenjangJabatan::paginate(5);
+        return view('jenjangJabatan.index', compact('jenJab'));
     }
 
     public function listjenjangJabatan(Request $request)
@@ -69,7 +70,7 @@ class JenjangJabatanController extends Controller
                 
             ]);
 
-            return redirect()->route('index')->with('success', 'Berhasil Menambahkan Data!');
+            return Redirect::to('/jenjangJabatan')->with('success', 'Berhasil mengubah data!');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
@@ -109,7 +110,7 @@ class JenjangJabatanController extends Controller
             
         ]);
 
-        return redirect()->route('index')->with('success', 'Berhasil mengubah data!');
+        return Redirect::to('/jenjangJabatan')->with('success', 'Berhasil mengubah data!');
     }
 
     public function destroy(jenjangJabatan $jenjangJabatanController, $id)

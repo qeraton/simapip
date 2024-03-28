@@ -2,9 +2,9 @@
 
 <style>
     .nftmax-table__text {
-    /* white-space: nowrap;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; */
+    text-overflow: ellipsis;
     max-width: 100px;
 }
 
@@ -26,7 +26,7 @@
                                     module ini.</p>
                             </div>
                             <div class="welcome-cta__button">
-                                <a href="{{ url('/jenis-pengawasan/create') }}"
+                                <a href="{{ url('/unit-kerja/create') }}"
                                     class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Unit Kerja</a>
                             </div>
                         </div>
@@ -36,13 +36,18 @@
                                 <h3 class="nftmax-table__title mb-0">Data Unit Kerja
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
+                                @if(session()->has('success'))
+                                    <script>
+                                        toastr.success("{{ session('success') }}");
+                                    </script>
+                                @endif
                                 <div class="nftmax-marketplace__bar-right">
                                     <div class="nftmax-marketplace__bar-one">
                                         <div class="nftmax-marketplace__bar-search">
                                             <button id="btn-search" class="search-btn" type="button"><img
                                                     src="/assets/img/search.png" alt="#"></button>
                                             <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Ketikan kode atau nama...">
+                                                placeholder="Ketikan Nama Unit, Nama...">
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +65,7 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h3">Nama Singkatan</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h4">Alamat</th>
                                                 <th class="nftmax-table__column-5 nftmax-table__h5">Pimpinan</th>
-                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp.</th>
+                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp</th>
                                                 <th class="nftmax-table__column-7 nftmax-table__h7">Email</th>
                                                 <th class="nftmax-table__column-8 nftmax-table__h8">Website</th>
                                                 {{-- <th class="nftmax-table__column-9 nftmax-table__h9">No. Urut</th> --}}
@@ -72,51 +77,43 @@
                                             @foreach ($unitKerja as $item)
                                                 <tr>
                                                     {{-- <td class="nftmax-table__column-1 nftmax-table__data-1">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['kode_unit_kerja'] }}
                                                         </p>
                                                     </td> --}}
                                                     <td class="nftmax-table__column-2 nftmax-table__data-2">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_unit'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-3">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_singkatan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-4">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['alamat'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-5 nftmax-table__data-5">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['pimpinan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-6 nftmax-table__data-6">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nomor_telepon'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-7 nftmax-table__data-7">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['email'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-8 nftmax-table__data-8">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['website'] }}
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            <a href="{{ $item['website'] }}" target="_blank">{{ $item['website'] }}</a>
                                                         </p>
                                                     </td>   
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
@@ -148,7 +145,7 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h3">Nama Singkatan</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h4">Alamat</th>
                                                 <th class="nftmax-table__column-5 nftmax-table__h5">Pimpinan</th>
-                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp.</th>
+                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp</th>
                                                 <th class="nftmax-table__column-7 nftmax-table__h7">Email</th>
                                                 <th class="nftmax-table__column-8 nftmax-table__h8">Website</th>
                                                 {{-- <th class="nftmax-table__column-9 nftmax-table__h9">No. Urut</th> --}}
@@ -160,51 +157,43 @@
                                             @foreach ($unitKerja as $item)
                                                 <tr>
                                                     {{-- <td class="nftmax-table__column-1 nftmax-table__data-1">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['kode_unit_kerja'] }}
                                                         </p>
                                                     </td> --}}
                                                     <td class="nftmax-table__column-2 nftmax-table__data-2">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_unit'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-3">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_singkatan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-4">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['alamat'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-5 nftmax-table__data-5">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['pimpinan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-6 nftmax-table__data-6">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nomor_telepon'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-7 nftmax-table__data-7">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['email'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-8 nftmax-table__data-8">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['website'] }}
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            <a href="{{ $item['website'] }}" target="_blank">{{ $item['website'] }}</a>
                                                         </p>
                                                     </td>   
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
@@ -236,7 +225,7 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h3">Nama Singkatan</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h4">Alamat</th>
                                                 <th class="nftmax-table__column-5 nftmax-table__h5">Pimpinan</th>
-                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp.</th>
+                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp</th>
                                                 <th class="nftmax-table__column-7 nftmax-table__h7">Email</th>
                                                 <th class="nftmax-table__column-8 nftmax-table__h8">Website</th>
                                                 {{-- <th class="nftmax-table__column-9 nftmax-table__h9">No. Urut</th> --}}
@@ -248,51 +237,43 @@
                                             @foreach ($unitKerja as $item)
                                                 <tr>
                                                     {{-- <td class="nftmax-table__column-1 nftmax-table__data-1">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['kode_unit_kerja'] }}
                                                         </p>
                                                     </td> --}}
                                                     <td class="nftmax-table__column-2 nftmax-table__data-2">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_unit'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-3">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_singkatan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-4">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['alamat'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-5 nftmax-table__data-5">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['pimpinan'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-6 nftmax-table__data-6">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nomor_telepon'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-7 nftmax-table__data-7">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['email'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-8 nftmax-table__data-8">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['website'] }}
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            <a href="{{ $item['website'] }}" target="_blank">{{ $item['website'] }}</a>
                                                         </p>
                                                     </td>   
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
@@ -320,11 +301,30 @@
                                 <div class="col-12">
                                     <div class="row nftmax-gap-sq30">
                                         <div id="pegawai-container"></div>
-                                        <div id="pegawai-pagination-container" class="pull-left"></div>
+                                        <div id="pegawai-pagination-container" class="pull-left">
+                                            @if($unitKerja->lastPage() > 1)
+                                                {{ $unitKerja->links() }}
+                                            @else
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link text-secondary"><</span>
+                                                        </li>
+                                                        <li class="page-item active" aria-current="page">
+                                                            <span class="page-link">1</span>
+                                                        </li>
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link text-secondary">></span>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- End Welcome CTA -->
                     </div>
                     <!-- End Dashboard Inner -->
