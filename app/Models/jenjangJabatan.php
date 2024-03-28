@@ -16,4 +16,9 @@ class jenjangJabatan extends Model
         'level',
     ];
     protected $table = 'ref_jenjang_jabatan';
+
+    public function jabatan()
+    {
+        return $this->belongsTo(jabatan::class, 'ref_jabatan');
+    }
 }

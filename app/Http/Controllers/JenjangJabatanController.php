@@ -9,7 +9,8 @@ use Hash;
 use Session;
 use App\Models\{
     Obyek,
-    jenjangJabatan
+    jenjangJabatan,
+    jabatan
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,14 @@ class JenjangJabatanController extends Controller
         $jenJab = jenjangJabatan::paginate(5);
         return view('jenjangJabatan.index', compact('jenJab'));
     }
+
+    public function selectIDJabatan()
+    {
+        $data = jabatan::where('kode', 'LIKE', '%' . request('q') . '%')->paginate(10);
+
+        return response()->json($data);
+    }
+
 
     public function listjenjangJabatan(Request $request)
     {

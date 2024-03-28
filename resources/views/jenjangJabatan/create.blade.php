@@ -35,10 +35,15 @@
 											<div class="row">
 												<div class="col-12">
 													<div class="nftmax__item-box">
-                                  <div class="nftmax__item-form--group">
+                                  {{-- <div class="nftmax__item-form--group">
 																		<label class="nftmax__item-label">ID jabatan </label>
 																		<input class="nftmax__item-input" type="text" name="ref_jabatan_id" id="ref_jabatan_id" placeholder="Input ID Jabatan" required="required">
-																	</div>
+																	</div> --}}
+																	<div class="nftmax__item-form--group">
+																		<label class="nftmax__item-label">Pilih Jabatan </label>
+																		<select id="selectIDJabatan" class="form-select" name="ref_jabatan_id"
+                                    area-label="Default select example" required></select>
+										    					</div>
 
                                   <div class="nftmax__item-form--group">
 																		<label class="nftmax__item-label">Kode </label>
@@ -72,4 +77,4 @@
 								<!-- End Dashboard Inner -->
 							</div>
 						</div>
-@include('Layout.Template.Footer')
+@include('Layout.Footer')

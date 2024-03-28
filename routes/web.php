@@ -94,6 +94,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/create', [jenJabatan::class, 'create'])->name('create');
         Route::post('/store', [jenJabatan::class, 'store'])->name('store');
         Route::get('/edit/{id}', [jenJabatan::class, 'edit'])->name('edit');
+        Route::get('/selectIDJabatan', [jenJabatan::class, 'selectIDJabatan'])->name('selectIDJabatan');
         Route::patch('/update/{id}', [jenJabatan::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [jenJabatan::class, 'destroy'])->name('delete');
     })->name('jenjangJabatan');

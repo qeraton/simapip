@@ -1,4 +1,5 @@
 @include('Layout.Header')
+
 <!-- NFTmax Dashboard -->
 <section class="nftmax-adashboard nftmax-show">
     <div class="container">
@@ -37,12 +38,18 @@
                                                 </div>
                                             @endif
 
-                                            <div class="nftmax__item-form--group">
+                                            {{-- <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">ID Jabatan </label>
                                                 <input class="nftmax__item-input" type="number" name="ref_jabatan_id"
                                                     id="ref_jabatan_id" placeholder="Edit ID Jabatan" required="required"
                                                     value="{{ $jenjangJabatanEdit['ref_jabatan_id'] }}">
-                                            </div>
+                                            </div> --}}
+
+                                            <div class="nftmax__item-form--group">
+												<label class="nftmax__item-label">Edit jabatan </label>
+												<select id="selectIDJabatan" class="form-select" name="ref_jabatan_id"
+                                                area-label="Default select example" value="{{ $jenjangJabatanEdit['ref_jabatan_id'] }}"></select>
+										    </div>
 
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Kode </label>
@@ -84,4 +91,5 @@
             <!-- End Dashboard Inner -->
         </div>
     </div>
-    @include('Layout.Template.Footer')
+
+@include('Layout.Footer')
