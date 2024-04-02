@@ -64,11 +64,23 @@
 					</div>
 
 					<div class="admin-menu__two mg-top-50">
+						<h4 class="admin-menu__title nftmax-scolor">Perencanaan</h4>
+						<!-- Nav Menu -->
+						<div class="menu-bar">
+							<ul class="menu-bar__one">
+								<li><a href="{{url('/PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon"  viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg"><path d="M13.9729 3L9.06236 7.82172C7.92242 8.93841 6.07703 8.93841 4.93709 7.82172L0.0267964 3C0.0185934 3.09048 0 3.17238 0 3.26232V10.1359C0.00191403 11.7168 1.30673 12.9981 2.9167 13H11.0833C12.6933 12.9981 13.9981 11.7168 14 10.1359V3.26232C13.9997 3.17238 13.9811 3.09048 13.9729 3Z"></path><path d="M8.31954 6.50593L14 1.35845C13.4403 0.517707 12.4369 0.00264136 11.353 0H2.64666C1.5631 0.00264136 0.559417 0.517707 0 1.35845L5.68046 6.50593C6.40983 7.16469 7.58988 7.16469 8.31954 6.50593Z"></path></svg></span><span class="menu-bar__name">PKPT</span></span></a></li>
+							</ul>
+						</div>
+						<!-- End Nav Menu -->
+					</div>
+
+					<div class="admin-menu__two mg-top-50">
 						<h4 class="admin-menu__title nftmax-scolor">Referensi</h4>
 						<!-- Nav Menu -->
 						<div class="menu-bar">
 							<ul class="menu-bar__one">
 								<li><a href="{{url('/pegawai')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16"><path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/></svg></span><span class="menu-bar__name">Data Pegawai</span></span></a></li>
+								<li><a href="{{url('/PKPT/ref-PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon"  viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg"><path d="M13.9729 3L9.06236 7.82172C7.92242 8.93841 6.07703 8.93841 4.93709 7.82172L0.0267964 3C0.0185934 3.09048 0 3.17238 0 3.26232V10.1359C0.00191403 11.7168 1.30673 12.9981 2.9167 13H11.0833C12.6933 12.9981 13.9981 11.7168 14 10.1359V3.26232C13.9997 3.17238 13.9811 3.09048 13.9729 3Z"></path><path d="M8.31954 6.50593L14 1.35845C13.4403 0.517707 12.4369 0.00264136 11.353 0H2.64666C1.5631 0.00264136 0.559417 0.517707 0 1.35845L5.68046 6.50593C6.40983 7.16469 7.58988 7.16469 8.31954 6.50593Z"></path></svg></span><span class="menu-bar__name">PKPT</span></span></a></li>
 								<li><a href="{{url('/strata-pendidikan')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v2"><svg class="nftmax-svg-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.40093 8.39892C8.07534 8.74593 7.8023 9.13874 7.59052 9.56484L13.3422 15.3165C13.4732 15.4475 13.651 15.5211 13.8362 15.5211C14.0215 15.5211 14.1992 15.4475 14.3303 15.3165L15.3185 14.3283C15.3834 14.2634 15.4349 14.1864 15.47 14.1016C15.5052 14.0168 15.5232 13.9259 15.5232 13.8342C15.5232 13.7424 15.5052 13.6515 15.47 13.5667C15.4349 13.482 15.3834 13.4049 15.3185 13.34L9.56685 7.5899C9.13999 7.79984 8.74699 8.07254 8.40093 8.39892Z"></path><path d="M4.94216 4.94003C4.41373 5.43043 3.80202 5.8226 3.1358 6.09809L6.74747 9.70976C7.02543 9.04469 7.41799 8.43359 7.90728 7.90427C8.43576 7.4139 9.04746 7.02168 9.71363 6.74604L6.10179 3.13507C5.82373 3.79989 5.43125 4.41079 4.94216 4.94003Z"></path><path d="M7.4116 0.494075L6.42351 1.48216C6.15066 1.75501 6.15066 2.19739 6.42351 2.47024L10.3758 6.42256C10.6487 6.69541 11.0911 6.69541 11.3639 6.42256L12.352 5.43448C12.6249 5.16163 12.6249 4.71925 12.352 4.4464L8.39968 0.494075C8.12683 0.221224 7.68445 0.221224 7.4116 0.494075Z"></path><path d="M1.48209 6.42236L0.49401 7.41044C0.221159 7.68329 0.221159 8.12567 0.49401 8.39852L4.44633 12.3508C4.71919 12.6237 5.16156 12.6237 5.43441 12.3508L6.4225 11.3628C6.69535 11.0899 6.69535 10.6475 6.4225 10.3747L2.47017 6.42236C2.19732 6.14951 1.75494 6.14951 1.48209 6.42236Z"></path></svg></span><span class="menu-bar__name">Strata Pendidikan</span></span></a></li>
 								<li><a href="{{url('/unit-kerja')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/><path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/></svg></span><span class="menu-bar__name">Daftar Unit Kerja</span></span></a></li>
 								<li><a href="{{ url('/jenis-pengawasan') }}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-indent-left" viewBox="0 0 16 16" onmouseover="this.setAttribute('fill', 'white')" onmouseout="this.setAttribute('fill', 'currentColor')"><path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708M7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg></span><span class="menu-bar__name">Jenis Pengawasan</span></span></a></li>
@@ -125,39 +137,6 @@
 				</div>
 			</div>
 			<!-- End Logout Modal -->
-
-			<!-- Connect to Wallet -->
-			<div class="nftmax-preview__modal modal fade" id="add_wallet" tabindex="-1" aria-labelledby="addWalletlLabel" aria-hidden="true" >
-				<div class="modal-dialog modal-dialog-centered nftmax-followers__modal">
-					<div class="modal-content nftmax-preview__connect">
-						<div class="modal-header nftmax__modal__header">
-							<h4 class="modal-title nftmax-preview__modal-title" id="addWalletlLabel">Connect to a wallet</h4>
-							<button type="button" class="nftmax-preview__modal--close btn-close" data-bs-dismiss="modal" aria-label="Close"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36 16.16C36 17.4399 36 18.7199 36 20.0001C35.7911 20.0709 35.8636 20.2554 35.8385 20.4001C34.5321 27.9453 30.246 32.9248 22.9603 35.2822C21.9006 35.6251 20.7753 35.7657 19.6802 35.9997C18.4003 35.9997 17.1204 35.9997 15.8401 35.9997C15.5896 35.7086 15.2189 35.7732 14.9034 35.7093C7.77231 34.2621 3.08728 30.0725 0.769671 23.187C0.435002 22.1926 0.445997 21.1199 0 20.1599C0 18.7198 0 17.2798 0 15.8398C0.291376 15.6195 0.214408 15.2656 0.270759 14.9808C1.71321 7.69774 6.02611 2.99691 13.0428 0.700951C14.0118 0.383805 15.0509 0.386897 15.9999 0C17.2265 0 18.4532 0 19.6799 0C19.7156 0.124041 19.8125 0.136067 19.9225 0.146719C27.3 0.868973 33.5322 6.21922 35.3801 13.427C35.6121 14.3313 35.7945 15.2484 36 16.16ZM33.011 18.0787C33.0433 9.77105 26.3423 3.00309 18.077 2.9945C9.78479 2.98626 3.00344 9.658 2.98523 17.8426C2.96667 26.1633 9.58859 32.9601 17.7602 33.0079C26.197 33.0577 32.9787 26.4186 33.011 18.0787Z" fill="#374557" fill-opacity="0.6"></path><path d="M15.9309 18.023C13.9329 16.037 12.007 14.1207 10.0787 12.2072C9.60071 11.733 9.26398 11.2162 9.51996 10.506C9.945 9.32677 11.1954 9.0811 12.1437 10.0174C13.9067 11.7585 15.6766 13.494 17.385 15.2879C17.9108 15.8401 18.1633 15.7487 18.6375 15.258C20.3586 13.4761 22.1199 11.7327 23.8822 9.99096C24.8175 9.06632 26.1095 9.33639 26.4967 10.517C26.7286 11.2241 26.3919 11.7413 25.9133 12.2178C24.1757 13.9472 22.4477 15.6855 20.7104 17.4148C20.5228 17.6018 20.2964 17.7495 20.0466 17.9485C22.0831 19.974 24.0372 21.8992 25.9689 23.8468C26.9262 24.8119 26.6489 26.1101 25.4336 26.4987C24.712 26.7292 24.2131 26.3441 23.7455 25.8757C21.9945 24.1227 20.2232 22.3892 18.5045 20.6049C18.0698 20.1534 17.8716 20.2269 17.4802 20.6282C15.732 22.4215 13.9493 24.1807 12.1777 25.951C11.7022 26.4262 11.193 26.7471 10.4738 26.4537C9.31345 25.9798 9.06881 24.8398 9.98589 23.8952C11.285 22.5576 12.6138 21.2484 13.9387 19.9355C14.5792 19.3005 15.2399 18.6852 15.9309 18.023Z" fill="#374557" fill-opacity="0.6"></path></svg></button>
-						</div>
-						<div class="modal-body nftmax-modal__body">
-							<!-- Treadning Action Single -->
-							<ul class="nftmax-wallet__list">
-								<!-- Single Wallet -->
-								@foreach($Addmoney as $Addmoney)
-								<li  class="nftmax-wallet__list-single">
-									<div class="nftmax-balance-info">
-										<div class="nftmax-balance__img"><img src="{{asset($Addmoney['0'])}}" alt="#"></div>
-										<h4 class="nftmax-balance-name">{{ $Addmoney['1'] }}</h4>
-									</div>
-									@if($Addmoney['2'] == 1)
-									<a class="nftmax-btn nftmax-btn__bordered--plus radius" tabindex="-1" role="button" aria-disabled="true"><span class="ntfmax__btn-textgr">Connected</span></a>
-									@else
-									<a class="nftmax-btn nftmax-btn__bordered bg radius" tabindex="-1" role="button" aria-disabled="true">Connect</a>
-									@endif
-								</li>
-								@endforeach
-							</ul>
-							<div class="view-wallet__btn"><a href="{{url('/my-wallet')}}">View All Wallet</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Connect to Wallet -->
 
 			<!-- Start Header -->
 			<header class="nftmax-header">
@@ -237,7 +216,8 @@
 															<li>
 																<div class="nftmax-balance-info">
 																	<div class="nftmax-balance__img nftmax-profile__img-five"><img src="assets/img/profile-5.png" alt="#"></div>
-																	<h4 class="nftmax-balance-name"><a href="{{url('/load-login')}}">Log Out</a></h4>
+																	{{-- <h4 class="nftmax-balance-name"><a href="{{url('/logout')}}">Log Out</a></h4> --}}
+																	<h4 class="nftmax-balance-name" data-bs-toggle="modal" data-bs-target="#logout_modal"><a href="#">Log Out</a></h4>
 																</div>
 															</li>
 														</ul>

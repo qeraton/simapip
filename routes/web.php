@@ -15,6 +15,7 @@ use App\Http\Controllers\{
     pangkatController as pangkat,
     profileController as profile,
     UserController as Users,
+    PKPTController as PKPT,
 };
 
 /*
@@ -117,6 +118,17 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [pangkat::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [pangkat::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [pangkat::class, 'destroy'])->name('delete');
+    })->name('pangkat');
+
+    Route::group(['prefix' => 'PKPT', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [PKPT::class, 'index'])->name('index');
+        Route::get('/ref-PKPT', [PKPT::class, 'ref_index'])->name('index');
+        Route::get('/list', [PKPT::class, 'listPKPT'])->name('list');
+        Route::get('/create', [PKPT::class, 'create'])->name('create');
+        Route::post('/store', [PKPT::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [PKPT::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [PKPT::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PKPT::class, 'destroy'])->name('delete');
     })->name('pangkat');
 
     Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
