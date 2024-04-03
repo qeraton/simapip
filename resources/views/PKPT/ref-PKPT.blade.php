@@ -67,25 +67,25 @@
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            DK: {{ $item['waktu_dk'] }}
+                                                            DK: {{ isset($item['waktu_dk']) ? $item['waktu_dk'] : 0 }}
                                                         </p>
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            LK: {{ $item['waktu_lk'] }}
+                                                            LK: {{ isset($item['waktu_lk']) ? $item['waktu_lk'] : 0 }}
                                                         </p>
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            HP: {{ $item['waktu_hp'] }}
+                                                            HP: {{ isset($item['waktu_hp']) ? $item['waktu_hp'] : 0 }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2" id="nama">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            DK: {{ number_format($item['biaya_dk'], 0, ',', '.') }}
+                                                            DK: {{ isset($item['biaya_dk']) ? number_format($item['biaya_dk'], 0, ',', '.') : 0 }}
                                                         </p>
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            LK: {{ number_format($item['biaya_lk'], 0, ',', '.') }}
+                                                            LK: {{ isset($item['biaya_lk']) ? number_format($item['biaya_lk'], 0, ',', '.') : 0 }}
                                                         </p>
                                                         @php
                                                             $total_biaya = is_numeric($item['biaya_dk']) && is_numeric($item['biaya_lk']) ? ($item['biaya_dk'] + $item['biaya_lk']) : 0;
@@ -121,7 +121,7 @@
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['keterangan'] }}
+                                                            {{ isset($item['keterangan']) ? $item['keterangan'] : '' }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-3">

@@ -54,37 +54,67 @@ class PKPTController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'kode' => 'required|numeric',
+            'kode' => 'required|string|max:10',
             'nama' => 'required|string|max:225',
-            // 'golongan_kode' => 'required|string|max:10',
-            'golongan_kode_kiri' => 'required|string|max:10',
-            'golongan_kode_kanan' => 'required|string|max:10',
-            'golongan' => 'required|numeric',
-            'urutan' => 'required|numeric',
+            'jenis' => 'required|string|max:225',
+            'unit' => 'required|string|max:225',
+            'tujuan_audit' => 'required|string|max:225',
+            'ruang_lingkup' => 'required|string|max:4',
+            'susunan_tim' => 'required|string|max:225',
+            'waktu_dk' => 'nullable|numeric',
+            'waktu_lk' => 'nullable|numeric',
+            'waktu_hp' => 'nullable|numeric',
+            'biaya_dk' => 'nullable|numeric',
+            'biaya_lk' => 'nullable|numeric',
+            // 'total' => 'required|numeric',
+            'rmp' => 'required|numeric',
+            'rpl' => 'required|numeric',
+            'lha' => 'required|numeric',
+            'peralatan' => 'required|string|max:225',
+            'keterangan' => 'nullable|string|max:225',
 
         ]);
-
-        // Gabungkan kedua bagian menjadi satu kode
-        $golongan_kode = $request->golongan_kode_kiri . '/' . $request->golongan_kode_kanan;
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $data = $request->only(['kode', 'nama', 'jenis', 'unit' ,'tujuan_audit', 'ruang_lingkup', 'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan']);
+
+        // Handling waktu_dk
+        if ($request->filled('waktu_dk')) {
+            $data['waktu_dk'] = $request->waktu_dk;
+        } else {
+            $data['waktu_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling waktu_hp
+        if ($request->filled('waktu_hp')) {
+            $data['waktu_hp'] = $request->waktu_hp;
+        } else {
+            $data['waktu_hp'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling biaya_dk
+        if ($request->filled('biaya_dk')) {
+            $data['biaya_dk'] = $request->biaya_dk;
+        } else {
+            $data['biaya_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling biaya_lk
+        if ($request->filled('biaya_lk')) {
+            $data['biaya_lk'] = $request->biaya_lk;
+        } else {
+            $data['biaya_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling keterangan
+        $data['keterangan'] = $request->keterangan ?? ''; // Menggunakan null coalescing operator untuk nilai default kosong jika tidak ada input
+
         try {
-
-            PKPT::create([
-                'kode' => $request->kode,
-                'nama' => $request->nama,
-                'golongan_kode' => $golongan_kode,
-                'golongan_kode_kiri' => $request->golongan_kode_kiri,
-                'golongan_kode_kanan' => $request->golongan_kode_kanan,
-                'golongan' => $request->golongan,
-                'urutan' => $request->urutan,
-            ]);
-
-
-            return Redirect::to('/pangkat')->with('success', 'Berhasil mengubah data!');
+            PKPT::create($data);
+            return Redirect::to('/PKPT')->with('success', 'Berhasil Menambahkan data!');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
@@ -106,40 +136,80 @@ class PKPTController extends Controller
         return view('PKPT.edit', compact('PKPTEdit'));
     }
 
-    public function update(Request $request, PKPT $PKPTController, $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'kode' => 'numeric',
-            'nama' => 'string|max:225',
-            'golongan_kode_kiri' => 'max:10',
-            'golongan_kode_kanan' => 'max:10',
-            'golongan' => 'numeric',
-            'urutan' => 'numeric',
+        $validator = Validator::make($request->all(), [
+            'kode' => 'required|string|max:10',
+            'nama' => 'required|string|max:225',
+            'jenis' => 'required|string|max:225',
+            'unit' => 'required|string|max:225',
+            'tujuan_audit' => 'required|string|max:225',
+            'ruang_lingkup' => 'required|string|max:4',
+            'susunan_tim' => 'required|string|max:225',
+            'waktu_dk' => 'nullable|numeric',
+            'waktu_lk' => 'nullable|numeric',
+            'waktu_hp' => 'nullable|numeric',
+            'biaya_dk' => 'nullable|numeric',
+            'biaya_lk' => 'nullable|numeric',
+            'rmp' => 'required|numeric',
+            'rpl' => 'required|numeric',
+            'lha' => 'required|numeric',
+            'peralatan' => 'required|string|max:225',
+            'keterangan' => 'nullable|string|max:225',
         ]);
 
-        // Ambil nilai asli golongan_kode dari database
-        $PKPT = PKPT::findOrFail($id);
-        $golongan_kode_asli = $PKPT->golongan_kode;
-
-        // Gabungkan kedua bagian golongan_kode_kiri dan golongan_kode_kanan menjadi satu
-        $golongan_kode = $request->golongan_kode_kiri . '/' . $request->golongan_kode_kanan;
-
-        // Periksa apakah kedua input golongan_kode_kiri dan golongan_kode_kanan kosong
-        if (empty($request->golongan_kode_kiri) || empty($request->golongan_kode_kanan)) {
-            // Jika salah satu atau kedua input kosong, gunakan nilai asli dari golongan_kode
-            $golongan_kode = $golongan_kode_asli;
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        PKPT::where('id', $id)->update([
-            'kode' => $request->kode,
-            'nama' => $request->nama,
-            'golongan_kode' => $golongan_kode,
-            'golongan' => $request->golongan,
-            'urutan' => $request->urutan,
-        ]);
+        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'tujuan_audit', 'ruang_lingkup', 'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan', 'keterangan']);
 
-        return Redirect::to('/pangkat')->with('success', 'Berhasil mengubah data!');
+        // Handling waktu_dk
+        if ($request->filled('waktu_dk')) {
+            $data['waktu_dk'] = $request->waktu_dk;
+        } else {
+            $data['waktu_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling waktu_lk
+        if ($request->filled('waktu_lk')) {
+            $data['waktu_lk'] = $request->waktu_lk;
+        } else {
+            $data['waktu_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling waktu_hp
+        if ($request->filled('waktu_hp')) {
+            $data['waktu_hp'] = $request->waktu_hp;
+        } else {
+            $data['waktu_hp'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling biaya_dk
+        if ($request->filled('biaya_dk')) {
+            $data['biaya_dk'] = $request->biaya_dk;
+        } else {
+            $data['biaya_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling biaya_lk
+        if ($request->filled('biaya_lk')) {
+            $data['biaya_lk'] = $request->biaya_lk;
+        } else {
+            $data['biaya_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
+        }
+
+        // Handling keterangan
+        $data['keterangan'] = $request->keterangan ?? ''; // Menggunakan null coalescing operator untuk nilai default kosong jika tidak ada input
+
+        try {
+            PKPT::where('id', $id)->update($data);
+            return Redirect::to('/PKPT')->with('success', 'Berhasil mengubah data!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+        }
     }
+
 
     public function destroy(PKPT $PKPTController, $id)
     {

@@ -17,7 +17,7 @@
                             </div>
                             <div class="welcome-cta__button">
                                 <a href="{{ url('/PKPT/create') }}"
-                                    class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data Pangkat</a>
+                                    class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data PKPT</a>
                             </div>
                         </div>
                         <!-- End Welcome CTA -->
@@ -32,7 +32,7 @@
                                             <button id="btn-search" class="search-btn" type="button"><img
                                                     src="/assets/img/search.png" alt="#"></button>
                                             <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Ketikan kode atau nama...">
+                                                placeholder="Ketikan Kode, Nama atau Jenis...">
                                         </div>
                                     </div>
                                 </div>
