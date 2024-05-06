@@ -67,14 +67,14 @@
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2"
-                                                        id="kode">
+                                                        id="name">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['name'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-3">
-                                                        <a href="{{ url('permissions/'.$item->id.'/edit') }}"
+                                                        <a href="{{ url('permissions/' . $item->id . '/edit') }}"
                                                             class="btn btn-primary me-2"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor"
@@ -84,7 +84,7 @@
                                                                 <path fill-rule="evenodd"
                                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                                             </svg></a>
-                                                        <form action="{{ url('permissions/'.$item->id.'/delete') }}"
+                                                        <form action="{{ url('permissions/' . $item->id . '/delete') }}"
                                                             method="post" class="d-inline">
                                                             <button class="btn btn-danger"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
@@ -124,7 +124,7 @@
                                                     <ul class="pagination">
                                                         <li class="page-item disabled">
                                                             <span class="page-link text-secondary">
-                                                                <</span>
+                                                                << /span>
                                                         </li>
                                                         <li class="page-item active" aria-current="page">
                                                             <span class="page-link">1</span>
@@ -161,9 +161,10 @@
             var found = false; // Reset found status for each input event
 
             tableRows.forEach(function(row) {
-                var nama = row.querySelector('#nama').textContent.toLowerCase();
+                var nama = row.querySelector('#name').textContent.toLowerCase();
+                var kode = row.querySelector('#kode').textContent.toLowerCase();
 
-                if (nama.includes(searchTerm)(searchTerm)) {
+                if (kode.includes(searchTerm) || nama.includes(searchTerm)) {
                     row.style.display = '';
                     found = true; // Set found to true if data is found
                 } else {

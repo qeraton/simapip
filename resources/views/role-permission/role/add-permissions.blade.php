@@ -33,7 +33,7 @@
                             @endif
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Beri Permission Untuk Role :
-                                    {{ $role->name }}</h2>
+                                    <b class="nftmax__item-button--single nftmax__item-button--cancel"><i>{{ $role->name }}</i></b></h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
                                 <hr>
                             </div>
