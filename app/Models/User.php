@@ -6,13 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 use EvoMark\LaravelIdObfuscator\Traits\Obfuscatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use Obfuscatable;
+    use HasApiTokens, HasFactory, Notifiable, Obfuscatable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
