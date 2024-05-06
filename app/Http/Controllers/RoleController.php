@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Redirect;
 use \Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Hash;
 use Session;
 use App\Models\{
@@ -62,7 +63,10 @@ class RoleController extends Controller
             'name' => [
                 'required',
                 'string',
-                'unique:roles,name,description,'.$role->id
+                // 'unique:roles,name,description,'.$role->id
+                Rule::unique('roles')->where(function ($query) use ($role) {
+                    return $query->where('name', $role->name)->where('description', $role->description);
+                })->ignore($role->id),
             ]
         ]);
 

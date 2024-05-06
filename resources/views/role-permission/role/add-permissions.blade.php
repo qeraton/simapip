@@ -13,7 +13,7 @@
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
                         <div class="nftmax-inner__heading">
-                            <h2 class="nftmax-inner__page-title">Role Access</h2>
+                            <h2 class="nftmax-inner__page-title">Create, Read(view), Update, Delete</h2>
                         </div>
                         <!-- End All Notification Heading -->
 
@@ -71,7 +71,7 @@
 
                                 <div class="nftmax__item-button--group">
                                     <a class="nftmax__item-button--single nftmax__item-button--cancel"
-                                        href="{{ url('roles') }}" type="submit">Batal</a>
+                                        href="{{ url('roles') }}" type="submit">Kembali</a>
                                     <button
                                         class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
                                         type="submit">Simpan</button>

@@ -27,7 +27,7 @@
                         <!-- End Welcome CTA -->
                         <div class="nftmax-table mg-top-40">
                             <div class="nftmax-table__heading">
-                                <h3 class="nftmax-table__title mb-0">Data Roles
+                                <h3 class="nftmax-table__title mb-0">Data Role
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
                                 <div class="nftmax-marketplace__bar-right">
@@ -49,17 +49,17 @@
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
-                                                <th class="nftmax-table__column-2 nftmax-table__h10">ID</th>
-                                                <th class="nftmax-table__column-4 nftmax-table__h2">Nama Roles</th>
+                                                <th class="nftmax-table__column-2 nftmax-table__h2">ID</th>
+                                                <th class="nftmax-table__column-4 nftmax-table__h2">Nama Role</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Description</th>
-                                                <th class="nftmax-table__column-2 nftmax-table__h2">Aksi</th>
+                                                <th class="nftmax-table__column-1 nftmax-table__h2"> </th>
                                             </tr>
                                         </thead>
                                         <!-- NFTMax Table Body -->
                                         <tbody class="nftmax-table__body">
                                             @foreach ($roles as $item)
                                                 <tr>
-                                                    <td class="nftmax-table__column-3 nftmax-table__data-2"
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-1"
                                                         id="kode">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
@@ -67,14 +67,14 @@
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2"
-                                                        id="kode">
+                                                        id="nama">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['name'] }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2"
-                                                        id="kode">
+                                                        id="description">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['description'] }}
@@ -170,8 +170,9 @@
 
             tableRows.forEach(function(row) {
                 var nama = row.querySelector('#nama').textContent.toLowerCase();
+                var kode = row.querySelector('#kode').textContent.toLowerCase();
 
-                if (nama.includes(searchTerm)(searchTerm)) {
+                 if (kode.includes(searchTerm) || nama.includes(searchTerm)) {
                     row.style.display = '';
                     found = true; // Set found to true if data is found
                 } else {
