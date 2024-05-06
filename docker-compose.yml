@@ -33,7 +33,6 @@ services:
       - app_network
 
   db:
-    platform: linux/x86_64
     container_name: db
     image: mysql:8.0.20
     restart: always

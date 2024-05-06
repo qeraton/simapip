@@ -2,6 +2,11 @@ import './bootstrap';
 
 import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import { createPinia } from 'pinia'
+import { SomeComponent } from "@ntohq/buefy-next";
+import api from './api.js';
+
+import Buefy from '@ntohq/buefy-next';
+import '@ntohq/buefy-next/dist/buefy.css';
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
@@ -14,20 +19,11 @@ const app = createApp({
     }
 })
 
+app.config.globalProperties.$api = api;
+
 const pinia = createPinia()
 app.use(pinia)
 
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-const vuetify = createVuetify({
-    components,
-    directives,
-})
-
-app.use(vuetify)
+app.use(Buefy)
 
 app.mount('#app');

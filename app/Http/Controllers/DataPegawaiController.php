@@ -27,7 +27,6 @@ class DataPegawaiController extends Controller
         where(function($q) use($request){
             if($request->has('search') && $request->search != ""){
                 $q->whereRaw('LOWER(nama_lengkap) LIKE ?', ['%'.trim(strtolower($request->search)).'%']);
-                $q->orWhereRaw('LOWER(email) LIKE ?', ['%'.trim(strtolower($request->search)).'%']);
                 $q->orWhereRaw('LOWER(nip) LIKE ?', ['%'.trim(strtolower($request->search)).'%']);
             }
         })
@@ -37,9 +36,14 @@ class DataPegawaiController extends Controller
             }
             else
                 $q->where('jabatan_kode', $request->ja);
-        })
-        ->paginate($request->pageSize);
-        
+        });
+
+        if ($request->pageSize == "all") {
+            return $this->returnJsonSuccess("Userlist retrieved successfully", $data->get());
+        }
+
+        $data = $data->paginate($request->pageSize ?? 10);
+
         return $this->returnJsonSuccess("Userlist retrieved successfully", $data);
     }
 

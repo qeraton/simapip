@@ -9,6 +9,6 @@ class VPegawai extends Model
 {
     use Obfuscatable;
 
-    protected $table = 'v_pegawai';
+    protected $table = 'pegawai';
 
 }

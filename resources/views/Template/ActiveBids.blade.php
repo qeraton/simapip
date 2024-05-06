@@ -152,7 +152,8 @@
 															<!-- End Single Bid -->
 															<div class="dashboard-banner__middle-border"></div>
 															<!-- Single Bid -->
-															<div class="dashboard-banner__group dashboard-banner__group-v2">
+															<d
+															iv class="dashboard-banner__group dashboard-banner__group-v2">
 																<p class="dashboard-banner__group-small">Remaing Time</p>
 																<h3 class="dashboard-banner__group-title" id="CountDown" data-countdown="{{ $AllBids['7'] }}"></h3>
 															</div>

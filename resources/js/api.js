@@ -38,15 +38,15 @@ api.interceptors.response.use(
 
         if (error.response.status === 401) {
             window.location = '/#/login'
-          } else if (error.response.status === 422) {
+        } else if (error.response.status === 422) {
             console.log(error.response.data)
             apiStore.errors = null;
             apiStore.errors = error.response.data.errors;
-          } else {
+        } else {
             // apiStore.dialogTitle = error
             // apiStore.dialogMessage = error.response
             // apiStore.dialog = true
-          }
+        }
 
         // Handle errors here (e.g., show a notification or redirect to a login page)
         return Promise.reject(error);

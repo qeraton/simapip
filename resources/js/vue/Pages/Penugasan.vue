@@ -1,220 +1,395 @@
+<template>
+    <section>
+        <b-tabs v-model="activeTab">
+            <b-tab-item label="Objek">
+                <b-field horizontal label="Nama Obyek">
+                    <b-autocomplete :data="obyekOptions" placeholder="contoh Dinas Kesehatan Kabupaten..." field="nama"
+                        open-on-focus :loading="isFetching" @typing="getObyekPenugasan"
+                        @select="option => form.ref_obyek = option">
+
+                        <template v-slot="props">
+                            {{ props.option.nama }}
+                        </template>
+                    </b-autocomplete>
+                </b-field>
+                <input type="hidden" v-model="form.ref_obyek.id" />
+                <b-field horizontal label="Alamat">
+                    <b-input v-model="form.ref_obyek.alamat" maxlength="200" type="textarea" readonly></b-input>
+                </b-field>
+                <b-field horizontal label="Rencana Penugasan">
+                    <b-input v-model="form.nomor_tugas" placeholder="Nomor surat tugas"></b-input> / &nbsp;<b-input
+                        v-model="form.irban" placeholder="IRBAN"></b-input>
+                </b-field>
+                <b-field horizontal label="Nama Kegiatan">
+                    <b-input v-model="form.nama_kegiatan" maxlength="200" type="textarea"></b-input>
+                </b-field>
+                <b-field horizontal label="Tahun Anggaran">
+                    <b-select v-model="form.tahun_anggaran" placeholder="Pilih Tahun">
+                        <option v-for="year in years" :value="year" :key="year">{{ year }}</option>
+                    </b-select>
+                </b-field>
+                <b-field horizontal label="Sasaran Penugasan">
+                    <b-input v-model="form.sasaran_penugasan" maxlength="200" type="textarea"></b-input>
+                </b-field>
+                <b-field horizontal label="Tujuan Penugasan">
+                    <b-input v-model="form.tujuan_penugasan" maxlength="200" type="textarea"></b-input>
+                </b-field>
+                <b-field horizontal label="Laporan Ditunjukan">
+                    <b-input v-model="form.laporan_ditunjukan" maxlength="200" type="textarea"></b-input>
+                </b-field>
+                <b-field horizontal label="Jenis Pengawasan">
+                    <b-select v-model="form.ref_jenis_pengawasan.id" placeholder="Pilih">
+                        <option v-for="jenis_pengawasan in jenisPengawasanOptions" :value="jenis_pengawasan.id"
+                            :key="jenis_pengawasan.id">{{
+            jenis_pengawasan.nama }}
+                        </option>
+                    </b-select>
+                </b-field>
+            </b-tab-item>
+
+            <b-tab-item label="Penugasan">
+                <fieldset>
+                    <legend>Tim Bertugas</legend>
+                    <b-field horizontal label="Inspektur Pembantu Wilayah">
+                        <b-select
+                            v-model="form.inspektur_pembantu_wilayah_id"
+                            placeholder="Pilih pegawai"
+                            expanded
+                        >
+                            <option
+                                v-for="pegawai in pegawaiOptions"
+                                :value="pegawai.id"
+                                :key="pegawai.id"
+                            >
+                                {{pegawai.nama_lengkap }}
+                            </option>
+                        </b-select>
+                    </b-field>
+                    <b-field horizontal label="Pengendali Teknis">
+                        <b-select v-model="form.pengendali_teknis_id" placeholder="Pilih pegawai" expanded>
+                            <option
+                                v-for="pegawai in pegawaiOptions"
+                                :value="pegawai.id"
+                                :key="pegawai.id"
+                            >
+                                {{pegawai.nama_lengkap }}
+                            </option>
+                        </b-select>
+                    </b-field>
+                    <b-field horizontal label="Ketua Tim">
+                        <b-select v-model="form.ketua_tim_id" placeholder="Pilih pegawai" expanded>
+                            <option
+                                v-for="pegawai in pegawaiOptions"
+                                :value="pegawai.id"
+                                :key="pegawai.id"
+                            >
+                                {{pegawai.nama_lengkap }}
+                            </option>
+                        </b-select>
+                    </b-field>
+                    <fieldset>
+                        <legend style="font-size:14px">Anggota Tim
+                            <b-button
+                                class="is-pulled-right"
+                                size="is-small"
+                                type="is-dark"
+                                icon-pack="fas"
+                                icon-left="plus"
+                                @click="addPegawai"
+                            />
+                        </legend>
+
+                        <div class="columns" v-for="(pegawai, index) in form.pegawais" :key="pegawai.id">
+                            <div class="column is-6">
+                                <b-select
+                                    expanded
+                                    style="width: 100%;"
+                                    v-model="pegawai.id"
+                                    placeholder="Pilih pegawai"
+                                    @change="setNip(index)"
+                                >
+                                    <option
+                                        v-for="pegawaiOption in pegawaiOptions"
+                                        :value="pegawaiOption.id"
+                                        :key="pegawaiOption.id"
+                                    >
+                                        {{pegawaiOption.nama_lengkap }}
+                                    </option>
+                                </b-select>
+                            </div>
+                            <div class="column is-5">
+                                <b-input v-model="pegawai.nip" readonly></b-input>
+                            </div>
+                            <div class="column is-1">
+                                <b-button
+                                    class="is-pulled-right"
+                                    size="is-small"
+                                    type="is-danger"
+                                    icon-pack="fas"
+                                    icon-left="times"
+                                    @click="removePegawai(index)"
+                                />
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </fieldset>
+                <hr/>
+                <fieldset>
+                    <legend>Surat Tugas</legend>
+
+                    <section>
+                        <b-field horizontal label="File">
+                            <b-field class="file is-primary" :class="{'has-name': !!form.surat_tugas}">
+                                <b-upload v-model="form.surat_tugas" class="file-label" rounded>
+                                <span class="file-cta">
+                                    <b-icon class="file-icon" pack="fas" icon="upload"></b-icon>
+                                    <span class="file-label">{{ form.surat_tugas.name || "Click to upload"}}</span>
+                                </span>
+                                </b-upload>
+                            </b-field>
+                        </b-field>
+                        <b-field horizontal label="Nomor">
+                            <b-input v-model="form.nomor_surat_tugas"></b-input>
+                            <p class="control">
+                                <span class="button is-static">Nomor Kartu: KP-{{ form.nomor_surat_tugas }}</span>
+                            </p>
+                        </b-field>
+                        <b-field horizontal label="Tanggal">
+                            <b-datepicker
+                                v-model="form.tanggal_surat_tugas"
+                                placeholder="Pilih tanggal..."
+                                icon="calendar-today"
+                                :icon-right="selected ? 'close-circle' : ''"
+                                icon-right-clickable
+                                @icon-right-click="clearDate"
+                                trap-focus
+                            >
+                            </b-datepicker>
+                        </b-field>
+                        <b-field horizontal label="Penerbit">
+                            <b-input v-model="form.penerbit_surat_tugas"></b-input>
+                        </b-field>
+                        <b-field horizontal label="Instansi">
+                            <b-input v-model="form.instansi_surat_tugas"></b-input>
+                        </b-field>
+                        <b-field horizontal label="Perencanaan">
+                            <b-datepicker
+                                placeholder="Pilih..."
+                                v-model="form.tanggal_perencanaan"
+                                range>
+                            </b-datepicker>
+                        </b-field>
+                        <b-field horizontal>
+                            <div>
+                                Tanggal Efektif
+                                <b-datepicker
+                                    :min-date="form.tanggal_perencanaan[0] || '2021-01-01'"
+                                    :max-date="form.tanggal_perencanaan[1] || '2024-12-31'"
+                                    inline
+                                    placeholder="Click to select..."
+                                    v-model="form.tanggal_perencanaan_efektif"
+                                    multiple>
+                                </b-datepicker>
+                            </div>
+                        </b-field>
+                        <b-field horizontal label="Pelaksanaan">
+                            <b-datepicker
+                                placeholder="Pilih..."
+                                v-model="form.tanggal_pelaksanaan"
+                                range>
+                            </b-datepicker>
+                        </b-field>
+                        <b-field horizontal>
+                            <div>
+                                Tanggal Efektif
+                                <b-datepicker
+                                    :min-date="form.tanggal_pelaksanaan[0] || '2021-01-01'"
+                                    :max-date="form.tanggal_pelaksanaan[1] || '2024-12-31'"
+                                    inline
+                                    placeholder="Click to select..."
+                                    v-model="form.tanggal_pelaksanaan_efektif"
+                                    multiple>
+                                </b-datepicker>
+                            </div>
+                        </b-field>
+                        <b-field horizontal label="Pelaporan">
+                            <b-datepicker
+                                placeholder="Pilih..."
+                                v-model="form.tanggal_pelaporan"
+                                range>
+                            </b-datepicker>
+                        </b-field>
+                        <b-field horizontal>
+                            <div>
+                                Tanggal Efektif
+                                <b-datepicker
+                                    :min-date="form.tanggal_pelaporan[0] || '2021-01-01'"
+                                    :max-date="form.tanggal_pelaporan[1] || '2024-12-31'"
+                                    inline
+                                    placeholder="Click to select..."
+                                    v-model="form.tanggal_pelaporan_efektif"
+                                    multiple>
+                                </b-datepicker>
+                            </div>
+                        </b-field>
+                        <b-field horizontal label="Lama Penugasa">
+                            <b-input v-model="form.lama_penugasan"></b-input>
+                        </b-field>
+                    </section>
+                </fieldset>
+                <hr/>
+                <div class="buttons is-pulled-right">
+                    <b-button type="is-primary" outlined>Simpan Draf</b-button>
+                    <b-button type="is-success" outlined>Proses</b-button>
+                </div>
+            </b-tab-item>
+        </b-tabs>
+    </section>
+</template>
+
 <script>
-import { defineComponent, onMounted, ref } from 'vue'
-import Modal from 'bootstrap/js/dist/modal'
+import debounce from 'lodash/debounce'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
+import api from '../../api'
+
 export default defineComponent({
     name: 'PenugasanPage',
     components: {
     },
+    computed: {
+        years() {
+            const currentYear = new Date().getFullYear() - 2
+            return Array.from({ length: 10 }, (v, k) => currentYear + k)
+        }
+    },
     setup(props, context) {
-        // lifecycle hooks
-        const modal = ref(null)
-        const exampleModal = ref(null)
-        onMounted(() => {
+        const activeTab = ref(0)
+        const showBooks = ref(false)
+        const isFetching = ref(false)
+        const obyekOptions = ref([])
+        const jenisPengawasanOptions = ref([])
+        const pegawaiOptions = ref([])
 
-        })
+        const form = reactive({
+            ref_obyek: {},
+            penugasan: null,
+            nomor_tugas: null,
+            irban: null,
+            tahun_anggaran: null,
+            sasaran_penugasan: null,
+            tujuan_penugasan: null,
+            laporan_ditunjukan: null,
+            ref_jenis_pengawasan: {},
+            inspektur_pembantu_wilayah_id: null,
+            pengendali_teknis_id: null,
+            ketua_tim_id: null,
+            pegawais: [],
+            surat_tugas: {},
+            nomor_surat_tugas: null,
+            tanggal_surat_tugas: null,
+            penerbit_surat_tugas: null,
+            instansi_surat_tugas: null,
+            tanggal_perencanaan: [new Date(), new Date()],
+            tanggal_perencanaan_efektif: [],
+            tanggal_pelaksanaan: [new Date(), new Date()],
+            tanggal_pelaksanaan_efektif: [],
+            tanggal_pelaporan: [new Date(), new Date()],
+            tanggal_pelaporan_efektif: [],
+            lama_penugasan: null,
+        });
 
-        const openModal = () => {
-            const modal = new Modal(exampleModal.value, {
-                backdrop: 'static',
-                keyboard: false
-            })
-            modal.show()
+        const getObyekPenugasan = debounce(function (name) {
+            isFetching.value = true
+            api.get(`/obyek/list?pageSize=all&search=${name}`)
+                .then(({ data }) => {
+                    obyekOptions.value = []
+                    data.data.forEach((item) => obyekOptions.value.push(item))
+                })
+                .catch((error) => {
+                    obyekOptions.value = []
+                    throw error
+                })
+                .finally(() => {
+                    isFetching.value = false
+                })
+        }, 500)
+
+        const getJenisPenugasan = () => {
+            api.get(`/jenis-pengawasan/list?pageSize=all`)
+                .then(({ data }) => {
+                    jenisPengawasanOptions.value = []
+                    data.data.forEach((item) => jenisPengawasanOptions.value.push(item))
+                })
+                .catch((error) => {
+                    jenisPengawasanOptions.value = []
+                    throw error
+                })
+                .finally(() => {
+                    isFetching.value = false
+                })
         }
 
-        return {
-            modal,
-            exampleModal,
+        const getPegawai = () => {
+            api.get(`/pegawai/list?pageSize=all&search=${name}`)
+                .then(({ data }) => {
+                    pegawaiOptions.value = []
+                    data.data.forEach((item) => pegawaiOptions.value.push(item))
+                })
+                .catch((error) => {
+                    pegawaiOptions.value = []
+                    throw error
+                })
+                .finally(() => {
+                    isFetching.value = false
+                })
+        }
 
-            openModal
+        const addPegawai = () => {
+            form.pegawais.push({
+                id: null,
+                nip: null
+            })
+        }
+
+        const removePegawai = (index) => {
+            form.pegawais.splice(index, 1);
+            console.log(form.pegawais)
+            // Reindex the remaining employees
+            // form.pegawais.forEach((pegawai, i) => {
+            //     pegawai.id = i + 1;
+            // });
+        }
+
+        const setNip = (index) => {
+            const pegawai = form.pegawais[index]
+            const selectedPegawai = pegawaiOptions.value.find((item) => item.id === pegawai.id)
+            pegawai.nip = selectedPegawai.nip
+            pegawai.id = selectedPegawai.id
+        }
+
+        onMounted(async () => {
+            getJenisPenugasan();
+            getPegawai();
+        })
+
+        return {
+            activeTab,
+            showBooks,
+            isFetching,
+            form,
+
+            obyekOptions,
+            pegawaiOptions,
+            jenisPengawasanOptions,
+
+            getObyekPenugasan,
+            getJenisPenugasan,
+            getPegawai,
+            addPegawai,
+            removePegawai,
+            setNip
         }
     }
 })
 </script>
-
-<template>
-    <div>
-        <div class="nftmax-pcats">
-
-            <!-- Profile Menu -->
-            <div class="nftmax-pcats__bar">
-                <div class="nftmax-pcats__list list-group " id="list-tab" role="tablist">
-                    <a class="list-group-item active" data-bs-toggle="list" href="#tab_1" role="tab"
-                        aria-selected="false">Objek</a>
-                    <a class="list-group-item" data-bs-toggle="list" href="#tab_2" role="tab"
-                        aria-selected="true">Penugasan</a>
-                </div>
-            </div>
-            <!-- End Profile Menu -->
-
-
-            <div class="tab-content mt-3" id="nav-tabContent">
-                <!-- Single Tab -->
-                <div class="tab-pane fade active show" id="tab_1" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="nftmax-personals">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="nftmax-ptabs__separate">
-                                        <div class="nftmax-ptabs__form-main">
-                                            <div class="nftmax__item-form--group">
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-12">
-                                                        <div class="nftmax__item-form--group nftmax-last-name">
-                                                            <label class="nftmax__item-label">Frist Name </label>
-                                                            <input class="nftmax__item-input" type="text"
-                                                                value="Mr John" required="required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-12">
-                                                        <div class="nftmax__item-form--group">
-                                                            <label class="nftmax__item-label">Last Name </label>
-                                                            <input class="nftmax__item-input" type="text" value="Wick"
-                                                                required="required">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">User Name</label>
-                                                <input class="nftmax__item-input" type="url" value="JohnWick@75"
-                                                    required="required">
-                                            </div>
-
-                                            <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Exter link </label>
-                                                <input class="nftmax__item-input" type="url"
-                                                    placeholder="https:yoursite.lo/imte/item_name123"
-                                                    required="required">
-                                            </div>
-
-                                            <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Bio </label>
-                                                <textarea class="nftmax__item-input nftmax__item-textarea" type="url"
-                                                    required="required">Autoglyphs are fitting the first “on-chain” to the find generative art on the Ethereum blockchain</textarea>
-                                            </div>
-
-                                            <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Email </label>
-                                                <input class="nftmax__item-input" type="email"
-                                                    value="mrjohnwick@gmail.com" required="required">
-                                                <p class="nftmax__item-fee-text">Your email for marketplace
-                                                    notifications</p>
-                                            </div>
-
-
-                                            <div class="nftmax-ptabs__social">
-                                                <div class="nftmax-ptabs__accounts">
-                                                    <h4 class="nftmax-ptabs__accounts-heading">Social Connections </h4>
-                                                    <p class="nftmax__item-fee-text">Help collectors verify your account
-                                                        by connecting Twitter</p>
-                                                    <ul class="nftmax-ptabs__social-list">
-                                                        <li>
-                                                            <div class="nftmax-ptabs__social-name"><span
-                                                                    class="nftmax-ptabs__social-icon"><i
-                                                                        class="fa-brands fa-twitter"></i></span>Twitter
-                                                            </div>
-                                                            <p class="nftmax-ptabs__social-connect"><a
-                                                                    href="#">Connect</a></p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nftmax-ptabs__verified">
-                                                    <div class="nftmax-ptabs__verified-content">
-                                                        <h4 class="nftmax-ptabs__accounts-heading">Verification </h4>
-                                                        <p class="nftmax__item-fee-text">Proceed with verification
-                                                            process to get more visibility and gain trust on NFTMAX
-                                                            Marketplace. </p>
-                                                    </div>
-                                                    <div class="nftmax-ptabs__verified-button">
-                                                        <a href="#"
-                                                            class="nftmax-btn nftmax-ptabs__verified-btn nftmax-gbcolor radius ">Get
-                                                            Verificed</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="nftmax-ptabs__form-update">
-                                            <div class="nftmax-ptabs__sidebar">
-                                                <div class="nftmax-ptabs__ssingle nftmax-ptabs__srofile">
-                                                    <div class="nftmax-ptabs__sheading">
-                                                        <h4 class="nftmax-ptabs__stitle">Update Profile <svg width="17"
-                                                                height="17" viewBox="0 0 17 17" class="fill-current"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M8.5 0C3.80338 0 0 3.80622 0 8.5C0 13.1938 3.80623 17 8.5 17C13.1938 17 17 13.1938 17 8.5C16.9972 3.80907 13.1938 0.00568942 8.5 0ZM8.5 14.1695C8.10743 14.1695 7.79167 13.8537 7.79167 13.4612C7.79167 13.0686 8.10743 12.7528 8.5 12.7528C8.89257 12.7528 9.20833 13.0686 9.20833 13.4612C9.20833 13.8509 8.89257 14.1695 8.5 14.1695ZM9.86831 8.86128C9.4416 9.12868 9.19126 9.6009 9.20833 10.1016V10.6278C9.20833 11.0204 8.89257 11.3362 8.5 11.3362C8.10743 11.3362 7.79167 11.0204 7.79167 10.6278V10.1016C7.77176 9.08317 8.30371 8.13303 9.18273 7.62098C9.72038 7.32513 10.0049 6.71637 9.89107 6.11613C9.77728 5.54434 9.33066 5.09772 8.75887 4.98678C7.9908 4.84454 7.25118 5.35375 7.10894 6.12182C7.09472 6.20716 7.08618 6.2925 7.08618 6.37784C7.08618 6.77041 6.77042 7.08618 6.37785 7.08618C5.98528 7.08618 5.66952 6.77041 5.66952 6.37784C5.66952 4.81325 6.93825 3.54451 8.50569 3.54451C10.0703 3.54451 11.339 4.81325 11.339 6.38069C11.3333 7.41048 10.7729 8.36061 9.86831 8.86128Z">
-                                                                </path>
-                                                            </svg></h4>
-                                                        <p class="nftmax-ptabs__stext">Profile of at least Size
-                                                            <b>300x300.</b> Gifs work too. <b>Max 5mb.</b></p>
-                                                    </div>
-                                                    <div class="nftmax-ptabs__sauthor">
-                                                        <div class="nftmax-ptabs__sauthor-img nftmax-ptabs__pthumb">
-                                                            <img src="http://localhost:8000/assets/img/profile-thumb.png"
-                                                                alt="#">
-                                                            <label for="file-input"><span
-                                                                    class="nftmax-ptabs__sedit"><svg width="32"
-                                                                        height="32" viewBox="0 0 32 32" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                            fill="white"></path>
-                                                                        <path
-                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                            fill="white"></path>
-                                                                    </svg></span></label>
-                                                            <input id="file-input" type="file">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="nftmax-ptabs__ssingle nftmax-ptabs__scover">
-                                                    <div class="nftmax-ptabs__sheading">
-                                                        <h4 class="nftmax-ptabs__stitle nftmax-ptabs__stitle--update">
-                                                            Update Cover <svg width="17" height="17" viewBox="0 0 17 17"
-                                                                class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M8.5 0C3.80338 0 0 3.80622 0 8.5C0 13.1938 3.80623 17 8.5 17C13.1938 17 17 13.1938 17 8.5C16.9972 3.80907 13.1938 0.00568942 8.5 0ZM8.5 14.1695C8.10743 14.1695 7.79167 13.8537 7.79167 13.4612C7.79167 13.0686 8.10743 12.7528 8.5 12.7528C8.89257 12.7528 9.20833 13.0686 9.20833 13.4612C9.20833 13.8509 8.89257 14.1695 8.5 14.1695ZM9.86831 8.86128C9.4416 9.12868 9.19126 9.6009 9.20833 10.1016V10.6278C9.20833 11.0204 8.89257 11.3362 8.5 11.3362C8.10743 11.3362 7.79167 11.0204 7.79167 10.6278V10.1016C7.77176 9.08317 8.30371 8.13303 9.18273 7.62098C9.72038 7.32513 10.0049 6.71637 9.89107 6.11613C9.77728 5.54434 9.33066 5.09772 8.75887 4.98678C7.9908 4.84454 7.25118 5.35375 7.10894 6.12182C7.09472 6.20716 7.08618 6.2925 7.08618 6.37784C7.08618 6.77041 6.77042 7.08618 6.37785 7.08618C5.98528 7.08618 5.66952 6.77041 5.66952 6.37784C5.66952 4.81325 6.93825 3.54451 8.50569 3.54451C10.0703 3.54451 11.339 4.81325 11.339 6.38069C11.3333 7.41048 10.7729 8.36061 9.86831 8.86128Z">
-                                                                </path>
-                                                            </svg></h4>
-                                                        <p class="nftmax-ptabs__stext">Cover of at least Size
-                                                            <b>1170x920</b></p>
-                                                    </div>
-                                                    <div class="nftmax-ptabs__sauthor">
-                                                        <div class="nftmax-ptabs__sauthor-img nftmax-ptabs__pthumb">
-                                                            <img src="assets/img/profile-cover.png" alt="#">
-                                                            <label for="file-input"><span
-                                                                    class="nftmax-ptabs__sedit"><svg width="32"
-                                                                        height="32" viewBox="0 0 32 32" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                            fill="white"></path>
-                                                                        <path
-                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                            fill="white"></path>
-                                                                    </svg></span></label>
-                                                            <input id="file-input" type="file">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="nftmax__item-button--group nftmax__ptabs-bottom">
-                                <button class="nftmax__item-button--single nftmax__item-button--cancel">Cancel</button>
-                                <a class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius "
-                                    href="http://localhost:8000/my-profile" type="submit">Update Profile</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
