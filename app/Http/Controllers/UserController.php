@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Session;
+use App\Models\{
+    User,
+};
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -15,6 +22,89 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function index() 
+    { 
+        $users = User::paginate(5);
+        return view('role-permission.user.index', [
+            'users' => $users,
+        ]);
+    }
+
+    public function create() 
+    {
+        $roles = Role::pluck('name', 'name')->all();
+        return view(
+        'role-permission.user.create', [
+            'roles' => $roles,
+        ]);
+    }
+
+    public function store(Request $request) 
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|max:20',
+            'roles' => 'required',
+        ]);
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->syncRoles($request->roles);
+
+        return redirect('/users')->with('status', 'User created successfully with roles');
+    }
+
+    public function edit(User $user)
+    {
+        $roles = Role::pluck('name', 'name')->all();
+        $userRoles = $user->roles->pluck('name', 'name')->all();
+        return view('role-permission.user.edit', [
+            'user' => $user,
+            'roles' => $roles,
+            'userRoles' => $userRoles
+        ]);
+
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|max:20',
+            'roles' => 'required',
+        ]);
+
+        $data = [
+            'username' => $request->username,
+            'email' => $request->email,
+        ];
+
+        if(!empty($request->password)){
+            $data += [
+                'password' => Hash::make($request->password),
+            ];
+        }
+
+        $user->update($data);
+        $user->syncRoles($request->roles);
+
+        return redirect('/users')->with('status', 'User Updated Successfully with roles');
+    }
+
+    public function destroy($userId)
+    {
+        $user = User::findOrFail($userId);
+        $user->delete();
+
+        return redirect('/users')->with('status', 'User Deleted Successfully with roles');
+    }
+
     public function showChangePasswordForm()
     {
         return view('Users.change-password');
