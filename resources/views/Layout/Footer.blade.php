@@ -54,6 +54,7 @@ jQuery(document).ready(function($) {
 			});
 		</script>
 	@endif
+
 <!-- End Izi Toast-->
 
 <!-- Select2 -->

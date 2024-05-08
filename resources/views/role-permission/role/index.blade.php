@@ -81,7 +81,9 @@
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
-                                                        <a href="{{ url('roles/'.$item->id.'/give-permissions') }}" class="btn btn-warning ml-0">Add / Edit Role Permission</a>
+                                                        @can('Give Permission To Users')
+                                                            <a href="{{ url('roles/'.$item->id.'/give-permissions') }}" class="btn btn-warning ml-0">Add / Edit Role Permission</a>
+                                                        @endcan
                                                         @can('Edit Role')
                                                             <a href="{{ url('roles/'.$item->id.'/edit') }}"
                                                                 class="btn btn-primary ml-0"><svg
