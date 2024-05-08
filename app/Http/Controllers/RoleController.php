@@ -56,7 +56,7 @@ class RoleController extends Controller
             'description' => $request->description
         ]);
 
-        return Redirect::to('roles')->with('success', 'Berhasil Menambah Data!');
+        return Redirect::to('roles')->with('success', 'Berhasil Menambah Data Role!');
     }
 
     public function edit(Role $role)
@@ -83,14 +83,14 @@ class RoleController extends Controller
             'name' => $request->name,
             'description' => $request->description
         ]);
-        return Redirect::to('roles')->with('success', 'Berhasil MengUpdate Data!');
+        return Redirect::to('roles')->with('success', 'Berhasil MengUpdate Data Role!');
     }
 
     public function destroy($roleId)
     {
         $role = Role::find($roleId);
         $role->delete();
-        return Redirect::to('roles')->with('success', 'Berhasil MengHapus Data!');
+        return Redirect::to('roles')->with('success', 'Berhasil MengHapus Data Role!');
     }
 
     public function addPermissionToRole($roleId) 

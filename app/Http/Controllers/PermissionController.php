@@ -49,7 +49,7 @@ class PermissionController extends Controller
             'name' => $request->name
         ]);
 
-        return Redirect::to('permissions')->with('success', 'Berhasil Menambah Data!');
+        return Redirect::to('permissions')->with('success', 'Berhasil Menambah Data Permission!');
     }
 
     public function edit(Permission $permission)
@@ -72,13 +72,13 @@ class PermissionController extends Controller
         $permission->update([
             'name' => $request->name
         ]);
-        return Redirect::to('permissions')->with('success', 'Berhasil MengUpdate Data!');
+        return Redirect::to('permissions')->with('success', 'Berhasil MengUpdate Data Permission!');
     }
 
     public function destroy($permissionId)
     {
         $permission = Permission::find($permissionId);
         $permission->delete();
-        return Redirect::to('permissions')->with('success', 'Berhasil MengHapus Data!');
+        return Redirect::to('permissions')->with('success', 'Berhasil MengHapus Data Permission!');
     }
 }

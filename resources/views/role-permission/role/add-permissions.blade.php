@@ -18,19 +18,6 @@
                         <!-- End All Notification Heading -->
 
                         <div class="nftmax__item">
-                            @if ($errors->any())
-                                <div id="error-alert" class="alert alert-danger alert-dismissible fade show"
-                                    role="alert">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Beri Permission Untuk Role :
                                     <b class="nftmax__item-button--single nftmax__item-button--cancel"><i>{{ $role->name }}</i></b></h2>
