@@ -16,8 +16,15 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Permission', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Permission', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Permission', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Permission', ['only' => ['destroy']]);
+    }
     public function index() {
-        $permissions = Permission::paginate(5);
+        $permissions = Permission::paginate(4);
         return view('role-permission.permission.index', [
             'permissions' => $permissions
         ]);

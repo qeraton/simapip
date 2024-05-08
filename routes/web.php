@@ -18,16 +18,23 @@ use App\Http\Controllers\{
     PKPTController as PKPT,
 };
 
-Route::resource('permissions', App\Http\Controllers\PermissionController::class);
-Route::delete('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
+Route::group(['middleware' => ['isAdmin']], function(){
 
-Route::resource('roles', App\Http\Controllers\RoleController::class);
-Route::delete('roles/{rolesId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
-Route::get('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
-Route::put('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+    Route::delete('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
 
-Route::resource('users', App\Http\Controllers\UserController::class);
-Route::delete('users/{usersId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::delete('roles/{rolesId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+        // ->middleware('permission::Delete Role');
+    Route::get('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
+    Route::put('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::delete('users/{usersId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

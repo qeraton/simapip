@@ -23,6 +23,13 @@ class UserController extends Controller
      * @return \Illuminate\View\View
      */
 
+    public function __construct()
+    {
+        $this->middleware('permission:View User', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create User', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit User', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete User', ['only' => ['destroy']]);
+    }
     public function index() 
     { 
         $users = User::paginate(5);
@@ -57,7 +64,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->roles);
 
-        return redirect('/users')->with('status', 'User created successfully with roles');
+        return redirect('/users')->with('success', 'User created successfully with roles');
     }
 
     public function edit(User $user)
@@ -94,7 +101,7 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles($request->roles);
 
-        return redirect('/users')->with('status', 'User Updated Successfully with roles');
+        return redirect('/users')->with('success', 'User Updated Successfully with roles');
     }
 
     public function destroy($userId)
@@ -102,7 +109,7 @@ class UserController extends Controller
         $user = User::findOrFail($userId);
         $user->delete();
 
-        return redirect('/users')->with('status', 'User Deleted Successfully with roles');
+        return redirect('/users')->with('success', 'User Deleted Successfully with roles');
     }
 
     public function showChangePasswordForm()

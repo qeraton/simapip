@@ -12,9 +12,25 @@
 		<!-- Site Title -->
 		<title>SIMAPIP Terintegrasi</title>
 		
-		<!-- StyleSheet Script -->
-		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+		<!-- Toast js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous"></script>
+		
+		<!-- StyleSheet Script -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" 
+			integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" 
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+			
+		
 		<!-- Fav Icon -->
 		<link rel="icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
@@ -209,6 +225,7 @@
 													<div class="nftmax-header__author-img"><img src="{{ asset($User_info_for_header['image']) }}" alt="#"></div>
 													<div class="nftmax-header__author-content">
 														<h4 class="nftmax-header__author-title">{{ Auth::user()->username }}</h4>
+														{{-- <p class="nftmax-header__author-text v1"><a href="#">{{ Auth::user()->email }}</a></p> --}}
 														<p class="nftmax-header__author-text v1"><a href="#">{{ Auth::user()->email }}</a></p>
 													</div>
 
@@ -254,6 +271,8 @@
 			</header>
 			<!-- End Header -->
 
+			
+
 			<script>
 				document.addEventListener('DOMContentLoaded', function() {
 					var selectedMenu = document.querySelector('.menu-bar__one .active');
@@ -273,5 +292,3 @@
 					}
 				});
 			</script>
-			
-			

@@ -19,6 +19,15 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:View Role', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Role', ['only' => ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']]);
+        $this->middleware('permission:Edit Role', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Role', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $roles = Role::paginate(5);
