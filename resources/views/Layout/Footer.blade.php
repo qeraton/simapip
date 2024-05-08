@@ -1,5 +1,6 @@
 <!-- Jquery JS -->
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/js/iziToast.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-migrate.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -24,6 +25,36 @@ jQuery(document).ready(function($) {
 		});
 });
 </script>
+
+<!-- Izi Toast Notification -->
+
+	@if ($errors->any())
+		@foreach ($errors->all() as $error)
+			<script>
+			iziToast.error({
+				title: 'error',
+				position: 'topRight',
+				message: '{{$error}}'
+			});
+		</script>
+		@endforeach
+	@endif
+
+	@if (session()->get('success'))
+		<script>
+			iziToast.success({
+				title: 'success',
+				position: 'topRight',
+				animateInside: true,
+				pauseOnHover: true,
+				progressBar: true,
+				progressBarEasing: 'linear',
+				theme: 'light',
+				message: '{{session()->get('success')}}'
+			});
+		</script>
+	@endif
+<!-- End Izi Toast-->
 
 <!-- Select2 -->
 <script>

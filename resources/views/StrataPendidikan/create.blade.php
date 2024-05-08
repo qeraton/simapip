@@ -61,4 +61,5 @@
         </div>
     </div>
 </section>
-@include('Layout.Template.Footer')
+{{-- @include('Layout.RightSidebar') --}}
+@include('Layout.Footer')

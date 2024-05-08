@@ -28,7 +28,7 @@
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit User </h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
                             </div>
-                            <form class="form" method="POST" action="{{ url('users/'.$user->id) }}">
+                            <form class="form" method="POST" action="{{ url('users/' . $user->id) }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -36,30 +36,35 @@
                                         <div class="nftmax__item-box">
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Username </label>
-                                                <input class="nftmax__item-input" type="text" name="username" placeholder="Ganti username" value="{{ $user->username }}">     
+                                                <input class="nftmax__item-input" type="text" name="username"
+                                                    placeholder="Ganti username" value="{{ $user->username }}">
                                             </div>
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Email </label>
-                                                <input class="nftmax__item-input" type="text" name="email" placeholder="Ganti email" value="{{ $user->email }}">     
+                                                <input class="nftmax__item-input" type="text" name="email"
+                                                    placeholder="Ganti email" value="{{ $user->email }}">
                                             </div>
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Password </label>
-                                                <input class="nftmax__item-input" type="text" name="password" placeholder="Ganti password">     
+                                                <input class="nftmax__item-input" type="text" name="password"
+                                                    placeholder="Ganti password">
                                             </div>
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Role </label>
                                                 <select name="roles[]" class="form-control" multiple>
-                                                  <option value="">Select Role</option>
-                                                  @foreach ($roles as $item)
-                                                    <option value="{{ $item }}" {{ in_array($item, $userRoles) ? 'selected':'' }}> {{ $item }} </option>
-                                                  @endforeach
-                                                </select>   
+                                                    <option value="">Select Role</option>
+                                                    @foreach ($roles as $item)
+                                                        <option value="{{ $item }}"
+                                                            {{ in_array($item, $userRoles) ? 'selected' : '' }}>
+                                                            {{ $item }} </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
-                                
+
                                 <div class="nftmax__item-button--group">
                                     <a class="nftmax__item-button--single nftmax__item-button--cancel"
                                         href="{{ url('users') }}" type="submit">Batal</a>
@@ -68,7 +73,7 @@
                                         type="submit">Simpan</button>
 
                                 </div>
-                            
+
                         </div>
                     </div>
                     </form>
@@ -78,4 +83,5 @@
             <!-- End Dashboard Inner -->
         </div>
     </div>
-    @include('Layout.Template.Footer')
+    {{-- @include('Layout.RightSidebar') --}}
+    @include('Layout.Footer')

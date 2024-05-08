@@ -170,23 +170,6 @@
     </div>
 </section>
 
-<!-- toastr start -->
-    {{-- @if (Session::has('success')) --}}
-        <script>
-            // toastr.success("{{ Session::get('success')}}");
-            toastr.warning('Pesan berhasil!', 'Judul Pesan', { 
-                "progressBar": true, 
-                "positionClass": "toast-top-right", 
-                "showDuration": "300", 
-                "hideDuration": "1000", 
-                "timeOut": "5000", 
-                "extendedTimeOut": "1000", 
-                "iconClass": "toast-success" });
-
-        </script>
-    {{-- @endif  --}}
-<!-- toastr end -->
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var searchInput = document.getElementById('txt-search');
@@ -219,3 +202,5 @@
         });
     });
 </script>
+{{-- @include('Layout.RightSidebar') --}}
+@include('Layout.Footer')

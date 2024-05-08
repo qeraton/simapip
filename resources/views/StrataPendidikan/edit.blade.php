@@ -14,7 +14,8 @@
                         <!-- End All Notification Heading -->
                         <div class="nftmax__item">
                             <div class="nftmax__item-heading">
-                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Nama Pendidikan</h2>
+                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Nama Pendidikan
+                                </h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Edit Nama Yang Valid!</p>
                             </div>
                             <form action="{{ url('/strata-pendidikan/update', $pendidikan['id']) }}" method="post">
@@ -42,4 +43,5 @@
                     <!-- End Dashboard Inner -->
                 </div>
             </div>
-            @include('Layout.Template.Footer')
+            {{-- @include('Layout.RightSidebar') --}}
+            @include('Layout.Footer')

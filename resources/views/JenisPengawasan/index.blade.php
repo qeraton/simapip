@@ -214,3 +214,5 @@
         });
     });
 </script>
+{{-- @include('Layout.RightSidebar') --}}
+@include('Layout.Footer')

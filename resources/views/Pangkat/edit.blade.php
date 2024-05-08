@@ -99,4 +99,5 @@
             <!-- End Dashboard Inner -->
         </div>
     </div>
-    @include('Layout.Template.Footer')
+    {{-- @include('Layout.RightSidebar') --}}
+@include('Layout.Footer')

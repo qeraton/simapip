@@ -18,6 +18,7 @@
 
 		<!-- NFTMax Stylesheet -->
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/iziToast.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/font-awesome-all.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/charts.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/slickslider.min.css')}}">
@@ -25,7 +26,7 @@
 		<link rel="stylesheet" href="{{asset('assets/style.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/custom.css')}}">
 
-        @vite(['resources/js/app.js'])
+      @vite(['resources/js/app.js'])
 	</head>
 	<body>
 		<div id="app" class="body-bg" style="background-image:url('assets/img/body-bg.jpg')">
