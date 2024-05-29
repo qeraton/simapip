@@ -61,13 +61,13 @@
                                         <thead class="nftmax-table__head">
                                             <tr>
                                                 {{-- <th class="nftmax-table__column-1 nftmax-table__h1">Kode</th> --}}
-                                                <th class="nftmax-table__column-2 nftmax-table__h2">Nama Unit</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Nama Unit</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h3">Nama Singkatan</th>
-                                                <th class="nftmax-table__column-4 nftmax-table__h4">Alamat</th>
-                                                <th class="nftmax-table__column-5 nftmax-table__h5">Pimpinan</th>
-                                                <th class="nftmax-table__column-6 nftmax-table__h6">No. Telp</th>
-                                                <th class="nftmax-table__column-7 nftmax-table__h7">Email</th>
-                                                <th class="nftmax-table__column-8 nftmax-table__h8">Website</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h4">Alamat</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h5">Pimpinan</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h6">No. Telp</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h7">Email</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h8">Website</th>
                                                 {{-- <th class="nftmax-table__column-9 nftmax-table__h9">No. Urut</th> --}}
                                                 <th class="nftmax-table__column-10 nftmax-table__h10">Aksi</th>
                                             </tr>
@@ -334,31 +334,6 @@
     </div>
 </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchInput = document.getElementById('txt-search');
-        var tableRows = document.querySelectorAll('.nftmax-table__body tr');
 
-        searchInput.addEventListener('input', function() {
-            var searchTerm = searchInput.value.toLowerCase();
-
-            tableRows.forEach(function(row) {
-                var namaUnit = row.querySelector('.nftmax-table__data-2').textContent.toLowerCase();
-                var namaSingkatan = row.querySelector('.nftmax-table__data-3').textContent.toLowerCase();
-                var alamat = row.querySelector('.nftmax-table__data-4').textContent.toLowerCase();
-                var pimpinan = row.querySelector('.nftmax-table__data-5').textContent.toLowerCase();
-                var noTelp = row.querySelector('.nftmax-table__data-6').textContent.toLowerCase();
-                var email = row.querySelector('.nftmax-table__data-7').textContent.toLowerCase();
-                var web = row.querySelector('.nftmax-table__data-8').textContent.toLowerCase();
-
-                if (namaSingkatan.includes(searchTerm) || namaUnit.includes(searchTerm) || alamat.includes(searchTerm) || pimpinan.includes(searchTerm) || noTelp.includes(searchTerm) || email.includes(searchTerm) || web.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    });
-</script>
 {{-- @include('Layout.RightSidebar') --}}
 @include('Layout.Footer')

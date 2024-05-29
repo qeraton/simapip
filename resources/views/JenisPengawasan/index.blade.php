@@ -193,26 +193,5 @@
     </div>
 </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchInput = document.getElementById('txt-search');
-        var tableRows = document.querySelectorAll('.nftmax-table__body tr');
-
-        searchInput.addEventListener('input', function() {
-            var searchTerm = searchInput.value.toLowerCase();
-
-            tableRows.forEach(function(row) {
-                var kode = row.querySelector('.nftmax-table__data-1').textContent.toLowerCase();
-                var nama = row.querySelector('.nftmax-table__data-2').textContent.toLowerCase();
-
-                if (kode.includes(searchTerm) || nama.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    });
-</script>
 {{-- @include('Layout.RightSidebar') --}}
 @include('Layout.Footer')

@@ -16,6 +16,7 @@ use App\Http\Controllers\{
     profileController as profile,
     UserController as Users,
     PKPTController as PKPT,
+    RPKHController as RPKH,
 };
 
 Route::group(['middleware' => ['isAdmin']], function(){
@@ -146,6 +147,16 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [PKPT::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [PKPT::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PKPT::class, 'destroy'])->name('delete');
+    })->name('pangkat');
+
+    Route::group(['prefix' => 'RPKH', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [RPKH::class, 'index'])->name('index');
+        Route::get('/list', [RPKH::class, 'listRPKH'])->name('list');
+        Route::get('/create', [RPKH::class, 'create'])->name('create');
+        Route::post('/store', [RPKH::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [RPKH::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [RPKH::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [RPKH::class, 'destroy'])->name('delete');
     })->name('pangkat');
 
     Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
