@@ -7,10 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use App\Models\{
-    Obyek,
-    profile,
-};
+use App\Models\profile;
 use Illuminate\Support\Facades\Auth;
 
 class profileController extends Controller
@@ -43,11 +40,12 @@ class profileController extends Controller
     {
         $User = array(
             'cover_image' => 'assets/img/profile-cover.png',
-            'profile_image' => 'assets/img/profile-thumb.png',
             'bio' => 'Autoglyphs are fitting the first “on-chain” to the find generative art on the Ethereum blockchain',
         );
+        
         $user = profile::all();
-        return view('my-profile.index', compact('user', 'User'));
+        $foto = profile::where('id', Auth::user()->id)->first();
+        return view('my-profile.index', compact('user', 'User', 'foto'));
     }
 
     public function edit(profile $profile, $id)

@@ -11,4 +11,12 @@ class profile extends Model
 
     protected $table = 'users';
 
+    protected $fillable = [
+            'username',
+            'foto',
+            'email',
+            'password',
+            'role',
+        ];
+
 }
