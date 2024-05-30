@@ -144,7 +144,7 @@
 									</div>
 									<!-- End Trending Action -->
 									
-									<div class="row nftmax-gap-30">
+									{{-- <div class="row nftmax-gap-30">
 										<div class="col-lg-6 col-md-6 col-12 nftmax-sixth-one">
 											<!-- Charts One -->
 											<div class="charts-main charts-home-one mg-top-40">
@@ -211,8 +211,8 @@
 											<!-- End Charts Two -->
 										</div>
 									</div>
-									
-									<div class="row nftmax-gap-30">
+									 --}}
+									{{-- <div class="row nftmax-gap-30">
 										<div class="col-lg-6 col-12 nftmax-sixth-one">
 											<div class="seller-list mg-top-40">
 												<h3 class="seller-list__heading">Top Seller</h3>
@@ -480,7 +480,7 @@
 												<!-- End NFTMax Table -->
 											</div>
 										</div>
-									</div>
+									</div> --}}
 								</div>
 								<!-- End Dashboard Inner -->
 							</div>

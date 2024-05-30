@@ -16,9 +16,15 @@
 										</div>
 										<div class="nftmax-userprofile__user">
 											<div class="nftmax-userprofile__content">
-												<div class="nftmax-userprofile__thumb">
-													<img src="{{ $User['profile_image'] }}" alt="#">
-												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-md-4">
+															<div class="nftmax-userprofile__thumb">
+																<img src="{{ asset('photo/' . Auth::user()->foto) }}" class="img-fluid" alt="#"> <!-- Gunakan kelas img-fluid untuk membuat gambar responsif -->
+															</div>
+														</div>
+													</div>
+												</div
 												<div class="nftmax-userprofile__info">
 													<h4 class="nftmax-userprofile__info-title"> {{ Auth::user()->username }} <p class="nftmax-userprofile__info-text"> {{ Auth::user()->email }}</p></h4>
 													<p class="nftmax-userprofile__info-text"> {{ $User['bio'] }} <a href="#">Read More</a></p>

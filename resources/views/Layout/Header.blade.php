@@ -90,8 +90,12 @@
 						<!-- Nav Menu -->
 						<div class="menu-bar">
 							<ul class="menu-bar__one">
+<<<<<<< HEAD
+								<li class="{{ Request::path() == 'PKPT' ? 'active' : '' }}"><a href="{{url('/PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon"  viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg"><path d="M13.9729 3L9.06236 7.82172C7.92242 8.93841 6.07703 8.93841 4.93709 7.82172L0.0267964 3C0.0185934 3.09048 0 3.17238 0 3.26232V10.1359C0.00191403 11.7168 1.30673 12.9981 2.9167 13H11.0833C12.6933 12.9981 13.9981 11.7168 14 10.1359V3.26232C13.9997 3.17238 13.9811 3.09048 13.9729 3Z"></path><path d="M8.31954 6.50593L14 1.35845C13.4403 0.517707 12.4369 0.00264136 11.353 0H2.64666C1.5631 0.00264136 0.559417 0.517707 0 1.35845L5.68046 6.50593C6.40983 7.16469 7.58988 7.16469 8.31954 6.50593Z"></path></svg></span><span class="menu-bar__name">PKPT</span><span class="menu-bar__count ntfmax__bgc--2">{{ $SidebarInf['market_place'] }}</span></span></a></li>
+=======
 								<li class="{{ Request::path() == 'PKPT' ? 'active' : '' }}"><a href="{{url('/PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon"  viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg"><path d="M13.9729 3L9.06236 7.82172C7.92242 8.93841 6.07703 8.93841 4.93709 7.82172L0.0267964 3C0.0185934 3.09048 0 3.17238 0 3.26232V10.1359C0.00191403 11.7168 1.30673 12.9981 2.9167 13H11.0833C12.6933 12.9981 13.9981 11.7168 14 10.1359V3.26232C13.9997 3.17238 13.9811 3.09048 13.9729 3Z"></path><path d="M8.31954 6.50593L14 1.35845C13.4403 0.517707 12.4369 0.00264136 11.353 0H2.64666C1.5631 0.00264136 0.559417 0.517707 0 1.35845L5.68046 6.50593C6.40983 7.16469 7.58988 7.16469 8.31954 6.50593Z"></path></svg></span><span class="menu-bar__name">PKPT</span></span></a></li>
 								<li class="{{ Request::path() == 'RPKH' ? 'active' : '' }}"><a href="{{url('/RPKH') }}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon"  viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg"><path d="M13.9729 3L9.06236 7.82172C7.92242 8.93841 6.07703 8.93841 4.93709 7.82172L0.0267964 3C0.0185934 3.09048 0 3.17238 0 3.26232V10.1359C0.00191403 11.7168 1.30673 12.9981 2.9167 13H11.0833C12.6933 12.9981 13.9981 11.7168 14 10.1359V3.26232C13.9997 3.17238 13.9811 3.09048 13.9729 3Z"></path><path d="M8.31954 6.50593L14 1.35845C13.4403 0.517707 12.4369 0.00264136 11.353 0H2.64666C1.5631 0.00264136 0.559417 0.517707 0 1.35845L5.68046 6.50593C6.40983 7.16469 7.58988 7.16469 8.31954 6.50593Z"></path></svg></span><span class="menu-bar__name">RPKH</span></span></a></li>
+>>>>>>> 4a945bf1f2e67386e44f4a35be073d88ec7b72a4
 							</ul>
 						</div>
 						<!-- End Nav Menu -->
@@ -185,12 +189,12 @@
 								<div class="nftmax__sicon close-icon d-xl-none"><img src="/assets/img/menu-toggle.svg" alt="#"></div>
 								<div class="nftmax-header__left">
 									<!-- Search Form -->
-									<div class="nftmax-header__form">
+									{{-- <div class="nftmax-header__form">
 										<form class="nftmax-header__form-inner" action="#">
 											<button class="search-btn" type="submit"><img src="/assets/img/search.png" alt="#"></button>
 											<input name="s" value="" type="text" placeholder="Search items, collections...">
 										</form>
-									</div>
+									</div> --}}
 									<!-- End Search Form -->
 								</div>
 								<div class="nftmax-header__right">
@@ -224,7 +228,7 @@
 												</div>
 
 												<div class="nftmax-header__author">
-													<div class="nftmax-header__author-img"><img src="{{ asset($User_info_for_header['image']) }}" alt="#"></div>
+													<div class="nftmax-header__author-img"><img src="{{ asset('photo/' . Auth::user()->foto) }}" alt="#"></div>
 													<div class="nftmax-header__author-content">
 														<h4 class="nftmax-header__author-title">{{ Auth::user()->username }}</h4>
 														{{-- <p class="nftmax-header__author-text v1"><a href="#">{{ Auth::user()->email }}</a></p> --}}
