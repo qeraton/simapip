@@ -74,7 +74,7 @@
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2"
-                                                        id="description">
+                                                        id="search1">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['description'] }}
@@ -165,36 +165,5 @@
     </div>
 </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchInput = document.getElementById('txt-search');
-        var tableRows = document.querySelectorAll('.nftmax-table__body tr');
-        var noDataMessage = document.getElementById('no-data-message');
-
-        searchInput.addEventListener('input', function() {
-            var searchTerm = searchInput.value.toLowerCase();
-            var found = false; // Reset found status for each input event
-
-            tableRows.forEach(function(row) {
-                var nama = row.querySelector('#nama').textContent.toLowerCase();
-                var kode = row.querySelector('#kode').textContent.toLowerCase();
-
-                 if (kode.includes(searchTerm) || nama.includes(searchTerm)) {
-                    row.style.display = '';
-                    found = true; // Set found to true if data is found
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            // Show or hide noDataMessage based on found status after all iterations
-            if (!found) {
-                noDataMessage.style.display = 'block';
-            } else {
-                noDataMessage.style.display = 'none';
-            }
-        });
-    });
-</script>
 {{-- @include('Layout.RightSidebar') --}}
 @include('Layout.Footer')

@@ -79,7 +79,7 @@ class pangkatController extends Controller
             ]);
 
 
-            return Redirect::to('/pangkat')->with('success', 'Berhasil mengubah data!');
+            return Redirect::to('/pangkat')->with('success', 'Berhasil Menambah data!');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());

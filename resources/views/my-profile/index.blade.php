@@ -113,5 +113,4 @@
 								<!-- End Dashboard Inner -->
 							</div>
 						</div>
-@include('Layout.RightSidebar')
 @include('Layout.Footer')
