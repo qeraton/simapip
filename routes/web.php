@@ -151,6 +151,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
 
     Route::group(['prefix' => 'RPKH', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [RPKH::class, 'index'])->name('index');
+        Route::get('/RPKH/{id}', [RPKH::class, 'show'])->name('show');
         Route::get('/list', [RPKH::class, 'listRPKH'])->name('list');
         Route::get('/create', [RPKH::class, 'create'])->name('create');
         Route::post('/store', [RPKH::class, 'store'])->name('store');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
 use Hash;
 use Session;
 use App\Models\{
@@ -66,4 +67,5 @@ class RPKHController extends Controller
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
         }
     }
+
 }

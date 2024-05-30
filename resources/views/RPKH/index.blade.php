@@ -115,14 +115,21 @@
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-3">
-                                                        {{-- <a href="{{ url('/RPKH/edit', $item['id']) }}" class="btn btn-primary me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></a> --}}
-                                                        <form
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataModal-{{ $item->id }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                                            </svg>
+                                                        </button>
+
+                                                        <a href="{{ url('/RPKH/edit', $item['id']) }}" class="btn btn-warning me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></a>
+                                                        {{-- <form
                                                             action="{{ url('/RPKH/edit', $item['id']) }}"
                                                             method="post" class="d-inline">
                                                             <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
                                                             @csrf
-                                                            @method('PUT')
-                                                        </form>
+                                                            @method('GET')
+                                                        </form> --}}
                                                         <form
                                                             action="{{ url('/RPKH/delete', $item['id']) }}"
                                                             method="post" class="d-inline">
@@ -130,17 +137,67 @@
                                                             @csrf
                                                             @method('DELETE')
                                                         </form>
-                                                        <form
-                                                            action="{{ url('/RPKH/view', $item['id']) }}"
-                                                            method="post" class="d-inline">
-                                                            <button class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                                                </svg>
-                                                            </button>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
+
+                                                        <!-- Modal Structure -->
+                                                        <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="dataModalLabel">Detail Isi</h5>
+                                                                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button> --}}
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered no-margin custom-table">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th>Nama Kegiatan</th>
+                                                                                        <td><span>{{ $item->nama_kegiatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Kartu Penugasan</th>
+                                                                                        <td><span>{{ $item->kartu_penugasan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Hari</th>
+                                                                                        <td><span>{{ $item->hari }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Tanggal Pelaksanaan Kegiatan</th>
+                                                                                        <td><span>{{ $item->tanggal_pelaksanaan_kegiatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Rencana Kegiatan</th>
+                                                                                        <td><span>{{ $item->rencana_kegiatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Tim</th>
+                                                                                        <td><span>{{ $item->tim }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Realisasi Kegiatan</th>
+                                                                                        <td><span>{{ $item->realisasi_kegiatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Keterangan</th>
+                                                                                        <td><span>{{ $item->keterangan }}</span></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Of Modal Structure -->
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
