@@ -17,8 +17,10 @@ class pangkatController extends Controller
 {
     public function index()
     {
-        $pangkat = pangkat::paginate(5);
-        return view('pangkat.index', compact('pangkat'));
+        $pangkat = pangkat::get();
+        $total = pangkat::count();
+
+        return view('pangkat.index', compact('pangkat', 'total'));
     }
 
     public function listPangkat(Request $request)

@@ -17,8 +17,11 @@ class RPKHController extends Controller
 {
     public function index()
     {
-        $RPKH = RPKH::paginate(3);
-        return view('RPKH.index', compact('RPKH'));
+        // $RPKH = RPKH::paginate(3);
+        $RPKH = RPKH::get();
+        $total = RPKH::count();
+
+        return view('RPKH.index', compact('RPKH', 'total'));
     }
 
     public function create()

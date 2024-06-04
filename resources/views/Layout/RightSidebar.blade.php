@@ -75,50 +75,7 @@
 															
 														</div>
 													</div>
-												</div>
-												
-												
-												<!-- End Single Tab -->
-											</div>
-										</div>
-										<!-- End NFTMax Single Sidebar -->
-									</div>
-									
-									<div class="col-xxl-12 col-xl-6 col-12 nftmax-sidebar__widget">	
-										<!-- NFTMax Single Sidebar -->
-										<div class="nftmax-sidebar__single">
-											<ul class="nav nav-tabs nftmax-dropdown__list" id="nav-tab" role="tablist">
-												<li class="nav-item dropdown nftmax-multiple__adropdownn">
-													<a class="nftmax-heading__amount-dropdown nav-link  dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><div class="nftmax__amount-dropdown"><img src="assets/img/eth-icon.png" alt="#">ETH rate<span class="nftmax-sidebar__arrow--icon"><svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.7092 0.288658C13.6163 0.197192 13.5057 0.124593 13.3839 0.0750502C13.262 0.025507 13.1313 0 12.9993 0C12.8673 0 12.7366 0.025507 12.6148 0.0750502C12.4929 0.124593 12.3824 0.197192 12.2894 0.288658L7.70992 4.7581C7.61697 4.84956 7.50638 4.92216 7.38453 4.9717C7.26269 5.02125 7.132 5.04676 7 5.04676C6.868 5.04676 6.73731 5.02125 6.61547 4.9717C6.49362 4.92216 6.38303 4.84956 6.29008 4.7581L1.7106 0.288658C1.61765 0.197192 1.50706 0.124593 1.38521 0.0750502C1.26337 0.025507 1.13268 0 1.00068 0C0.868682 0 0.737991 0.025507 0.616146 0.0750502C0.4943 0.124593 0.383712 0.197192 0.29076 0.288658C0.10453 0.471497 0 0.718831 0 0.976639C0 1.23445 0.10453 1.48178 0.29076 1.66462L4.88024 6.14382C5.44268 6.69206 6.20509 7 7 7C7.79491 7 8.55732 6.69206 9.11976 6.14382L13.7092 1.66462C13.8955 1.48178 14 1.23445 14 0.976639C14 0.718831 13.8955 0.471497 13.7092 0.288658Z" fill="#374557"></path></svg></span></div></a>
-													<ul class="dropdown-menu nftmax-sidebar_dropdown">
-														<a class="list-group-item" data-bs-toggle="tab" data-bs-target="#side__two" role="tab"><div class="nftmax__amount-dropdown"><img src="assets/img/eth-icon.png" alt="#">ETH rate</div></a>
-														<a class="list-group-item" data-bs-toggle="tab"  data-bs-target="#side__two_BTC" role="tab"><div class="nftmax__amount-dropdown"><img src="assets/img/btc-icon.png" alt="#">BTC rate</div></a>
-													</ul>
-												</li>
-											</ul>
-											
-											<div class="tab-content" id="nav-tabContent">
-												<!-- Single Tab -->
-												<div class="tab-pane fade show active" id="side__two" role="tabpanel" aria-labelledby="side__two">
-													<div class="nftmax-amount__statics">
-														<h4 class="nftmax-amount__statics__title">${{$transectionRateData['usd']}} USD</h4>
-														<p class="nftmax-amount__statics__text">+{{$transectionRateData['growth']}} ({{$transectionRateData['growth_percentage']}}%)</p>
-													</div>
-													
-													<div class="nftmax-sidebar__cside-one">
-														<canvas id="myChart_Side_Two"></canvas>
-													</div>
-												</div>
-												<div class="tab-pane fade show" id="side__two_BTC" role="tabpanel" aria-labelledby="side__two">
-													<div class="nftmax-amount__statics">
-														<h4 class="nftmax-amount__statics__title">${{$transectionRateBTCData['usd']}} USD</h4>
-														<p class="nftmax-amount__statics__text">+{{$transectionRateBTCData['growth']}} ({{$transectionRateBTCData['growth_percentage']}}%)</p>
-													</div>
-													
-													<div class="nftmax-sidebar__cside-one">
-														<canvas id="myChart_Side_Two_BTC"></canvas>
-													</div>
-												</div>
+												</div>											
 												<!-- End Single Tab -->
 											</div>
 										</div>

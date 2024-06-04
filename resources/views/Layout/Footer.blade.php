@@ -20,6 +20,25 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+<!-- Data Tables -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap4.js"></script>
+
+<script>
+	$(document).ready(function () {
+    $("#myTable").DataTable({
+			responsive: true,
+		 	scrollY: 400,
+    	deferRender: true,
+    	scroller: true,
+			// paging: true, 
+			// pageLength: 3, 
+		});
+  });
+</script>
+
 
 <script>
 jQuery(document).ready(function($) {
@@ -63,9 +82,10 @@ jQuery(document).ready(function($) {
 
 <!-- End Izi Toast-->
 
+
 <!-- Search Filters -->
 
-<script>
+{{-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         var searchInput = document.getElementById('txt-search');
         var tableRows = document.querySelectorAll('.nftmax-table__body tr');
@@ -98,7 +118,7 @@ jQuery(document).ready(function($) {
             }
         });
     });
-</script>
+</script> --}}
 
 <!-- End OF Search Filters -->
 

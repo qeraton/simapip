@@ -17,8 +17,10 @@ class UnitKerjaController extends Controller
      */
     public function index()
     {
-        $unitKerja = UnitKerja::paginate(10);
-        return view('DataUnitKerja.index', compact('unitKerja'));
+        $unitKerja = UnitKerja::get();
+        $total = UnitKerja::count();
+
+        return view('DataUnitKerja.index', compact('unitKerja', 'total'));
     }
 
     /**

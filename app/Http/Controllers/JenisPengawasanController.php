@@ -12,7 +12,7 @@ class JenisPengawasanController extends Controller
 
     public function index()
     {
-        $jenis = JenisPengawasan::paginate(5);
+        $jenis = JenisPengawasan::get();
         return view('JenisPengawasan.index', compact('jenis'));
     }
 

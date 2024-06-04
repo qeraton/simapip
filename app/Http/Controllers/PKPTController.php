@@ -17,8 +17,10 @@ class PKPTController extends Controller
 {
     public function index()
     {
-        $PKPT = PKPT::paginate(3);
-        return view('PKPT.index', compact('PKPT'));
+        $PKPT = PKPT::get();
+        $total = PKPT::count();
+
+        return view('PKPT.index', compact('PKPT', 'total'));
     }
 
     public function ref_index(){

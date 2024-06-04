@@ -35,6 +35,10 @@
 		<link rel="icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
 
+		<!-- CSS Liblaries -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap4.css">
+
 		<!-- NFTMax Stylesheet -->
 		
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">

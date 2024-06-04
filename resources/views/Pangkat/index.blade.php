@@ -26,7 +26,7 @@
                                 <h3 class="nftmax-table__title mb-0">Data Pangkat
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
-                                <div class="nftmax-marketplace__bar-right">
+                                {{-- <div class="nftmax-marketplace__bar-right">
                                     <div class="nftmax-marketplace__bar-one">
                                         <div class="nftmax-marketplace__bar-search">
                                             <button id="btn-search" class="search-btn" type="button"><img
@@ -35,13 +35,13 @@
                                                 placeholder="Ketikan kode atau nama...">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
                                     aria-labelledby="table_1">
                                     <!-- NFTMax Table -->
-                                    <table id="nftmax-table__main" class="nftmax-table__main nftmax-table__main-v1">
+                                    <table id="myTable" class="nftmax-table__main nftmax-table__main-v1">
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
@@ -102,15 +102,15 @@
                                         </tbody>
                                         <!-- End NFTMax Table Body -->
                                     </table>
-                                    <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
+                                    {{-- <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
                                         Data tidak ditemukan
-                                    </div>
+                                    </div> --}}
                                     <!-- End NFTMax Table -->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="trending-action">
+                        {{-- <div class="trending-action">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row nftmax-gap-sq30">
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <!-- End Welcome CTA -->
                     </div>

@@ -19,7 +19,7 @@ class JenjangJabatanController extends Controller
 
     public function index()
     {
-        $jenJab = jenjangJabatan::paginate(5);
+        $jenJab = jenjangJabatan::get();
         return view('jenjangJabatan.index', compact('jenJab'));
     }
 

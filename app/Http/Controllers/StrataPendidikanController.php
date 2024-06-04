@@ -15,7 +15,7 @@ class StrataPendidikanController extends Controller
      */
     public function index()
     {
-        $pendidikan = StrataPendidikan::paginate(5);
+        $pendidikan = StrataPendidikan::get();
         return view('StrataPendidikan.index', compact('pendidikan'));
     }
 

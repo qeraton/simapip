@@ -24,7 +24,7 @@ class PermissionController extends Controller
         $this->middleware('permission:Delete Permission', ['only' => ['destroy']]);
     }
     public function index() {
-        $permissions = Permission::paginate(4);
+        $permissions = Permission::get();
         return view('role-permission.permission.index', [
             'permissions' => $permissions
         ]);

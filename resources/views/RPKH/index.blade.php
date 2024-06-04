@@ -23,10 +23,10 @@
                         <!-- End Welcome CTA -->
                         <div class="nftmax-table mg-top-40">
                             <div class="nftmax-table__heading">
-                                <h3 class="nftmax-table__title mb-0">Data RPKH
-                                    {{-- <span class="nftmax-table__badge"></span> --}}
+                                <h3 class="nftmax-table__title mb-0">DATA RPKH
+                                    {{-- <span class="nftmax-table__badge">{{ $total }}</span> --}}
                                 </h3>
-                                <div class="nftmax-marketplace__bar-right">
+                                {{-- <div class="nftmax-marketplace__bar-right">
                                     <div class="nftmax-marketplace__bar-one">
                                         <div class="nftmax-marketplace__bar-search">
                                             <button id="btn-search" class="search-btn" type="button"><img
@@ -35,13 +35,13 @@
                                                 placeholder="Search...">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
                                     aria-labelledby="table_1">
                                     <!-- NFTMax Table -->
-                                    <table id="nftmax-table__main" class="nftmax-table__main nftmax-table__main-v1">
+                                    <table id="myTable" class="nftmax-table__main nftmax-table__main-v1">
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
@@ -54,6 +54,7 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Tim</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Realisasi Kegiatan</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Keterangan</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Aksi</th>
                                             </tr>
                                         </thead>
                                         <!-- NFTMax Table Body -->
@@ -133,7 +134,7 @@
                                                         <form
                                                             action="{{ url('/RPKH/delete', $item['id']) }}"
                                                             method="post" class="d-inline">
-                                                            <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
+                                                            <button class="btn btn-danger mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
                                                             @csrf
                                                             @method('DELETE')
                                                         </form>
@@ -204,15 +205,15 @@
                                         </tbody>
                                         <!-- End NFTMax Table Body -->
                                     </table>
-                                    <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
+                                    {{-- <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
                                         Data tidak ditemukan
-                                    </div>
+                                    </div> --}}
                                     <!-- End NFTMax Table -->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="trending-action">
+                        {{-- <div class="trending-action">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row nftmax-gap-sq30">
@@ -239,7 +240,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <!-- End Welcome CTA -->
                     </div>

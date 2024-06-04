@@ -18,7 +18,7 @@ class ObyekController extends Controller
 
     public function index()
     {
-        $obyek = Obyek::paginate(3);
+        $obyek = Obyek::get();
         return view('obyek.index', compact('obyek'));
     }
 

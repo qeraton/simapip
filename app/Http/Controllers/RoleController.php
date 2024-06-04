@@ -30,7 +30,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        $roles = Role::paginate(5);
+        $roles = Role::get();
         return view('role-permission.role.index', [
             'roles' => $roles
         ]);

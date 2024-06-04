@@ -32,7 +32,7 @@ class UserController extends Controller
     }
     public function index() 
     { 
-        $users = User::paginate(5);
+        $users = User::get();
         return view('role-permission.user.index', [
             'users' => $users,
         ]);
