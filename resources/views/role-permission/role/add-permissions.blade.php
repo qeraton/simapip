@@ -38,16 +38,27 @@
                                               @enderror
                                                 <label class="nftmax__item-label mb-3">Permissions </label>
                                                 <div class="row">
-                                                    @foreach ($permissions as $item)
-                                                        <div class="col-md-2">
-                                                            <label>
-                                                                <input type="checkbox"
-                                                                    name="permission[]" 
-                                                                    value="{{ $item->name }}"
-                                                                    {{ in_array($item->id, $rolePermissions) ? 'checked' : ''}}
-                                                                    >
-                                                                {{ $item->name }}
-                                                            </label>
+                                                    @php
+                                                        $groupedPermissions = $permissions->groupBy(function ($item) {
+                                                            $parts = explode(' ', $item->name);
+                                                            return end($parts); // Mengambil bagian terakhir sebagai nama modul
+                                                        });
+                                                    @endphp
+                                                    @foreach ($groupedPermissions as $module => $permissions)
+                                                        <div class="col-12">
+                                                            <h5>Modul {{ $module }} :</h5>
+                                                            @foreach ($permissions as $item)
+                                                                <div class="col-md-2">
+                                                                    <label>
+                                                                        <input type="checkbox"
+                                                                            name="permission[]" 
+                                                                            value="{{ $item->name }}"
+                                                                            {{ in_array($item->id, $rolePermissions) ? 'checked' : ''}}
+                                                                            >
+                                                                        {{ $item->name }}
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     @endforeach
                                                 </div>

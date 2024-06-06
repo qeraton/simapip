@@ -45,7 +45,6 @@
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
-                                                {{-- <th class="nftmax-table__column-2 nftmax-table__h2">ID</th> --}}
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Username</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Email</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Roles</th>
@@ -56,13 +55,6 @@
                                         <tbody class="nftmax-table__body">
                                             @foreach ($users as $item)
                                                 <tr>
-                                                    {{-- <td class="nftmax-table__column-3 nftmax-table__data-1"
-                                                        id="kode">
-                                                        <p
-                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['id'] }}
-                                                        </p>
-                                                    </td> --}}
                                                     <td class="nftmax-table__column-2 nftmax-table__data-2"
                                                         id="nama">
                                                         <p
@@ -91,7 +83,7 @@
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
                                                         @can('Edit User')
                                                             <a href="{{ url('users/'.$item->id.'/edit') }}"
-                                                                class="btn btn-primary ml-0"><svg
+                                                                class="btn btn-warning ml-0"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -130,37 +122,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="trending-action">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row nftmax-gap-sq30">
-                                        <div id="pegawai-container"></div>
-                                        <div id="pegawai-pagination-container" class="pull-left">
-                                            @if ($users->lastPage() > 1)
-                                                {{ $users->links() }}
-                                            @else
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination">
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary">
-                                                                <</span>
-                                                        </li>
-                                                        <li class="page-item active" aria-current="page">
-                                                            <span class="page-link">1</span>
-                                                        </li>
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary">></span>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
                         <!-- End Welcome CTA -->
                     </div>
                     <!-- End Dashboard Inner -->
