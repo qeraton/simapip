@@ -5,6 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@types/vue": "^2.0.0",
         "axios": "^1.1.2",
         "browser-sync": "^3.0.2",
         "browser-sync-webpack-plugin": "^2.3.0",
@@ -18,7 +19,7 @@
     "dependencies": {
         "@ntohq/buefy-next": "^0.1.2",
         "@popperjs/core": "^2.11.8",
-        "@vitejs/plugin-vue": "3.1",
+        "@vitejs/plugin-vue": "^3.1.2",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
         "latest": "^0.2.0",

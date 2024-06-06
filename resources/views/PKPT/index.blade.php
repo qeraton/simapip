@@ -68,41 +68,53 @@
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2" id="nama">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['nama'] }}
+                                                            {{ Str::limit($item->nama, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2" id="jenis">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['jenis'] }}
+                                                            {{ Str::limit($item->jenis, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['unit'] }}
+                                                            {{ Str::limit($item->unit, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['tujuan_audit'] }}
+                                                            {{ Str::limit($item->tujuan_audit, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            Tahun {{ $item['ruang_lingkup'] }}
+                                                            Tahun {{ Str::limit($item->ruang_lingkup, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-3 nftmax-table__data-2">
                                                         <p
                                                             class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            {{ $item['susunan_tim'] }}
+                                                            {{ Str::limit($item->susunan_tim, 20) }}
                                                         </p>
                                                     </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-3">
-                                                        <a href="{{ url('/PKPT/edit', $item['id']) }}" class="btn btn-primary me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></a>
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataModal-{{ $item->id }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                                            </svg>
+                                                        </button>
+
+                                                        <a href="{{ url('/PKPT/edit', $item['id']) }}" class="btn btn-warning me-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                            </svg>
+                                                        </a>
                                                         <form
                                                             action="{{ url('/PKPT/delete', $item['id']) }}"
                                                             method="post" class="d-inline">
@@ -110,7 +122,100 @@
                                                             @csrf
                                                             @method('DELETE')
                                                         </form>
+
+                                                        <!-- Modal Structure -->
+                                                        <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="dataModalLabel">Detail Isi</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered no-margin custom-table">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th>Kode </th>
+                                                                                        <td><span>{{ $item->kode }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Nama PKPT</th>
+                                                                                        <td><span>{{ $item->nama }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Jenis PKPT</th>
+                                                                                        <td><span>{{ $item->jenis }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Unit Kerja/SKPD/Satker</th>
+                                                                                        <td><span>{{ $item->unit }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Tujuan Audit</th>
+                                                                                        <td><span>{{ $item->tujuan_audit }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Ruang Lingkup</th>
+                                                                                        <td><span>{{ $item->ruang_lingkup }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Susunan Tim</th>
+                                                                                        <td><span>{{ $item->susunan_tim }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Anggaran Waktu</th>
+                                                                                        <td>DK:<span>{{ isset($item['waktu_dk']) ? $item['waktu_dk'] : 0 }}</span><br>
+                                                                                            LK:<span>{{ isset($item['waktu_lk']) ? $item['waktu_lk'] : 0 }}</span><br>
+                                                                                            HP:<span>{{ isset($item['waktu_hp']) ? $item['waktu_hp'] : 0 }}</span>
+                                                                                        </td>
+                                                                                        
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Anggaran Biaya</th>
+                                                                                        <td>DK: <span>{{ isset($item['biaya_dk']) ? number_format($item['biaya_dk'], 0, ',', '.') : 0 }}</span><br>
+                                                                                            LK: <span>DK: {{ isset($item['biaya_lk']) ? number_format($item['biaya_lk'], 0, ',', '.') : 0 }}</span><br>
+                                                                                            @php
+                                                                                                $total_biaya = is_numeric($item['biaya_dk']) && is_numeric($item['biaya_lk']) ? ($item['biaya_dk'] + $item['biaya_lk']) : 0;
+                                                                                            @endphp
+                                                                                            Total: <span>{{ number_format($total_biaya, 0, ',', '.') }}</span>
+                                                                                        </td>     
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>RMP</th>
+                                                                                        <td><span>{{ $item->rmp }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>RPL</th>
+                                                                                        <td><span>{{ $item->rpl }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>LHA</th>
+                                                                                        <td><span>{{ $item->lha }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Peralatan</th>
+                                                                                        <td><span>{{ $item->peralatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Keterangan</th>
+                                                                                        <td><span>{{ $item->keterangan }}</span></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Of Modal Structure -->
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -123,35 +228,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="trending-action">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row nftmax-gap-sq30">
-                                        <div id="pegawai-container"></div>
-                                        <div id="pegawai-pagination-container" class="pull-left">
-                                            @if($PKPT->lastPage() > 1)
-                                                {{ $PKPT->links() }}
-                                            @else
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination">
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary"><</span>
-                                                        </li>
-                                                        <li class="page-item active" aria-current="page">
-                                                            <span class="page-link">1</span>
-                                                        </li>
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary">></span>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         
                         <!-- End Welcome CTA -->
                     </div>

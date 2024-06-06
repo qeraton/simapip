@@ -9,170 +9,81 @@
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
                         <div class="nftmax-inner__heading">
-                            <h2 class="nftmax-inner__page-title">Edit Data PKPT </h2>
+                            <h2 class="nftmax-inner__page-title">Edit Data RPKH </h2>
                         </div>
                         <!-- End All Notification Heading -->
                         <div class="nftmax__item">
                             <div class="nftmax__item-heading">
-                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Data PKPT Sesuai Dengan Kriteria!</h2>
+                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Data RPKH Sesuai Dengan Kriteria!</h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
                             </div>
-                            <form class="form" method="POST" action="{{ url('PKPT/update', $PKPTEdit['id']) }}">
+                            <form class="form" method="POST" action="{{ url('RPKH/update', $RPKHEdit['id']) }}">
                                 @csrf
                                 @method('PATCH')
 
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="nftmax__item-box">
-                                            
+             
                                             <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">PKPT </label>
-                                              <hr style="width: 100px;">
-                                                <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Kode </label>
-                                                  <input class="nftmax__item-input rounded-0" type="number"
-                                                      name="kode" id="kode" placeholder="Edit Kode"
-                                                      value="{{ $PKPTEdit['kode'] }}">
-                                              </div>
-
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Nama </label>
-                                                  <input class="nftmax__item-input" type="text" name="nama"
-                                                      id="nama" placeholder="Edit Nama"
-                                                      value="{{ $PKPTEdit['nama'] }}">
-                                              </div>
-                                              
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Jenis </label>
-                                                  <input class="nftmax__item-input" type="text" name="jenis"
-                                                      id="jenis" placeholder="Edit jenis"
-                                                      value="{{ $PKPTEdit['jenis'] }}">
-                                              </div>
-                                            </div>
-                                            <hr>
-                                            
-                                            <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Unit </label>
-                                                <input class="nftmax__item-input" type="text" name="unit"
-                                                    id="unit" placeholder="Edit unit"
-                                                    value="{{ $PKPTEdit['unit'] }}">
+                                                <label class="nftmax__item-label">Nama Kegiatan </label>
+                                                <input class="nftmax__item-input rounded-0" type="text"
+                                                name="nama_kegiatan" id="nama_kegiatan" placeholder="Edit Nama Kegiatan"
+                                                value="{{ $RPKHEdit['nama_kegiatan'] }}">
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Tujuan Audit </label>
-                                                <input class="nftmax__item-input" type="text" name="tujuan_audit"
-                                                    id="tujuan_audit" placeholder="Edit tujuan audit"
-                                                    value="{{ $PKPTEdit['tujuan_audit'] }}">
+                                                <label class="nftmax__item-label">Kartu Penugasan</label>
+                                                <input class="nftmax__item-input" type="text" name="kartu_penugasan"
+                                                    id="kartu_penugasan" placeholder="Input Kartu Penugasan" value="{{ $RPKHEdit['kartu_penugasan'] }}">
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Ruang Lingkup </label>
-                                                <input class="nftmax__item-input" type="number" name="ruang_lingkup"
-                                                    id="ruang_lingkup" placeholder="Edit ruang lingkup"
-                                                    value="{{ $PKPTEdit['ruang_lingkup'] }}">
+                                                <label class="nftmax__item-label">Hari </label>
+                                                <input class="nftmax__item-input" type="text" name="hari"
+                                                    id="hari" placeholder="Input Hari" value="{{ $RPKHEdit['hari'] }}">
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Susunan Tim </label>
-                                                <input class="nftmax__item-input" type="text" name="susunan_tim"
-                                                    id="susunan_tim" placeholder="Edit Susunan Tim"
-                                                    value="{{ $PKPTEdit['susunan_tim'] }}">
-                                            </div>
-                                          
-                                            <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">Anggaran Waktu </label>
-                                              <hr style="width: 100px;">
-                                                <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">DK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_dk" id="waktu_dk" 
-                                                  placeholder="Edit Waktu DK"
-                                                  pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_dk'] }}">
-                                              </div>
-
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">LK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_lk" id="waktu_lk" 
-                                                  placeholder="Edit Waktu LK"
-                                                  pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_lk'] }}">
-                                              </div>
-                                              
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">HP </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_hp" id="waktu_hp" 
-                                                  placeholder="Edit Waktu HP"
-                                                  pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_hp'] }}">
-                                              </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">Anggaran Biaya </label>
-                                              <hr style="width: 100px;">
-                                                <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">DK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="number"
-                                                      name="biaya_dk" id="biaya_dk" placeholder="Edit Biaya DK"
-                                                      value="{{ $PKPTEdit['biaya_dk'] }}">
-                                              </div>
-
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">LK </label>
-                                                  <input class="nftmax__item-input" type="number" name="biaya_lk"
-                                                      id="biaya_lk" placeholder="Edit Biaya LK"
-                                                      value="{{ $PKPTEdit['biaya_lk'] }}">
-                                              </div>
-                                              
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Total </label>
-                                                  <input class="nftmax__item-input" type="number" name="total"
-                                                      id="total" placeholder="Edit Total"
-                                                      value="{{ $PKPTEdit['total'] }}">
-                                              </div>
-                                            </div>
-                                            <hr>
-
-                                           <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">RMP</label>
-                                              <input class="nftmax__item-input" type="number" name="rmp" id="rmp" 
-                                              placeholder="Edit RMP" step="0.01" value="{{ $PKPTEdit['rmp'] }}">
-                                          </div>
-
-                                          <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">RPL</label>
-                                              <input class="nftmax__item-input" type="number" name="rpl" id="rpl" 
-                                              placeholder="Edit RPL" step="0.01" value="{{ $PKPTEdit['rpl'] }}">
-                                          </div>
-
-
-                                            <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">LHA </label>
-                                                  <input class="nftmax__item-input" type="number" name="lha"
-                                                  id="lha" placeholder="Edit LHA"
-                                                  value="{{ $PKPTEdit['lha'] }}">
+                                                  <label class="nftmax__item-label">Tanggal Pelaksanaan Kegiatan </label>
+                                                  <input class="nftmax__item-input" type="text" name="tanggal_pelaksanaan_kegiatan"
+                                                  id="tanggal_pelaksanaan_kegiatan" placeholder="Input Tanggal Pelaksanaan Kegiatan" value="{{ $RPKHEdit['tanggal_pelaksanaan_kegiatan'] }}">
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Peralatan </label>
-                                                  <input class="nftmax__item-input" type="text" name="peralatan"
-                                                  id="peralatan" placeholder="Edit Peralatan"
-                                                  value="{{ $PKPTEdit['peralatan'] }}">
+                                                  <label class="nftmax__item-label">Rencana Kegiatan </label>
+                                                  <input class="nftmax__item-input" type="text" name="rencana_kegiatan"
+                                                  id="rencana_kegiatan" placeholder="Input Rencana Kegiatan" value="{{ $RPKHEdit['rencana_kegiatan'] }}">
+                                            </div>
+
+                                            <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">Tim </label>
+                                                  <input class="nftmax__item-input" type="text" name="tim"
+                                                  id="tim" placeholder="Input Tim" value="{{ $RPKHEdit['tim'] }}">
+                                            </div>
+
+                                            <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">Realisasi Kegiatan </label>
+                                                  <input class="nftmax__item-input" type="text" name="realisasi_kegiatan"
+                                                  id="realisasi_kegiatan" placeholder="Input Realisasi Kegiatan" value="{{ $RPKHEdit['realisasi_kegiatan'] }}">
                                             </div>
 
                                             <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">Keterangan </label>
                                                   <input class="nftmax__item-input" type="text" name="keterangan"
-                                                  id="keterangan" placeholder="Edit Keterangan"
-                                                  value="{{ $PKPTEdit['keterangan'] }}">
+                                                  id="keterangan" placeholder="Input Keterangan" value="{{ $RPKHEdit['keterangan'] }}">
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="nftmax__item-button--group">
                                     <a class="nftmax__item-button--single nftmax__item-button--cancel"
-                                        href="{{ url('/PKPT') }}" type="submit">Batal</a>
+                                        href="{{ url('/RPKH') }}" type="submit">Batal</a>
                                     <button
                                         class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
-                                        type="submit">Perbarui</button>
+                                        type="submit">Perbarui
+                                    </button>
                                 </div>
                         </div>
                     </div>

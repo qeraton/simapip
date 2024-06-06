@@ -26,16 +26,6 @@
                                 <h3 class="nftmax-table__title mb-0">Data Obyek
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
-                                {{-- <div class="nftmax-marketplace__bar-right">
-                                    <div class="nftmax-marketplace__bar-one">
-                                        <div class="nftmax-marketplace__bar-search">
-                                            <button id="btn-search" class="search-btn" type="button"><img
-                                                    src="/assets/img/search.png" alt="#"></button>
-                                            <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Ketikan kode, nama atau no. telp...">
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"

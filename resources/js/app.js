@@ -2,6 +2,7 @@ import './bootstrap';
 
 import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import { createPinia } from 'pinia'
+import { datePicker } from "@ntohq/buefy-next";
 // import { SomeComponent } from "@ntohq/buefy-next";
 import api from './api.js';
 

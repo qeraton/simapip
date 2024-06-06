@@ -9,6 +9,16 @@ class PKPT extends Model
 {
     use HasFactory;
 
+    public function setTujuanAuditAttribute($value)
+    {
+        $this->attributes['tujuan_audit'] = str_replace('_', ' ', $value);
+    }
+
+    public function setJenisAttribute($value)
+    {
+        $this->attributes['jenis'] = str_replace('_', ' ', $value);
+    }
+
     protected $fillable = [
         'kode',
         'nama',
@@ -17,6 +27,10 @@ class PKPT extends Model
         'tujuan_audit',
         'ruang_lingkup',
         'susunan_tim',
+        'pj',
+        'pt_wpj',
+        'kt',
+        'at',
         'waktu_dk',
         'waktu_lk',
         'waktu_hp',

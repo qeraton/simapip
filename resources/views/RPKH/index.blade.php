@@ -16,8 +16,9 @@
                                     module ini.</p>
                             </div>
                             <div class="welcome-cta__button">
-                                <a href="{{ url('/RPKH/create') }}"
-                                    class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data RPKH</a>
+                                {{-- <a href="{{ url('/RPKH/create') }}"
+                                    class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data RPKH
+                                </a> --}}
                             </div>
                         </div>
                         <!-- End Welcome CTA -->
@@ -145,9 +146,9 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="dataModalLabel">Detail Isi</h5>
-                                                                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
-                                                                        </button> --}}
+                                                                        </button>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="table-responsive">
@@ -191,13 +192,11 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!-- End Of Modal Structure -->
-
 
                                                     </td>
                                                 </tr>

@@ -24,7 +24,7 @@ Version:	1.0.0
 ========================================*/
 .body-bg {
 	width: 100%;
-	height: 120%;
+	/* height: 100%; */
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -37,11 +37,15 @@ Version:	1.0.0
 }
 
 .custom-modal .modal-dialog {
-	max-width: 80%;
+	max-width: 50%;
 	/* Atur lebar modal */
-	max-height: 60%;
+	max-height: 50%;
 	/* Atur tinggi modal */
 }
+
+/* .nftmax-body { 
+	height: 100%;
+} */
 
 .custom-modal .modal-content {
 	height: 50%;
@@ -50,6 +54,8 @@ Version:	1.0.0
 
 .custom-modal .modal-body {
 	overflow-y: auto;
+	z-index: inherit;
+	border: none;
 	/* Tambahkan scroll jika konten modal melebihi tinggi */
 }
 
@@ -554,10 +560,12 @@ Version:	1.0.0
 	padding-right: 22px;
 	transition: all 0.3s ease;
 }
+
 .admin-menu__title {
 	font-size: 20px;
 	margin-bottom: 12px;
 }
+
 .logo {
 	border-bottom: 1px solid rgba(243, 245, 249, 0.1);
 	padding-bottom: 15px;
@@ -3742,9 +3750,15 @@ li.collapsed .nftmax__toggle:before {
 	padding-left: 40px;
 	padding-bottom: 30px;
 }
+
 .nftmax__item-box {
 	overflow-y: auto;
-	max-height: 500px;
+	max-height: 550px;
+}
+
+.strata-box { 
+	overflow-y: auto;
+	height: 10000px;
 }
 
 .nftmax-chatbox__outgoing {

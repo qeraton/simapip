@@ -24,29 +24,29 @@ class PKPTController extends Controller
     }
 
     public function ref_index(){
-        $PKPT = PKPT::paginate(3);
+        $PKPT = PKPT::get();
         return view('PKPT.ref-PKPT', compact('PKPT'));
     }
 
-    public function listPangkat(Request $request)
-    {
-        $data = PKPT::where(function ($q) use ($request) {
-            if ($request->has('search') && $request->search != "") {
-                $q->whereRaw('LOWER(nama) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-                $q->orWhereRaw('LOWER(kode) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-                $q->orWhereRaw('LOWER(jenis) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-            }
-        })
-            ->when($request->has('ja') && $request->ja != "all" && !empty($request->ja), function ($q) use ($request) {
-                if ($request->ja == "NOA") {
-                    $q->whereNull('kode');
-                } else
-                    $q->where('kode', $request->ja);
-            })
-            ->paginate($request->pageSize);
+    // public function listPangkat(Request $request)
+    // {
+    //     $data = PKPT::where(function ($q) use ($request) {
+    //         if ($request->has('search') && $request->search != "") {
+    //             $q->whereRaw('LOWER(nama) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
+    //             $q->orWhereRaw('LOWER(kode) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
+    //             $q->orWhereRaw('LOWER(jenis) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
+    //         }
+    //     })
+    //         ->when($request->has('ja') && $request->ja != "all" && !empty($request->ja), function ($q) use ($request) {
+    //             if ($request->ja == "NOA") {
+    //                 $q->whereNull('kode');
+    //             } else
+    //                 $q->where('kode', $request->ja);
+    //         })
+    //         ->paginate($request->pageSize);
 
-        return $this->returnJsonSuccess("Userlist retrieved successfully", $data);
-    }
+    //     return $this->returnJsonSuccess("Userlist retrieved successfully", $data);
+    // }
 
     public function create()
     {
@@ -62,7 +62,11 @@ class PKPTController extends Controller
             'unit' => 'required|string|max:225',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
-            'susunan_tim' => 'required|string|max:225',
+            // 'susunan_tim' => 'required|string|max:225',
+            'pj' => 'required|numeric',
+            'pt_wpj' => 'required|numeric',
+            'kt' => 'required|numeric',
+            'at' => 'required|numeric',
             'waktu_dk' => 'nullable|numeric',
             'waktu_lk' => 'nullable|numeric',
             'waktu_hp' => 'nullable|numeric',
@@ -81,7 +85,15 @@ class PKPTController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $data = $request->only(['kode', 'nama', 'jenis', 'unit' ,'tujuan_audit', 'ruang_lingkup', 'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan']);
+        // Gabungkan nilai dari 'pj', 'pt_wpj', 'kt', dan 'at' ke dalam 'susunan_tim' dengan format yang diinginkan
+        $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
+
+        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'pj', 'pt_wpj', 'kt', 'at','tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+
+        // Tambahkan 'susunan_tim' ke dalam data
+        $data['susunan_tim'] = $susunanTim;
+
+        // $data = $request->only(['kode', 'nama', 'jenis', 'unit' ,'tujuan_audit', 'ruang_lingkup', 'pj', 'pt_wpj', 'kt', 'at' ,'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan']);
 
         // Handling waktu_dk
         if ($request->filled('waktu_dk')) {
@@ -147,12 +159,17 @@ class PKPTController extends Controller
             'unit' => 'required|string|max:225',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
-            'susunan_tim' => 'required|string|max:225',
+            // 'susunan_tim' => 'required|string|max:225',
+            'pj' => 'required|numeric',
+            'pt_wpj' => 'required|numeric',
+            'kt' => 'required|numeric',
+            'at' => 'required|numeric',
             'waktu_dk' => 'nullable|numeric',
             'waktu_lk' => 'nullable|numeric',
             'waktu_hp' => 'nullable|numeric',
             'biaya_dk' => 'nullable|numeric',
             'biaya_lk' => 'nullable|numeric',
+            // 'total' => 'required|numeric',
             'rmp' => 'required|numeric',
             'rpl' => 'required|numeric',
             'lha' => 'required|numeric',
@@ -164,7 +181,13 @@ class PKPTController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'tujuan_audit', 'ruang_lingkup', 'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan', 'keterangan']);
+        // Gabungkan nilai dari 'pj', 'pt_wpj', 'kt', dan 'at' ke dalam 'susunan_tim' dengan format yang diinginkan
+        $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
+
+        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+
+        // Tambahkan 'susunan_tim' ke dalam data
+        $data['susunan_tim'] = $susunanTim;
 
         // Handling waktu_dk
         if ($request->filled('waktu_dk')) {
@@ -217,6 +240,6 @@ class PKPTController extends Controller
     {
         PKPT::where('id', $id)->delete();
 
-        return redirect()->back()->with('deleted', 'Berhasil menghapus data!');
+        return redirect()->back()->with('success', 'Berhasil menghapus data!');
     }
 }

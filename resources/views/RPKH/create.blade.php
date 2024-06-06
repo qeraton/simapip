@@ -41,26 +41,6 @@
                                                     id="hari" placeholder="Input Hari" required="required">
                                             </div>
 
-                                            {{-- <hr style="width: 100%;">
-                                            <div class="nftmax__item-form--group">
-                                              <label class="nftmax__item-label">Tanggal Pelaksanaan Kegiatan </label>
-                                              <hr style="width: 100px;">
-                                                <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Dari Tanggal :  </label>
-                                                  <input class="nftmax__item-input rounded-0" type="date"
-                                                      name="start_date" id="start_date" placeholder="Input Tanggal Mulai"
-                                                      required="required">
-                                              </div>
-
-                                              <div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">Berakhir Tanggal :  </label>
-                                                  <input class="nftmax__item-input" type="date" name="end_date"
-                                                      id="end_date" placeholder="Input Tanggal Berakhir" required="required">
-                                              </div>
-
-                                            </div>
-                                            <hr> --}}
-
                                             <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">Tanggal Pelaksanaan Kegiatan </label>
                                                   <input class="nftmax__item-input" type="text" name="tanggal_pelaksanaan_kegiatan"

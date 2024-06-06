@@ -27,7 +27,7 @@
                                             
                                             <div class="nftmax__item-form--group">
                                               <label class="nftmax__item-label">PKPT </label>
-                                              <hr style="width: 100px;">
+                                              <hr style="width: 30%; border-top: 3px solid; color: red">
                                                 <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">Kode </label>
                                                   <input class="nftmax__item-input rounded-0" type="number"
@@ -42,14 +42,34 @@
                                                       value="{{ $PKPTEdit['nama'] }}">
                                               </div>
                                               
-                                              <div class="nftmax__item-form--group">
+                                              {{-- <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">Jenis </label>
                                                   <input class="nftmax__item-input" type="text" name="jenis"
                                                       id="jenis" placeholder="Edit jenis"
                                                       value="{{ $PKPTEdit['jenis'] }}">
-                                              </div>
+                                              </div> --}}
+                                                <div class="nftmax__item-form--group">
+                                                    <label class="nftmax__item-label" for="jenis">Jenis PKPT</label>
+                                                    <select class="nftmax__item-input" name="jenis" id="jenis">
+                                                        @php
+                                                            $jenisOptions = [
+                                                                'Reviu' => 'Reviu',
+                                                                'Evaluasi' => 'Evaluasi',
+                                                                'Monitoring' => 'Monitoring',
+                                                                'Evaluasi dan Monitoring' => 'Evaluasi dan Monitoring',
+                                                                'Pemeriksaan Khusus' => 'Pemeriksaan Khusus',
+                                                                'Audit' => 'Audit',
+                                                                'Audit Operasional' => 'Audit Operasional',
+                                                                // Add more options as needed
+                                                            ];
+                                                        @endphp
+                                                        @foreach ($jenisOptions as $value => $label)
+                                                            <option value="{{ $value }}" {{ $PKPTEdit['jenis'] == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <hr>
+                                            <hr style="width: 100%; border-top: 3px solid; color: red">
                                             
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Unit </label>
@@ -59,94 +79,141 @@
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Tujuan Audit </label>
-                                                <input class="nftmax__item-input" type="text" name="tujuan_audit"
-                                                    id="tujuan_audit" placeholder="Edit tujuan audit"
-                                                    value="{{ $PKPTEdit['tujuan_audit'] }}">
+                                                <label class="nftmax__item-label" for="tujuan_audit">Tujuan Audit</label>
+                                                <select class="nftmax__item-input" name="tujuan_audit" id="tujuan_audit">
+                                                    @php
+                                                        $tujuanAuditOptions = [
+                                                            'Evaluasi Lakip' => 'Evaluasi LAKIP/SAKIP',
+                                                            'Reviu LKPD' => 'Reviu LKPD',
+                                                            'Pengelolaan Dana Desa' => 'Pengelolaan Dana Desa',
+                                                            'Reviu RKA' => 'Reviu RKA',
+                                                            'Pemutakhiran Data Pengawasan Tk Provinsi' => 'Pemutakhiran Data Pengawasan Tk Provinsi',
+                                                            'Pengawasan Otsus' => 'Pengawasan Otsus',
+                                                            'Monitoring Tindak Lanjut LHP BPK/Inspektorat' => 'Monitoring Tindak Lanjut LHP BPK/Inspektorat',
+                                                            'Penanganan Pengaduan Masyarakat' => 'Penanganan Pengaduan Masyarakat',
+                                                            'Opname Kas dan Persediaan' => 'Opname Kas dan Persediaan',
+                                                            'Audit Kinerja' => 'Audit Kinerja',
+                                                            'Pemeriksaan Reguler' => 'Pemeriksaan Reguler',
+                                                            // Add more options as needed
+                                                        ];
+                                                    @endphp
+                                                    @foreach ($tujuanAuditOptions as $value => $label)
+                                                        <option value="{{ $value }}" {{ $PKPTEdit['tujuan_audit'] == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Ruang Lingkup </label>
-                                                <input class="nftmax__item-input" type="number" name="ruang_lingkup"
-                                                    id="ruang_lingkup" placeholder="Edit ruang lingkup"
-                                                    value="{{ $PKPTEdit['ruang_lingkup'] }}">
+                                                {{-- <input class="nftmax__item-input" type="number" name="ruang_lingkup"
+                                                    id="ruang_lingkup" placeholder="Tahun..." required="required"> --}}
+                                                <input class="nftmax__item-input" type="number" placeholder="YYYY" min="1999" max="2040" name="ruang_lingkup"
+                                                id="ruang_lingkup" placeholder="Tahun..." value="{{ $PKPTEdit['ruang_lingkup'] }}">
+                                                <script>
+                                                    document.querySelector("input[type=number]")
+                                                    .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                                                </script>
                                             </div>
 
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Susunan Tim </label>
-                                                <input class="nftmax__item-input" type="text" name="susunan_tim"
-                                                    id="susunan_tim" placeholder="Edit Susunan Tim"
-                                                    value="{{ $PKPTEdit['susunan_tim'] }}">
+                                              <label class="nftmax__item-label mb-0">Susunan Tim </label>
+                                                <hr style="width: 100px; border-top: 3px solid red;">
+                                                <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">PJ</label>
+                                                  <input style="width: 40%" class="nftmax__item-input rounded-0" type="number"
+                                                      name="pj" id="pj" placeholder="Input Jumlah PJ"
+                                                      value="{{ $PKPTEdit['pj'] }}">
+                                              </div>
+
+                                              <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">PT/WPJ</label>
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="pt_wpj"
+                                                      id="pt_wpj" placeholder="Input Jumlah PT/WPJ" value="{{ $PKPTEdit['pt_wpj'] }}">
+                                              </div>
+
+                                              <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">KT</label>
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="kt"
+                                                      id="kt" placeholder="Input Jumlah KT" value="{{ $PKPTEdit['kt'] }}">
+                                              </div>
+
+                                              <div class="nftmax__item-form--group">
+                                                  <label class="nftmax__item-label">AT</label>
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="at"
+                                                      id="at" placeholder="Input Jumlah AT" value="{{ $PKPTEdit['at'] }}">
+                                              </div>
+
                                             </div>
+                                            <hr style="width: 100%; border-top: 3px solid; color: red">
                                           
                                             <div class="nftmax__item-form--group">
                                               <label class="nftmax__item-label">Anggaran Waktu </label>
-                                              <hr style="width: 100px;">
+                                              <hr style="width: 30%; border-top: 3px solid; color: red">
                                                 <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">DK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_dk" id="waktu_dk" 
+                                                  <input style="width: 40%" class="nftmax__item-input rounded-0" type="text" name="waktu_dk" id="waktu_dk" 
                                                   placeholder="Edit Waktu DK"
                                                   pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_dk'] }}">
                                               </div>
 
                                               <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">LK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_lk" id="waktu_lk" 
+                                                  <input style="width: 40%" class="nftmax__item-input rounded-0" type="text" name="waktu_lk" id="waktu_lk" 
                                                   placeholder="Edit Waktu LK"
                                                   pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_lk'] }}">
                                               </div>
                                               
                                               <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">HP </label>
-                                                  <input class="nftmax__item-input rounded-0" type="text" name="waktu_hp" id="waktu_hp" 
+                                                  <input style="width: 40%" class="nftmax__item-input rounded-0" type="text" name="waktu_hp" id="waktu_hp" 
                                                   placeholder="Edit Waktu HP"
                                                   pattern="^([0-1]?[0-9]|2[0-3])$" value="{{ $PKPTEdit['waktu_hp'] }}">
                                               </div>
                                             </div>
-                                            <hr>
+                                           <hr style="width: 100%; border-top: 3px solid; color: red">
 
                                             <div class="nftmax__item-form--group">
                                               <label class="nftmax__item-label">Anggaran Biaya </label>
-                                              <hr style="width: 100px;">
+                                              <hr style="width: 30%; border-top: 3px solid; color: red">
                                                 <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">DK </label>
-                                                  <input class="nftmax__item-input rounded-0" type="number"
+                                                  <input style="width: 40%" class="nftmax__item-input rounded-0" type="number"
                                                       name="biaya_dk" id="biaya_dk" placeholder="Edit Biaya DK"
                                                       value="{{ $PKPTEdit['biaya_dk'] }}">
                                               </div>
 
                                               <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">LK </label>
-                                                  <input class="nftmax__item-input" type="number" name="biaya_lk"
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="biaya_lk"
                                                       id="biaya_lk" placeholder="Edit Biaya LK"
                                                       value="{{ $PKPTEdit['biaya_lk'] }}">
                                               </div>
                                               
                                               <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">Total </label>
-                                                  <input class="nftmax__item-input" type="number" name="total"
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="total"
                                                       id="total" placeholder="Edit Total"
                                                       value="{{ $PKPTEdit['total'] }}">
                                               </div>
                                             </div>
-                                            <hr>
+                                            <hr style="width: 100%; border-top: 3px solid; color: red">
 
                                            <div class="nftmax__item-form--group">
                                               <label class="nftmax__item-label">RMP</label>
-                                              <input class="nftmax__item-input" type="number" name="rmp" id="rmp" 
+                                              <input style="width: 40%" class="nftmax__item-input" type="number" name="rmp" id="rmp" 
                                               placeholder="Edit RMP" step="0.01" value="{{ $PKPTEdit['rmp'] }}">
                                           </div>
 
                                           <div class="nftmax__item-form--group">
                                               <label class="nftmax__item-label">RPL</label>
-                                              <input class="nftmax__item-input" type="number" name="rpl" id="rpl" 
+                                              <input style="width: 40%" class="nftmax__item-input" type="number" name="rpl" id="rpl" 
                                               placeholder="Edit RPL" step="0.01" value="{{ $PKPTEdit['rpl'] }}">
                                           </div>
 
 
                                             <div class="nftmax__item-form--group">
                                                   <label class="nftmax__item-label">LHA </label>
-                                                  <input class="nftmax__item-input" type="number" name="lha"
+                                                  <input style="width: 40%" class="nftmax__item-input" type="number" name="lha"
                                                   id="lha" placeholder="Edit LHA"
                                                   value="{{ $PKPTEdit['lha'] }}">
                                             </div>
