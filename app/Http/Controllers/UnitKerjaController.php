@@ -51,15 +51,15 @@ class UnitKerjaController extends Controller
             'email' => 'nullable|email',
             'website' => 'nullable|regex:/^https:\/\/.*/',
             'nomor_urut' => 'required|max:3',
-            'unitKerja_Kode' => 'required|min:9|max:14',
+            'UnitKerja_Kode' => 'required|min:9|max:14',
         ], [
-            'kode.required' => 'Kode unit kerja wajib diisi.',
-            'nama_unit.required' => 'Kode unit kerja wajib diisi.',
-            'nomor_urut.required' => 'Kode unit kerja wajib diisi.',
-            'nomor_urut.max' => 'Nomor surat maksimal 3 nomor.',
-            'unitKerja_Kode.required' => 'Kode unit kerja wajib diisi.',
-            'unitKerja_Kode.min' => 'Kode unit kerja minimal 9 angka.',
-            'unitKerja_Kode.max' => 'Kode unit kerja maksimal 14 angka.',
+            'kode.required' => 'Kode wajib diisi.',
+            'nama_unit.required' => 'Nama unit kerja wajib diisi.',
+            'nomor_urut.required' => 'Nomor urut kerja wajib diisi.',
+            'nomor_urut.max' => 'Nomor urut maksimal 3 nomor.',
+            'UnitKerja_Kode.required' => 'Kode unit kerja wajib diisi.',
+            'UnitKerja_Kode.min' => 'Kode unit kerja minimal 9 angka.',
+            'UnitKerja_Kode.max' => 'Kode unit kerja maksimal 14 angka.',
             'email.email' => 'Format email tidak valid.',
             'website.regex' => 'Format website tidak valid. Pastikan website dimulai dengan https://',
         ]);
@@ -78,7 +78,7 @@ class UnitKerjaController extends Controller
             'email' => $request->email,
             'website' => $request->website,
             'nomor_urut' => $request->nomor_urut,
-            'UnitKerja_Kode' => $request->unitKerja_Kode,
+            'UnitKerja_Kode' => $request->UnitKerja_Kode,
         ]);
         
         $success = 'Data unit kerja berhasil ditambahkan.';
@@ -129,15 +129,15 @@ class UnitKerjaController extends Controller
             'email' => 'nullable|email',
             'website' => 'nullable|regex:/^https:\/\/.*/',
             'nomor_urut' => 'required|max:3',
-            'unitKerja_Kode' => 'required|min:9|max:14',
+            'UnitKerja_Kode' => 'required|min:9|max:14',
         ], [
             'kode.required' => 'Kode unit kerja wajib diisi.',
             'nama_unit.required' => 'Kode unit kerja wajib diisi.',
             'nomor_urut.required' => 'Kode unit kerja wajib diisi.',
             'nomor_urut.max' => 'Nomor surat maksimal 3 nomor.',
-            'unitKerja_Kode.required' => 'Kode unit kerja wajib diisi.',
-            'unitKerja_Kode.min' => 'Kode unit kerja minimal 9 angka.',
-            'unitKerja_Kode.max' => 'Kode unit kerja maksimal 14 angka.',
+            'UnitKerja_Kode.required' => 'Kode unit kerja wajib diisi.',
+            'UnitKerja_Kode.min' => 'Kode unit kerja minimal 9 angka.',
+            'UnitKerja_Kode.max' => 'Kode unit kerja maksimal 14 angka.',
             'email.email' => 'Format email tidak valid.',
             'website.regex' => 'Format website tidak valid. Pastikan website dimulai dengan https://',
         ]);
@@ -156,7 +156,7 @@ class UnitKerjaController extends Controller
             'email' => $request->email,
             'website' => $request->website,
             'nomor_urut' => $request->nomor_urut,
-            'UnitKerja_Kode' => $request->unitKerja_Kode,
+            'UnitKerja_Kode' => $request->UnitKerja_Kode,
         ]);
         
         $success = 'Data unit kerja berhasil diubah.';

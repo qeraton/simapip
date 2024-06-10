@@ -49,7 +49,7 @@
                                 <div class="col-md-6">
                                     <div class="nftmax__item-form--group">
                                         <label class="nftmax__item-label">Unit Kerja Kode <span class="text-danger">*</span></label>
-                                        <input class="nftmax__item-input form-control" type="number" placeholder="Inputkan unit kerja kode yang sesuai!" required="required" name="unitKerja_Kode" value="{{ old('unitKerja_Kode') }}">
+                                        <input class="nftmax__item-input form-control" type="number" placeholder="Inputkan unit kerja kode yang sesuai!" required="required" name="UnitKerja_Kode" value="{{ old('UnitKerja_Kode') }}">
                                     </div>
                                     <div class="nftmax__item-form--group">
                                         <label class="nftmax__item-label">Nama Singkatan</label>

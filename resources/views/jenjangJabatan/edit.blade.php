@@ -82,3 +82,13 @@
     </div>
 {{-- @include('Layout.RightSidebar') --}}
 @include('Layout.Footer')
+<script>
+	function toUpperCaseInput() {
+		var inputField = document.getElementById('kode');
+		inputField.addEventListener('input', function() {
+			this.value = this.value.toUpperCase();
+			this.value = this.value.replace(/[^A-Z]/g, '');
+		});
+	}
+	window.onload = toUpperCaseInput;
+</script>

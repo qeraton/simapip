@@ -281,20 +281,28 @@
 
 			<script>
 				document.addEventListener('DOMContentLoaded', function() {
-					var selectedMenu = document.querySelector('.menu-bar__one .active');
-			
-					if (selectedMenu) {
-						var rect = selectedMenu.getBoundingClientRect();
-						var isInViewport = (
-							rect.top >= 0 &&
-							rect.left >= 0 &&
-							rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-							rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-						);
-			
-						if (!isInViewport) {
-							selectedMenu.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+					try {
+						var selectedMenu = document.querySelector('.menu-bar__one .active');
+						console.log('Selected menu:', selectedMenu); // Debugging
+						
+						if (selectedMenu) {
+							var rect = selectedMenu.getBoundingClientRect();
+							console.log('Rect:', rect); // Debugging
+							var isInViewport = (
+								rect.top >= 0 &&
+								rect.left >= 0 &&
+								rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+								rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+							);
+							console.log('Is in viewport:', isInViewport); // Debugging
+		
+							if (!isInViewport) {
+								selectedMenu.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+								console.log('Scrolled into view'); // Debugging
+							}
 						}
+					} catch (error) {
+						console.error('Error:', error);
 					}
 				});
 			</script>
