@@ -250,5 +250,5 @@
 							</div>
 						</div>
 
-@include('Layout.RightSidebar')
+{{-- @include('Layout.RightSidebar') --}}
 @include('Layout.Footer')
