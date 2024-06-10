@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DataPegawaiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Data Pegawai', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Data Pegawai', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Data Pegawai', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Data Pegawai', ['only' => ['destroy']]);
+    }
     public function index()
     {
         return view('DataPegawai.index');

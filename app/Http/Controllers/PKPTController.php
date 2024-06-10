@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Auth;
 
 class PKPTController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View PKPT', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create PKPT', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit PKPT', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete PKPT', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $PKPT = PKPT::get();
@@ -51,6 +58,11 @@ class PKPTController extends Controller
     public function create()
     {
         return view('PKPT.create');
+    }
+
+    public function createnyoba()
+    {
+        return view('PKPT.createnyoba');
     }
 
     public function store(Request $request)

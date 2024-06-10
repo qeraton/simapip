@@ -33,39 +33,42 @@
                                     <div class="col-12">
                                         <div class="nftmax__item-box">
                                             <div class="nftmax__item-form--group">
-                                              @error('permission')
-                                                <span class="text-danger">{{ $message }}</span>
-                                              @enderror
-                                                <label class="nftmax__item-label mb-3">Permissions </label>
-                                                <div class="row">
-                                                    @php
-                                                        $groupedPermissions = $permissions->groupBy(function ($item) {
-                                                            $parts = explode(' ', $item->name);
-                                                            return end($parts); // Mengambil bagian terakhir sebagai nama modul
-                                                        });
-                                                    @endphp
-                                                    @foreach ($groupedPermissions as $module => $permissions)
-                                                        <div class="col-12">
-                                                            <h5>Modul {{ $module }} :</h5>
-                                                            @foreach ($permissions as $item)
-                                                                <div class="col-md-2">
+                                                @error('permission')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                @php
+                                                    $groupedPermissions = $permissions->groupBy(function ($item) {
+                                                        $parts = explode(' ', $item->name);
+                                                        $moduleName = implode(' ', array_slice($parts, 1)); // Mengambil semua kata kecuali yang pertama
+                                                        return $moduleName;
+                                                    });
+                                                @endphp
+                                                @foreach ($groupedPermissions as $module => $permissions)
+                                                    <div class="module-section mb-4">
+                                                        <h5>Modul {{ $module }}:</h5>
+                                                        <div class="permission-list">
+                                                            @foreach ($permissions as $index => $item)
+                                                                <div class="permission-item">
                                                                     <label>
                                                                         <input type="checkbox"
-                                                                            name="permission[]" 
+                                                                            name="permission[]"
                                                                             value="{{ $item->name }}"
-                                                                            {{ in_array($item->id, $rolePermissions) ? 'checked' : ''}}
-                                                                            >
+                                                                            {{ in_array($item->id, $rolePermissions) ? 'checked' : '' }}
+                                                                            class="{{ $loop->first ? 'permission-first' : 'permission-rest' }}"
+                                                                            {{ $loop->first ? '' : 'disabled' }}>
                                                                         {{ $item->name }}
                                                                     </label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
-                                                    @endforeach
-                                                </div>
+                                                        <hr style="width: 100px; border-top: 1px solid black;">
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="nftmax__item-button--group">
                                     <a class="nftmax__item-button--single nftmax__item-button--cancel"

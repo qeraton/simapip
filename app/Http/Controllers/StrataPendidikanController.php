@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class StrataPendidikanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Strata Pendidikan', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Strata Pendidikan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Strata Pendidikan', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Strata Pendidikan', ['only' => ['destroy']]);
+    }
 
     public function index()
     {

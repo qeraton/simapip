@@ -15,10 +15,12 @@
                                 <p class="welcome-cta__text">Anda dapat menambahkan dan mengubah PKPT di
                                     module ini.</p>
                             </div>
-                            <div class="welcome-cta__button">
-                                <a href="{{ url('/PKPT/create') }}"
-                                    class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data PKPT</a>
-                            </div>
+                            @can('Create PKPT')
+                                <div class="welcome-cta__button">
+                                    <a href="{{ url('/PKPT/create') }}"
+                                        class="nftmax-btn nftmax-btn__bordered bg radius">Tambah Data PKPT</a>
+                                </div>
+                            @endcan
                         </div>
                         <!-- End Welcome CTA -->
                         <div class="nftmax-table mg-top-40">
@@ -52,6 +54,13 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Tujuan Audit</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Ruang Lingkup</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Susunan Tim</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Anggaran <br> Waktu</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Anggaran <br> Biaya</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">RMP</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">RPL</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">LHA</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Peralatan</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Keterangan</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Aksi</th>
                                             </tr>
                                         </thead>
@@ -101,6 +110,66 @@
                                                             {{ Str::limit($item->susunan_tim, 20) }}
                                                         </p>
                                                     </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            DK: {{ isset($item['waktu_dk']) ? $item['waktu_dk'] : 0 }}
+                                                        </p>
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            LK: {{ isset($item['waktu_lk']) ? $item['waktu_lk'] : 0 }}
+                                                        </p>
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            HP: {{ isset($item['waktu_hp']) ? $item['waktu_hp'] : 0 }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2" id="nama">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            DK: {{ isset($item['biaya_dk']) ? number_format($item['biaya_dk'], 0, ',', '.') : 0 }}
+                                                        </p>
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            LK: {{ isset($item['biaya_lk']) ? number_format($item['biaya_lk'], 0, ',', '.') : 0 }}
+                                                        </p>
+                                                        @php
+                                                            $total_biaya = is_numeric($item['biaya_dk']) && is_numeric($item['biaya_lk']) ? ($item['biaya_dk'] + $item['biaya_lk']) : 0;
+                                                        @endphp
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            Total: {{ number_format($total_biaya, 0, ',', '.') }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            {{ $item['rmp'] }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            {{ $item['rpl'] }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            {{ $item['lha'] }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            {{ Str::limit($item->peralatan, 20) }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="nftmax-table__column-3 nftmax-table__data-2">
+                                                        <p
+                                                            class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            {{ isset($item['keterangan']) ? $item['keterangan'] : '' }}
+                                                        </p>
+                                                    </td>
                                                     <td class="nftmax-table__column-4 nftmax-table__data-3">
                                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataModal-{{ $item->id }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -108,20 +177,23 @@
                                                                 <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
                                                             </svg>
                                                         </button>
-
-                                                        <a href="{{ url('/PKPT/edit', $item['id']) }}" class="btn btn-warning me-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                                            </svg>
-                                                        </a>
-                                                        <form
-                                                            action="{{ url('/PKPT/delete', $item['id']) }}"
-                                                            method="post" class="d-inline">
-                                                            <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
+                                                        @can('Edit PKPT')
+                                                            <a href="{{ url('/PKPT/edit', $item['id']) }}" class="btn btn-warning me-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                                </svg>
+                                                            </a>
+                                                        @endcan
+                                                        @can('Delete PKPT')
+                                                            <form
+                                                                action="{{ url('/PKPT/delete', $item['id']) }}"
+                                                                method="post" class="d-inline">
+                                                                <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
+                                                        @endcan
 
                                                         <!-- Modal Structure -->
                                                         <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">

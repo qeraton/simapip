@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RPKHController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View RPKH', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create RPKH', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit RPKH', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete RPKH', ['only' => ['destroy']]);
+    }
     public function index()
     {
         // $RPKH = RPKH::paginate(3);

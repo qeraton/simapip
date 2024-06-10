@@ -140,14 +140,15 @@ Route::group(['middleware' => ["authenticated"]], function () {
 
     Route::group(['prefix' => 'PKPT', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [PKPT::class, 'index'])->name('index');
-        Route::get('/ref-PKPT', [PKPT::class, 'ref_index'])->name('index');
-        Route::get('/list', [PKPT::class, 'listPKPT'])->name('list');
+        // Route::get('/ref-PKPT', [PKPT::class, 'ref_index'])->name('index');
+        // Route::get('/list', [PKPT::class, 'listPKPT'])->name('list');
         Route::get('/create', [PKPT::class, 'create'])->name('create');
+        // Route::get('/createnyoba', [PKPT::class, 'createnyoba'])->name('createnyoba');
         Route::post('/store', [PKPT::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [PKPT::class, 'edit'])->name('edit');
-        Route::patch('/update/{id}', [PKPT::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [PKPT::class, 'destroy'])->name('delete');
-    })->name('pangkat');
+        Route::get('/edit/{id}/', [PKPT::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}/', [PKPT::class, 'update'])->name('update');
+        Route::delete('/delete/{id}/', [PKPT::class, 'destroy'])->name('delete');
+    })->name('PKPT');
 
     Route::group(['prefix' => 'RPKH', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [RPKH::class, 'index'])->name('index');
@@ -158,7 +159,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::get('/edit/{id}', [RPKH::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [RPKH::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [RPKH::class, 'destroy'])->name('delete');
-    })->name('pangkat');
+    })->name('RPKH');
 
     Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [profile::class, 'index'])->name('index');

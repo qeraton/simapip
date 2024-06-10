@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Auth;
 
 class JenjangJabatanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Jenjang Jabatan', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Jenjang Jabatan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Jenjang Jabatan', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Jenjang Jabatan', ['only' => ['destroy']]);
+    }
 
     public function index()
     {

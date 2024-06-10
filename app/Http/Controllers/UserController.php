@@ -30,6 +30,7 @@ class UserController extends Controller
         $this->middleware('permission:Edit User', ['only' => ['update', 'edit']]);
         $this->middleware('permission:Delete User', ['only' => ['destroy']]);
     }
+    
     public function index() 
     { 
         $users = User::get();

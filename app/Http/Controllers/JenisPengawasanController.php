@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class JenisPengawasanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Jenis Pengawasan', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Daftar Jenis Pengawasan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Daftar Jenis Pengawasan', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Daftar Jenis Pengawasan', ['only' => ['destroy']]);
+    }
 
     public function index()
     {

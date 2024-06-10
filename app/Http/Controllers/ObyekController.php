@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Auth;
 class ObyekController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:View Obyek', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Obyek', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Obyek', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Obyek', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $obyek = Obyek::get();

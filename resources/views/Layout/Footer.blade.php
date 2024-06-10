@@ -86,6 +86,30 @@ jQuery(document).ready(function($) {
 
 <!-- End Izi Toast-->
 
+<!-- Add Permissions Filter -->
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modules = document.querySelectorAll('.module-section');
+
+        modules.forEach(module => {
+            const firstCheckbox = module.querySelector('.permission-first');
+            const restCheckboxes = module.querySelectorAll('.permission-rest');
+
+            firstCheckbox.addEventListener('change', function () {
+                restCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = !this.checked;
+                });
+            });
+
+            // Initial state check
+            restCheckboxes.forEach(checkbox => {
+                checkbox.disabled = !firstCheckbox.checked;
+            });
+        });
+    });
+</script>
+<!-- End Of Add Permissions Filter -->
+
 
 <!-- Search Filters -->
 

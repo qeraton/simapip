@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Auth;
 
 class pangkatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Pangkat', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Pangkat', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Pangkat', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Pangkat', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $pangkat = pangkat::get();

@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Auth;
 
 class jabatanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Jabatan', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Jabatan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Jabatan', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Jabatan', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $jabatan = jabatan::get();

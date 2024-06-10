@@ -3761,6 +3761,18 @@ li.collapsed .nftmax__toggle:before {
 	height: 10000px;
 }
 
+.permission-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.permission-item {
+	flex: 0 0 calc(25% - 10px);
+	/* Adjust percentage as needed for the number of columns */
+	box-sizing: border-box;
+}
+
 .nftmax-chatbox__outgoing {
 	margin-left: 115px;
 	margin-top: 45px;
@@ -4212,17 +4224,28 @@ button.nftmax-item__btn{
 }
 .nftmax-personals__content {
 	width: 78.5%;
+	max-height: 100%;
 }
 .nftmax-ptabs__stext b {
 	color: #000;
 	font-weight: 400;
 }
+
 .nftmax-ptabs {
+	/* height: 700px; */
+	max-height: 800px;
 	border-left: 1px solid rgba(83, 86, 251, 0.16);
 	padding-left: 40px;
 }
+
+/* .nftmax-ptabs__inner {
+	max-height: 100px;
+} */
+
 .nftmax-personals {
 	background: #fff;
+	/* max-height: 100%; */
+	/* height: 500px; */
 	padding: 40px;
 	border-radius: 15px;
 	box-shadow: 0px 9px 95px rgba(0, 0, 0, 0.05);
@@ -4271,6 +4294,7 @@ button.nftmax-item__btn{
 
 .nftmax-ptabs__separate {
   display: flex;
+	/* max-height: 300px; */
   gap: 40px;
 }
 
@@ -4331,7 +4355,7 @@ button.nftmax-item__btn{
   background: #27AE60;
 }
 .nftmax-ptabs__form-main .nftmax__item-input {
-	display: ;
+	/* display: ; */
 	border: 1px solid #37455717;
 }
 .nftmax-paymentm__name {

@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class UnitKerjaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:View Daftar Unit Kerja', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Create Daftar Unit Kerja', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Daftar Unit Kerja', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Daftar Unit Kerja', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $unitKerja = UnitKerja::get();
