@@ -56,9 +56,9 @@
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Susunan Tim</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Anggaran <br> Waktu</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Anggaran <br> Biaya</th>
-                                                <th class="nftmax-table__column-3 nftmax-table__h2">RMP</th>
-                                                <th class="nftmax-table__column-3 nftmax-table__h2">RPL</th>
-                                                <th class="nftmax-table__column-3 nftmax-table__h2">LHA</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Rencana Mulai Penugasan (RMP)</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Rencana Penyusunan Laporan (RPL)</th>
+                                                <th class="nftmax-table__column-3 nftmax-table__h2">Laporan Hasil Audit (LHA)</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Peralatan</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Keterangan</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Aksi</th>
@@ -256,15 +256,15 @@
                                                                                         </td>     
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>RMP</th>
+                                                                                        <th>Rencana Mulai Penugasan</th>
                                                                                         <td><span>{{ $item->rmp }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>RPL</th>
+                                                                                        <th>Rencana Penyusunan Laporan</th>
                                                                                         <td><span>{{ $item->rpl }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>LHA</th>
+                                                                                        <th>Laporan Hasil Audit (LHA)</th>
                                                                                         <td><span>{{ $item->lha }}</span></td>
                                                                                     </tr>
                                                                                     <tr>

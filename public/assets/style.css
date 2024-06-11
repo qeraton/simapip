@@ -94,6 +94,11 @@ Version:	1.0.0
 	max-height: 850px;
 }
 
+.change-password-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
 .custom-modal .modal-content {
 	height: 50%;
 	/* Pastikan modal konten mengambil seluruh tinggi modal dialog */

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body change-password-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->

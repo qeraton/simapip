@@ -31,17 +31,17 @@
 															<div class="dashboard-banner__bid">
 																<!-- Single Bid -->
 																<div class="dashboard-banner__group">
-																	<p class="dashboard-banner__group-small">Current Bid</p>
+																	{{-- <p class="dashboard-banner__group-small">Current Bid</p>
 																	<h3 class="dashboard-banner__group-title">{{ $CurrentBid['bids'] }} ETH</h3>
-																	<p class="dashboard-banner__group-small">{{ $CurrentBid['usd'] }} <span>USD</span></p>
+																	<p class="dashboard-banner__group-small">{{ $CurrentBid['usd'] }} <span>USD</span></p> --}}
 																</div>
 																<!-- End Single Bid -->
 																<div class="dashboard-banner__middle-border"></div>
 																<!-- Single Bid -->
 																<div class="dashboard-banner__group">
-																	<p class="dashboard-banner__group-small">Remaing Time</p>
+																	{{-- <p class="dashboard-banner__group-small">Remaing Time</p>
 																	<h3 class="dashboard-banner__group-title" data-countdown="{{ $CurrentBid['count_down_from'] }}"></h3>
-																	<p class="dashboard-banner__group-small nftmax-timing"><span>Hrs</span> <span>Min</span> <span>Sec</span></p>
+																	<p class="dashboard-banner__group-small nftmax-timing"><span>Hrs</span> <span>Min</span> <span>Sec</span></p> --}}
 																</div>
 																<!-- End Single Bid -->
 															</div>
