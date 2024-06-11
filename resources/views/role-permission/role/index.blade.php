@@ -52,6 +52,7 @@
                                                 <th class="nftmax-table__column-2 nftmax-table__h2">ID</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Nama Role</th>
                                                 <th class="nftmax-table__column-4 nftmax-table__h2">Description</th>
+                                                {{-- <th class="nftmax-table__column-4 nftmax-table__h2">Permissions</th> --}}
                                                 <th class="nftmax-table__column-1 nftmax-table__h2">Aksi</th>
                                             </tr>
                                         </thead>
@@ -80,6 +81,13 @@
                                                             {{ $item['description'] }}
                                                         </p>
                                                     </td>
+                                                    {{-- <td class="nftmax-table__column-3 nftmax-table__data-2" id="search1">
+                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
+                                                            @foreach ($item['permissions'] as $permission)
+                                                                {{ $permission['name'] }}
+                                                            @endforeach
+                                                        </p>
+                                                    </td> --}}
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
                                                         @can('Give Permission To Users')
                                                             <a href="{{ url('roles/'.$item->id.'/give-permissions') }}" class="btn btn-warning ml-0">Add / Edit Role Permission</a>

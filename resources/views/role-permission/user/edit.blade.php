@@ -43,7 +43,7 @@
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Role </label>
                                                 <select name="roles[]" class="form-control" multiple>
-                                                    <option value="">Select Role</option>
+                                                    <option value="" disabled>Select Role</option>
                                                     @foreach ($roles as $item)
                                                         <option value="{{ $item }}"
                                                             {{ in_array($item, $userRoles) ? 'selected' : '' }}>

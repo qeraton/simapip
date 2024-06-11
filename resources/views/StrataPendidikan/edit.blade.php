@@ -4,17 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body strata-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
                         <div class="nftmax-inner__heading">
-                            <h2 class="nftmax-inner__page-title">Tambah Strata Pendidikan Baru</h2>
+                            <h2 class="nftmax-inner__page-title">Edit Data Strata Pendidikan</h2>
                         </div>
                         <!-- End All Notification Heading -->
                         <div class="nftmax__item">
                             <div class="nftmax__item-heading">
-                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Input Data Strata Pendidikan Sesuai Dengan Kriteria!</h2>
+                                <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Data Strata Pendidikan Sesuai Dengan Kriteria!</h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
                             </div>
                             <form class="form" method="POST" action="{{ url('/strata-pendidikan/update', $pendidikan['id']) }}">

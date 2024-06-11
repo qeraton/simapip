@@ -64,6 +64,11 @@ Version:	1.0.0
 	/* Adjust font size */
 }
 
+.strata-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
 .jenis-pengawasan-body {
 	min-height: 800px;
 	max-height: 850px;

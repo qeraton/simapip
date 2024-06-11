@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body strata-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
@@ -21,7 +21,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="nftmax__item-box strata-box">
+                                        <div class="nftmax__item-box">
                                             
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Nama</label>

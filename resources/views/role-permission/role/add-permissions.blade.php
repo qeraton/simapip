@@ -1,9 +1,5 @@
 @include('Layout.Header')
 <!-- NFTmax Dashboard -->
-@if (session()->has('success'))
-    
-    <span class="text-primary">SUCCESS</span>
-@endif
 <section class="nftmax-adashboard nftmax-show">
     <div class="container">
         <div class="row">
@@ -20,8 +16,8 @@
                         <div class="nftmax__item">
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Beri Permission Untuk Role :
-                                    <b class="nftmax__item-button--single nftmax__item-button--cancel"><i>{{ $role->name }}</i></b></h2>
-                                <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
+                                    <b class="badge bg-primary"><i>{{ $role->name }}</i></b></h2>
+                                <p class="nftmax__item-text nftmax__item-text--single">Mohon Beri Check Pada Permission Yang Akan Anda Berikan Pada Role : <i>{{ $role->name }}</i> </p>
                                 <hr>
                             </div>
                             <form class="form" method="POST"

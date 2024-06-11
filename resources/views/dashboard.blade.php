@@ -149,7 +149,7 @@
 @include('Layout.RightSidebar')						
 @include('Layout.Footer')		
 		
-		<script>
+		{{-- <script>
 			const ctx = document.getElementById('myChart_one').getContext('2d');
             var day       = @json($SellHistory[0]);
             var avgSell   = @json($SellHistory[1]);
@@ -405,7 +405,7 @@
 
 			
 			
-		</script>
+		</script> --}}
 		
 	</body>
 </html>

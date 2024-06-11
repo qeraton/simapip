@@ -30,6 +30,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 	$(document).ready(function () {
     $("#myTable").DataTable({
+			// processing: true,
 			responsive: true,
 		 	scrollY: 400,
     	deferRender: true,
@@ -109,46 +110,6 @@ jQuery(document).ready(function($) {
     });
 </script>
 <!-- End Of Add Permissions Filter -->
-
-
-<!-- Search Filters -->
-
-{{-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var searchInput = document.getElementById('txt-search');
-        var tableRows = document.querySelectorAll('.nftmax-table__body tr');
-        var noDataMessage = document.getElementById('no-data-message');
-
-        searchInput.addEventListener('input', function() {
-            var searchTerm = searchInput.value.toLowerCase();
-            var found = false; // Reset found status for each input event
-
-            tableRows.forEach(function(row) {
-                var nama = row.querySelector('#name').textContent.toLowerCase();
-                var kode = row.querySelector('#kode').textContent.toLowerCase();
-								var search1 = row.querySelector('#search1').textContent.toLowerCase();
-                var search2 = row.querySelector('#search2').textContent.toLowerCase();
-							
-
-                if (kode.includes(searchTerm) || nama.includes(searchTerm) || search1.includes(searchTerm) || search2.includes(searchTerm)) {
-                  row.style.display = '';
-                  found = true; // Set found to true if data is found
-                } else {
-                  row.style.display = 'none';
-                }
-            });
-
-            // Show or hide noDataMessage based on found status after all iterations
-            if (!found) {
-                noDataMessage.style.display = 'block';
-            } else {
-                noDataMessage.style.display = 'none';
-            }
-        });
-    });
-</script> --}}
-
-<!-- End OF Search Filters -->
 
 <!-- Select2 -->
 <script>
