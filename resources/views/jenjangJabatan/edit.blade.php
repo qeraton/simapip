@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body jenjang-jabatan-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
@@ -13,7 +13,7 @@
                             <h2 class="nftmax-inner__page-title">Edit Data Jenjang Jabatan </h2>
                         </div>
                         <!-- End All Notification Heading -->
-                        <div class="nftmax__item">
+                        <div class="nftmax__item jenjang-jabatan-box">
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Edit Jenjang Jabatan Sesuai Dengan Kriteria!</h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
@@ -91,4 +91,50 @@
 		});
 	}
 	window.onload = toUpperCaseInput;
+</script>
+<!-- Select2 -->
+<script>
+    $(document).ready(function() {
+        var selectedValue = "{{ $jenjangJabatanEdit['ref_jabatan_id'] }}";
+        var selectedText = ""; // Placeholder for the selected text
+        
+        // Fetch the selected option text if needed
+        $.ajax({
+            url: "{{ route('selectIDJabatan') }}",
+            type: 'GET',
+            success: function(response) {
+                response.data.forEach(function(item) {
+                    if (item.id == selectedValue) {
+                        selectedText = item.kode + ' - ' + item.nama;
+                    }
+                });
+
+                // Create the option and set it as selected if the value exists
+                if (selectedText !== "") {
+                    var option = new Option(selectedText, selectedValue, true, true);
+                    $("#selectIDJabatan").append(option).trigger('change');
+                }
+            }
+        });
+
+        $("#selectIDJabatan").select2({
+            placeholder: 'Pilih Jabatan',
+            width: 'resolve',
+            ajax: {
+                url: "{{ route('selectIDJabatan') }}",
+                processResults: function({ data }) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                id: item.id,
+                                text: item.kode + ' - ' + item.nama,
+                            }
+                        })
+                    }
+                }
+            }
+        });
+        // Additional styling
+        $('#selectIDJabatan').next('.select2-container').css('width', '100%');
+    });
 </script>

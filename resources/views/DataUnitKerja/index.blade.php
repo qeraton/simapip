@@ -43,16 +43,6 @@
                                         toastr.success("{{ session('success') }}");
                                     </script>
                                 @endif
-                                {{-- <div class="nftmax-marketplace__bar-right">
-                                    <div class="nftmax-marketplace__bar-one">
-                                        <div class="nftmax-marketplace__bar-search">
-                                            <button id="btn-search" class="search-btn" type="button"><img
-                                                    src="/assets/img/search.png" alt="#"></button>
-                                            <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Ketikan Nama Unit, Nama...">
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
@@ -62,7 +52,7 @@
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
-                                                {{-- <th class="nftmax-table__column-1 nftmax-table__h1">Kode</th> --}}
+                                                <th class="nftmax-table__column-1 nftmax-table__h1">Kode Unit</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h2">Nama Unit</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h3">Nama Singkatan</th>
                                                 <th class="nftmax-table__column-3 nftmax-table__h4">Alamat</th>
@@ -78,11 +68,11 @@
                                         <tbody class="nftmax-table__body">
                                             @foreach ($unitKerja as $item)
                                                 <tr>
-                                                    {{-- <td class="nftmax-table__column-1 nftmax-table__data-1">
+                                                    <td class="nftmax-table__column-1 nftmax-table__data-1">
                                                         <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['kode_unit_kerja'] }}
                                                         </p>
-                                                    </td> --}}
+                                                    </td>
                                                     <td class="nftmax-table__column-2 nftmax-table__data-2">
                                                         <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
                                                             {{ $item['nama_unit'] }}
@@ -119,6 +109,12 @@
                                                         </p>
                                                     </td>   
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataModal-{{ $item->id }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                                            </svg>
+                                                        </button>
                                                         @can('Edit Daftar Unit Kerja')
                                                             <a href="{{ url('/unit-kerja/edit', $item['id']) }}" class="btn btn-primary me-1">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -137,6 +133,83 @@
                                                             </form>
                                                         @endcan
                                                         
+                                                        <!-- Modal Structure -->
+                                                        <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="dataModalLabel">Detail Isi</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered no-margin custom-table">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th>Kode Unit Kerja</th>
+                                                                                        <td><span>{{ $item->kode_unit_kerja }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Nama Unit</th>
+                                                                                        <td><span>{{ $item->nama_unit }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Nama Singkatan</th>
+                                                                                        <td><span>{{ $item->nama_singkatan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Alamat</th>
+                                                                                        <td><span>{{ $item->alamat }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Pimpinan</th>
+                                                                                        <td><span>{{ $item->pimpinan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Nomor Telepon</th>
+                                                                                        <td><span>{{ $item->nomor_telepon }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Email</th>
+                                                                                        <td><span>{{ $item->email }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Keterangan</th>
+                                                                                        <td><span>{{ $item->keterangan }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Website</th>
+                                                                                        <td><span>{{ $item->website }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>ID Kota / Kabupaten </th>
+                                                                                        <td><span>{{ $item->kota_kabupaten_id }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>ID Instansi</th>
+                                                                                        <td><span>{{ $item->instansi_id }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Nomor Urut</th>
+                                                                                        <td><span>{{ $item->nomor_urut }}</span></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>UnitKerja_Kode</th>
+                                                                                        <td><span>{{ $item->UnitKerja_Kode }}</span></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Of Modal Structure -->
                                                     </td>
                                                 </tr>
                                             @endforeach

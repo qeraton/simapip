@@ -16,15 +16,14 @@
 													<div class="dashboard-banner__column dashboard-banner__column--one">
 														<!-- Dashboard Content -->
 														<div class="dashboard-banner__content">
-															<h2 class="dashboard-banner__title nftmax-font-regular nftmax-lspacing">{{ $CurrentBid['name'] }}</h2>
-															<p class="dashboard-banner__text nftmax-lspacing">ID : {{ $CurrentBid['id'] }}</p>
-														</div>	
-														
+															<h2 class="dashboard-banner__title nftmax-font-regular nftmax-lspacing">Kendali Mutu SIMAPIP</h2>
+															{{-- <p class="dashboard-banner__text nftmax-lspacing">Selamat Datang! : {{ Auth::user()->username }}</p> --}}
+														</div>															
 														<div class="nftmax-header__author nftmax-header__author-two ">
-															<div class="nftmax-header__author-img"><img src="{{ asset($CurrentBid['image']) }}" alt="#"></div>
+															<div class="nftmax-header__author-img"><img src="{{ asset('photo/' . Auth::user()->foto) }}" alt="#"></div>
 															<div class="nftmax-header__author-content ">
-																<h4 class="nftmax-header__author-title nftmax-header__author-title--two nftmax-lspacing">{{ $CurrentBid['user'] }}</h4>
-																<p class="nftmax-header__author-text nftmax-header__author-text--two"><a href="#" class="nftmax-font-regular nftmax-lspacing">{{ $CurrentBid['user_name'] }}</a></p>
+																<h4 class="nftmax-header__author-title nftmax-header__author-title--two nftmax-lspacing">{{ Auth::user()->username }}</h4>
+																<p class="nftmax-header__author-text nftmax-header__author-text--two"><a href="#" class="nftmax-font-regular nftmax-lspacing">{{ Auth::user()->email }}</a></p>
 															</div>
 														</div>
 														

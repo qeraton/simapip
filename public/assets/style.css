@@ -47,6 +47,53 @@ Version:	1.0.0
 	height: 100%;
 } */
 
+/* Ensure the Select2 container is wide */
+.select2-container {
+	width: 100% !important;
+	/* Ensure the container is 100% wide */
+}
+
+.select2-container .select2-selection--single {
+	height: 38px;
+	/* Adjust height as needed */
+	border: 1px solid #ccc;
+	/* Add border styling */
+	padding: 6px;
+	/* Add padding */
+	font-size: 16px;
+	/* Adjust font size */
+}
+
+.jenis-pengawasan-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.jenjang-jabatan-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.jabatan-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.permissions-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.role-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.users-body {
+	min-height: 800px;
+	max-height: 850px;
+}
+
 .custom-modal .modal-content {
 	height: 50%;
 	/* Pastikan modal konten mengambil seluruh tinggi modal dialog */

@@ -25,22 +25,11 @@ class UnitKerjaController extends Controller
         return view('DataUnitKerja.index', compact('unitKerja', 'total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('DataUnitKerja.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -88,37 +77,17 @@ class UnitKerjaController extends Controller
         return Redirect::to('/unit-kerja')->with('success', $success);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UnitKerja  $unitKerja
-     * @return \Illuminate\Http\Response
-     */
     public function show(UnitKerja $unitKerja)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UnitKerja  $unitKerja
-     * @return \Illuminate\Http\Response
-     */
     public function edit(String $id)
     {
         $unitKerja = UnitKerja::find($id);
         return view('DataUnitKerja.edit', compact('unitKerja'));
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UnitKerja  $unitKerja
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, String $id)
     {
         $validator = Validator::make($request->all(), [
@@ -166,15 +135,9 @@ class UnitKerjaController extends Controller
         return Redirect::to('/unit-kerja')->with('success', $success);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UnitKerja  $unitKerja
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(String $id)
     {
         UnitKerja::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil menghapus data!');
     }
 }

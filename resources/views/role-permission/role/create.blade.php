@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body role-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
@@ -13,7 +13,7 @@
                         </div>
                         <!-- End All Notification Heading -->
 
-                        <div class="nftmax__item">
+                        <div class="nftmax__item role-box">
                             
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Inputkan Jenis Role</h2>

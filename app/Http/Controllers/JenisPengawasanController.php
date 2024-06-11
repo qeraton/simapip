@@ -12,9 +12,9 @@ class JenisPengawasanController extends Controller
     public function __construct()
     {
         $this->middleware('permission:View Jenis Pengawasan', ['only' => ['index', 'show']]);
-        $this->middleware('permission:Create Daftar Jenis Pengawasan', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Daftar Jenis Pengawasan', ['only' => ['update', 'edit']]);
-        $this->middleware('permission:Delete Daftar Jenis Pengawasan', ['only' => ['destroy']]);
+        $this->middleware('permission:Create Jenis Pengawasan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Jenis Pengawasan', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Delete Jenis Pengawasan', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -37,13 +37,18 @@ class JenisPengawasanController extends Controller
             'nama' => 'required|string|min:5|max:30',
         ]);
 
-        JenisPengawasan::create([
-            'kode' => $request->kode,
-            'nama' => $request->nama,
-        ]);
+        try { 
 
-        // return redirect()->back();
-        return Redirect::to('/jenis-pengawasan');
+            JenisPengawasan::create([
+                'kode' => $request->kode,
+                'nama' => $request->nama,
+            ]);
+
+        return Redirect::to('/jenis-pengawasan')->with('success', 'Berhasil Menambah Data!');
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
+            return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
+        }
     }
 
 
@@ -67,18 +72,23 @@ class JenisPengawasanController extends Controller
             'nama' => 'required|string|max:100',
         ]);
 
-        JenisPengawasan::where('id', $id)->update([
-            'kode' => $request->kode,
-            'nama' => $request->nama,
-    ]);
+        try{
+            JenisPengawasan::where('id', $id)->update([
+                'kode' => $request->kode,
+                'nama' => $request->nama,
+            ]);
 
-        return Redirect::to('/jenis-pengawasan');
+        return Redirect::to('/jenis-pengawasan')->with('success', 'Berhasil Mengubah Data!');
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
+            return redirect()->back()->with('error', 'Gagal Mengubah Data: ' . $e->getMessage());
+        }
     }
 
     public function destroy(String $id)
     {
         JenisPengawasan::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 
     public function list(Request $request)

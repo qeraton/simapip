@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
-                <div class="nftmax-body">
+                <div class="nftmax-body users-body">
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
                         <!-- All Notification Heading -->
@@ -13,7 +13,7 @@
                         </div>
                         <!-- End All Notification Heading -->
 
-                        <div class="nftmax__item">
+                        <div class="nftmax__item users-box">
                             
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Inputkan Jenis Role</h2>
@@ -39,10 +39,10 @@
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Role </label>
                                                 <select name="roles[]" class="form-control" multiple>
-                                                  <option value="">Select Role</option>
-                                                  @foreach ($roles as $item)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
-                                                  @endforeach
+                                                    <option value="" disabled>Select Role</option>
+                                                    @foreach ($roles as $item)
+                                                        <option value="{{ $item }}">{{ $item }}</option>
+                                                    @endforeach
                                                 </select>   
                                             </div>
                                         </div>

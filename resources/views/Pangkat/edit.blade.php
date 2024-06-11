@@ -47,11 +47,11 @@
                                                     <input type="text" id="golongan_kode" disabled value="{{ $pangkatEdit['golongan_kode'] }}">
                                                 </div>
                                               <div class="input-group input-group-sm m-4 w-50">
-                                                <input class="form-control" type="text" name="golongan_kode_kiri" id="golongan_kode_kiri" placeholder="Input Golongan Ke - I, II, III, IV">
+                                                <input class="form-control" type="text" name="golongan_kode_kiri" id="golongan_kode_kiri" placeholder="Input Golongan Ke - I, II, III, IV ( Kosongkan Jika Tidak Perlu)">
                                                 <div class="input-group-prepend">
                                                   <div class="input-group-text">/</div>
                                                 </div>
-                                                <input class="form-control" type="text" name="golongan_kode_kanan" id="golongan_kode_kanan" placeholder="Input Golongan - a, b, c, d"></input>
+                                                <input class="form-control" type="text" name="golongan_kode_kanan" id="golongan_kode_kanan" placeholder="Input Golongan - a, b, c, d ( Kosongkan Jika Tidak Perlu)"></input>
                                               </div>
                                             </div>
                                             

@@ -4,7 +4,7 @@
 				<div class="container">
 					<div class="row">	
 						<div class="col-lg-9 col-12 nftmax-main__column">
-							<div class="nftmax-body">
+							<div class="nftmax-body jenjang-jabatan-body">
 								<!-- Dashboard Inner -->
 								<div class="nftmax-dsinner">
 									<!-- All Notification Heading -->
@@ -23,7 +23,7 @@
                       @csrf
 											<div class="row">
 												<div class="col-12">
-													<div class="nftmax__item-box">
+													<div class="nftmax__item-box jenjang-jabatan-box">
                                   {{-- <div class="nftmax__item-form--group">
 																		<label class="nftmax__item-label">ID jabatan </label>
 																		<input class="nftmax__item-input" type="text" name="ref_jabatan_id" id="ref_jabatan_id" placeholder="Input ID Jabatan" required="required">

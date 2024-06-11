@@ -4,7 +4,7 @@
 				<div class="container">
 					<div class="row">	
 						<div class="col-lg-9 col-12 nftmax-main__column">
-							<div class="nftmax-body">
+							<div class="nftmax-body jabatan-body">
 								<!-- Dashboard Inner -->
 								<div class="nftmax-dsinner">
 									<!-- All Notification Heading -->
@@ -22,7 +22,7 @@
                       @csrf
 											<div class="row">
 												<div class="col-12">
-													<div class="nftmax__item-box">
+													<div class="nftmax__item-box jabatan-box">
                                   <div class="nftmax__item-form--group">
 																		<label class="nftmax__item-label">Kode </label>
 																		<input class="nftmax__item-input" type="text" name="kode" id="kode" placeholder="Input Kode" required="required">
@@ -46,7 +46,7 @@
 														</div>
 													</div>
 													<div class="nftmax__item-button--group">
-                            <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/jenjangJabatan') }}" type="submit">Batal</a>
+                            <a class="nftmax__item-button--single nftmax__item-button--cancel" href="{{ url('/jabatan') }}" type="submit">Batal</a>
 														<button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn" type="submit">Simpan</button>
 														
 													</div>

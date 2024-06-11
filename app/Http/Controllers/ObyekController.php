@@ -148,7 +148,7 @@ class ObyekController extends Controller
     {
         Obyek::where('id', $id)->delete();
 
-        return redirect()->back()->with('deleted', 'Berhasil menghapus data!');
+        return redirect()->back()->with('success', 'Berhasil menghapus data!');
     }
 
     public function list()
