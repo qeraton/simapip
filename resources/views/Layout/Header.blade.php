@@ -273,7 +273,7 @@
 														<ul class="nftmax-balance_list">
 															<li>
 																<div class="nftmax-balance-info">
-																	<div class="nftmax-balance__img nftmax-profile__img-one"><img src="assets/img/profile-1.png" alt="#"></div>
+																	<div class="nftmax-balance__img nftmax-profile__img-one"><svg class="nftmax-svg-icon" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.8692 11.6667H4.13085C3.03569 11.668 1.98576 12.1036 1.21136 12.878C0.436961 13.6524 0.00132319 14.7023 0 15.7975V20H15.0001V15.7975C14.9987 14.7023 14.5631 13.6524 13.7887 12.878C13.0143 12.1036 11.9644 11.668 10.8692 11.6667Z"></path><path d="M7.49953 10C10.261 10 12.4995 7.76145 12.4995 5.00002C12.4995 2.23858 10.261 0 7.49953 0C4.7381 0 2.49951 2.23858 2.49951 5.00002C2.49951 7.76145 4.7381 10 7.49953 10Z"></path></svg></div>
 																	<h4 class="nftmax-balance-name"><a href="{{url('/my-profile')}}">Profile Saya</a></h4>
 																</div>
 															</li>
@@ -288,7 +288,7 @@
 															</li>
 															<li>
 																<div class="nftmax-balance-info">
-																	<div class="nftmax-balance__img nftmax-profile__img-five"><img src="assets/img/profile-5.png" alt="#"></div>
+																	<div class="nftmax-balance__img nftmax-profile__img-five"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16"><path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/></svg></div>
 																	{{-- <h4 class="nftmax-balance-name"><a href="{{url('/logout')}}">Log Out</a></h4> --}}
 																	<h4 class="nftmax-balance-name" data-bs-toggle="modal" data-bs-target="#logout_modal"><a href="#">Log Out</a></h4>
 																</div>
