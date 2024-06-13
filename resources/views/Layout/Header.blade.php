@@ -199,9 +199,9 @@
 								<div class="nftmax-preview__close-img"><img src="assets/img/close.png" alt="#"></div>
 								<h2 class="nftmax-preview__close-title">Lanjutkan untuk logout dari <span>SIMAPIP?</span></h2>
 								<div class="nftmax__item-button--group">
-									<a href="{{ url('/logout') }}" class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius " type="submit">Yes Logout
+									<a href="{{ url('/logout') }}" class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius " type="submit">Lanjutkan
 									</a>
-									<button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered--plus radius" data-bs-dismiss="modal"><span class="ntfmax__btn-textgr">Not Now</span> </button>
+									<button class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered--plus radius" data-bs-dismiss="modal"><span class="ntfmax__btn-textgr">Batal</span> </button>
 								</div>
 							</div>
 						</div>

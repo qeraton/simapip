@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController as Auth,
+    DaftarPenugasanController,
     DashboardController as Dashboard,
     DataPegawaiController as DataPegawai,
     PenugasanController,
@@ -76,7 +77,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
     })->name('jenis-pengawasan');
 
     Route::group(['prefix' => 'penugasan', 'middleware' => ["authenticated"]], function () {
-        Route::get('/', [PenugasanController::class, 'index'])->name('index');
+        Route::get('/', [DaftarPenugasanController::class, 'index'])->name('index');
     })->name('penugasan');
 
     Route::group(['prefix' => 'obyek', 'middleware' => ["authenticated"]], function () {
