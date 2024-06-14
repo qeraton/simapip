@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController as Auth,
-    DaftarPenugasanController,
+    DaftarPenugasanController as DaftarPenugasan,
     DashboardController as Dashboard,
     DataPegawaiController as DataPegawai,
-    PenugasanController,
     JenisPengawasanController as JenisPengawasan,
     StrataPendidikanController as StrataPendidikan,
     UnitKerjaController as UnitKerja,
@@ -76,9 +75,14 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('delete/{id}', [JenisPengawasan::class, 'destroy'])->name('delete');
     })->name('jenis-pengawasan');
 
-    Route::group(['prefix' => 'penugasan', 'middleware' => ["authenticated"]], function () {
-        Route::get('/', [DaftarPenugasanController::class, 'index'])->name('index');
-    })->name('penugasan');
+    Route::group(['prefix' => 'daftar-penugasan', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [DaftarPenugasan::class, 'index'])->name('index');
+        Route::get('/create', [DaftarPenugasan::class, 'create'])->name('create');
+        Route::post('/store', [DaftarPenugasan::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [DaftarPenugasan::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [DaftarPenugasan::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [DaftarPenugasan::class, 'destroy'])->name('delete');
+    })->name('daftar-penugasan');
 
     Route::group(['prefix' => 'obyek', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [Obyek::class, 'index'])->name('index');
