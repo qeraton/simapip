@@ -98,10 +98,14 @@
 																							</div>
 
 																							<div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Unit Kerja/SKPD/Satker</label>
-                                                <input class="nftmax__item-input" type="text" name="unit"
-                                                    id="unit" placeholder="Input unit" required="required">
-                                            </div>
+																									<label class="nftmax__item-label">Unit Kerja/SKPD/Satker</label>
+																									<select class="nftmax__item-input" name="unit" id="unit" required="required">
+																											<option value="" disabled selected>Pilih Unit Kerja...</option>
+																											@foreach($units as $unit)
+																													<option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
+																											@endforeach
+																									</select>
+																							</div>
 
                                             	<div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label" for="tujuan_audit">Tujuan Audit</label>
@@ -122,39 +126,35 @@
                                                 </select>
                                             	</div>
 
-
                                             	<div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Ruang Lingkup </label>
-                                                {{-- <input class="nftmax__item-input" type="number" name="ruang_lingkup"
-                                                    id="ruang_lingkup" placeholder="Tahun..." required="required"> --}}
-                                                <input class="nftmax__item-input" type="number" placeholder="YYYY" min="1999" max="2040" name="ruang_lingkup"
-                                                id="ruang_lingkup" placeholder="Tahun..." required="required">
-                                                <script>
-                                                    document.querySelector("input[type=number]")
-                                                    .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
-                                                </script>
-                                            	</div>
+																								<label class="nftmax__item-label">Ruang Lingkup </label>
+																								<select class="nftmax__item-input" name="ruang_lingkup" id="ruang_lingkup" required="required">
+																										<option value="" disabled selected>Pilih Tahun...</option>
+																										<!-- Generate options dynamically with JavaScript -->
+																								</select>
+																						</div>
+
 																						</div>	
 																						<div class="tab-pane fade" id="id2" role="tabpanel">
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">PJ</label>
+																										<label class="nftmax__item-label">PJ (Penanggung Jawab)</label>
 																										<input style="width: 40%" class="nftmax__item-input rounded-0" type="number" name="pj" id="pj" placeholder="Input Jumlah PJ" required="required">
 																								</div>
 
 																								<div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">PT/WPJ</label>
+                                                  <label class="nftmax__item-label">PT/WPJ (Pengawas Tim/Wakil Penanggung Jawab)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="pt_wpj"
                                                       id="pt_wpj" placeholder="Input Jumlah PT/WPJ" required="required">
                                               </div>
 
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">KT</label>
+																										<label class="nftmax__item-label">KT (Ketua Tim)</label>
 																										<input style="width: 40%" class="nftmax__item-input" type="number" name="kt"
 																												id="kt" placeholder="Input Jumlah KT" required="required">
 																								</div>
 
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">AT</label>
+																										<label class="nftmax__item-label">AT (Anggota Tim)</label>
 																										<input style="width: 40%" class="nftmax__item-input" type="number" name="at"
 																												id="at" placeholder="Input Jumlah AT" required="required">
 																								</div>
@@ -201,20 +201,20 @@
 
 																						<div class="tab-pane fade" id="id4" role="tabpanel">
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label">RMP</label>
+																									<label class="nftmax__item-label">RMP (Rencana Mulai Penugasan)</label>
 																									<input style="width: 40%" class="nftmax__item-input" type="number" name="rmp" id="rmp" 
 																									placeholder="Input RMP" required="required" step="0.01">
 																							</div>
 
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label">RPL</label>
+																									<label class="nftmax__item-label">RPL (Rencan Penyusunan Laporan)</label>
 																									<input style="width: 40%" class="nftmax__item-input" type="number" name="rpl" id="rpl" 
 																									placeholder="Input RPL" required="required" step="0.01">
 																							</div>
 
 
 																							<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">LHA </label>
+																										<label class="nftmax__item-label">LHA (Laporan Hasil Audit)</label>
 																										<input style="width: 40%" class="nftmax__item-input" type="number" name="lha"
 																										id="lha" placeholder="Input LHA" required="required">
 																							</div>

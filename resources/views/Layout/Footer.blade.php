@@ -44,6 +44,37 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </script>
 
+<script>
+  const select = document.getElementById('ruang_lingkup');
+  const startYear = 1999;
+  const endYear = 2040;
+        
+  for (let year = startYear; year <= endYear; year++) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/get-unit-kerja')
+      .then(response => response.json())
+      .then(data => {
+        const select = document.getElementById('unit');
+        data.forEach(unit => {
+          const option = document.createElement('option');
+          option.value = unit.id;
+          option.textContent = unit.name;
+          select.appendChild(option);
+        });
+      })
+    .catch(error => console.error('Error fetching unit kerja:', error));
+  });
+</script>
+
+
 
 <script>
 jQuery(document).ready(function($) {

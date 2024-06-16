@@ -12,6 +12,7 @@ use App\Models\{
     PKPT,
 };
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PKPTController extends Controller
 {
@@ -35,34 +36,17 @@ class PKPTController extends Controller
         return view('PKPT.ref-PKPT', compact('PKPT'));
     }
 
-    // public function listPangkat(Request $request)
-    // {
-    //     $data = PKPT::where(function ($q) use ($request) {
-    //         if ($request->has('search') && $request->search != "") {
-    //             $q->whereRaw('LOWER(nama) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-    //             $q->orWhereRaw('LOWER(kode) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-    //             $q->orWhereRaw('LOWER(jenis) LIKE ?', ['%' . trim(strtolower($request->search)) . '%']);
-    //         }
-    //     })
-    //         ->when($request->has('ja') && $request->ja != "all" && !empty($request->ja), function ($q) use ($request) {
-    //             if ($request->ja == "NOA") {
-    //                 $q->whereNull('kode');
-    //             } else
-    //                 $q->where('kode', $request->ja);
-    //         })
-    //         ->paginate($request->pageSize);
+    public function getUnitKerja()
+    {
+        $units = DB::table('unit_kerja')->select('id', 'nama_unit')->get(); 
+        return response()->json($units);
+    }
 
-    //     return $this->returnJsonSuccess("Userlist retrieved successfully", $data);
-    // }
 
     public function create()
     {
-        return view('PKPT.create');
-    }
-
-    public function createnyoba()
-    {
-        return view('PKPT.createnyoba');
+        $units = DB::table('unit_kerja')->select('id', 'nama_unit')->get();
+        return view('PKPT.create', compact('units'));
     }
 
     public function store(Request $request)
@@ -157,9 +141,8 @@ class PKPTController extends Controller
     public function edit(PKPT $PKPTEdit, $id)
     {
         $PKPTEdit = PKPT::find($id);
-        //atau $jenjangJabatanEdit = jenjangJabatan::where('id', $id)->first();
-
-        return view('PKPT.edit', compact('PKPTEdit'));
+        $units = DB::table('unit_kerja')->select('id', 'nama_unit')->get();
+        return view('PKPT.edit', compact('PKPTEdit', 'units'));
     }
 
     public function update(Request $request, $id)

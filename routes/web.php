@@ -17,6 +17,8 @@ use App\Http\Controllers\{
     UserController as Users,
     PKPTController as PKPT,
     RPKHController as RPKH,
+    ReviuController as Reviu,
+    KartuPenugasanController as KartuPenugasan,
 };
 
 Route::group(['middleware' => ['isAdmin']], function(){
@@ -138,10 +140,22 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [pangkat::class, 'destroy'])->name('delete');
     })->name('pangkat');
 
+    Route::group(['prefix' => 'kartu-penugasan', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [KartuPenugasan::class, 'index'])->name('index');
+        Route::get('/kartu-penugasan/{id}', [KartuPenugasan::class, 'show'])->name('show');
+        Route::get('/create', [KartuPenugasan::class, 'create'])->name('create');
+        Route::post('/store', [KartuPenugasan::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [KartuPenugasan::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [KartuPenugasan::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [KartuPenugasan::class, 'destroy'])->name('delete');
+    })->name('kartu-penugasan');
+
     Route::group(['prefix' => 'PKPT', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [PKPT::class, 'index'])->name('index');
         // Route::get('/ref-PKPT', [PKPT::class, 'ref_index'])->name('index');
         // Route::get('/list', [PKPT::class, 'listPKPT'])->name('list');
+        // routes/web.php
+        Route::get('/get-unit-kerja', [PKPT::class, 'getUnitKerja']);
         Route::get('/create', [PKPT::class, 'create'])->name('create');
         // Route::get('/createnyoba', [PKPT::class, 'createnyoba'])->name('createnyoba');
         Route::post('/store', [PKPT::class, 'store'])->name('store');
@@ -160,6 +174,17 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::patch('/update/{id}', [RPKH::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [RPKH::class, 'destroy'])->name('delete');
     })->name('RPKH');
+
+    Route::group(['prefix' => 'Reviu', 'middleware' => ["authenticated"]], function () {
+        Route::get('/', [Reviu::class, 'index'])->name('index');
+        Route::get('/Reviu/{id}', [Reviu::class, 'show'])->name('show');
+        // Route::get('/list', [Reviu::class, 'listReviu'])->name('list');
+        Route::get('/create', [Reviu::class, 'create'])->name('create');
+        Route::post('/store', [Reviu::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [Reviu::class, 'edit'])->name('edit');
+        Route::patch('/update/{id}', [Reviu::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [Reviu::class, 'destroy'])->name('delete');
+    })->name('Reviu');
 
     Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [profile::class, 'index'])->name('index');
