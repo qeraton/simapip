@@ -124,14 +124,40 @@
                                                             </a>
                                                         @endcan
                                                         @can('Delete Daftar Unit Kerja')
-                                                            <form
-                                                                action="{{ url('/unit-kerja/delete', $item['id']) }}"
-                                                                method="post" class="d-inline">
-                                                                <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dataModalDelete-{{ $item->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                                </svg>
+                                                            </button>      
                                                         @endcan
+
+                                                        <!-- Modal Delete -->
+                                                        <div id="dataModalDelete-{{ $item->id }}" class="modal fade">
+                                                            <div class="modal-dialog modal-confirm modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header flex-column">
+                                                                        <div class="icon-box">
+                                                                            <i class="material-icons">&#xE5CD;</i>
+                                                                        </div>						
+                                                                        <h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Apakah Anda Yakin Ingin Menghapus Data Ini?. Data Yang Akan Dihapus : <b style="color: #f44336">{{$item->kode_unit_kerja}}</b></p>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+                                                                        <form
+                                                                            action="{{ url('/unit-kerja/delete', $item['id']) }}"
+                                                                            method="post" class="d-inline">
+                                                                            <button class="btn btn-danger"><span>Hapus</span></button>
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         
                                                         <!-- Modal Structure -->
                                                         <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">

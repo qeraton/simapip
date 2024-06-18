@@ -41,20 +41,25 @@
                                                 $firstTab = true;
                                                 $regularTabs = [];
                                                 $advancedTabs = [];
+                                                $referenceTabs = [];
                                             @endphp
                                             @foreach ($groupedPermissions as $module => $permissions)
                                                 @if (in_array(strtolower($module), ['role', 'permission', 'user', 'permission to users']))
                                                     @php
                                                         $advancedTabs[$module] = $permissions;
                                                     @endphp
-                                                @else
+                                                @elseif (in_array(strtolower($module), ['data pegawai', 'strata pendidikan', 'daftar unit kerja', 'jenis pengawasan', 'obyek', 'jenjang jabatan', 'jabatan', 'pangkat']))
                                                     @php
-                                                        $regularTabs[$module] = $permissions;
+                                                        $referenceTabs[$module] = $permissions;
+                                                    @endphp
+                                                @elseif (in_array(strtolower($module), ['pkpt', 'rpkh', 'reviu']))
+                                                    @php
+                                                        $perencanaanTabs[$module] = $permissions;
                                                     @endphp
                                                 @endif
                                             @endforeach
 
-                                            @foreach ($regularTabs as $module => $permissions)
+                                            {{-- @foreach ($regularTabs as $module => $permissions)
                                                 <li class="nav-item">
                                                     <a class="nav-link {{ $firstTab ? 'active' : '' }}"
                                                        id="tab-{{ Str::slug($module) }}-tab"
@@ -65,7 +70,28 @@
                                                        aria-selected="{{ $firstTab ? 'true' : 'false' }}">{{ $module }}</a>
                                                 </li>
                                                 @php $firstTab = false; @endphp
-                                            @endforeach
+                                            @endforeach --}}
+
+                                            <li class="nav-item">
+                                                 <a class="nav-link {{ $firstTab ? 'active' : '' }}"
+                                                   id="tab-perencanaan-tab"
+                                                   data-toggle="tab"
+                                                   href="#tab-perencanaan"
+                                                   role="tab"
+                                                   aria-controls="tab-perencanaan"
+                                                   aria-selected="{{ $firstTab ? 'true' : 'false' }}">Perencanaan</a> 
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                   id="tab-referensi-tab"
+                                                   data-toggle="tab"
+                                                   href="#tab-referensi"
+                                                   role="tab"
+                                                   aria-controls="tab-referensi"
+                                                   aria-selected="false">Referensi</a>
+                                            </li>
+                                            
 
                                             <li class="nav-item">
                                                 <a class="nav-link"
@@ -76,9 +102,10 @@
                                                    aria-controls="tab-advanced"
                                                    aria-selected="false">Advanced</a>
                                             </li>
+                   
                                         </ul>
                                         <div class="tab-content" id="permissionTabsContent">
-                                            @php $firstPane = true; @endphp
+                                            {{-- @php $firstPane = true; @endphp
                                             @foreach ($regularTabs as $module => $permissions)
                                                 <div class="tab-pane fade {{ $firstPane ? 'show active' : '' }}"
                                                      id="tab-{{ Str::slug($module) }}"
@@ -103,9 +130,6 @@
                                                                                        value="{{ $item->name }}"
                                                                                        {{ in_array($item->id, $rolePermissions) ? 'checked' : '' }}
                                                                                        class="form-check-input permission-checkbox">
-                                                                                    <label class="form-check-label"
-                                                                                        for="permission{{ $item->id }}">{{$item->name}}
-                                                                                    </label>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -115,7 +139,7 @@
                                                     </div>
                                                 </div>
                                                 @php $firstPane = false; @endphp
-                                            @endforeach
+                                            @endforeach --}}
 
                                             <div class="tab-pane fade"
                                                  id="tab-advanced"
@@ -123,6 +147,90 @@
                                                  aria-labelledby="tab-advanced-tab">
                                                 <div class="advanced-scroll">
                                                     @foreach ($advancedTabs as $module => $permissions)
+                                                        <h4>{{ $module }}</h4>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-unique">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 70%;">Permission</th>
+                                                                        <th style="width: 30%;" class="text-center">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($permissions as $index => $item)
+                                                                        <tr>
+                                                                            <td>{{ $item->name }}</td>
+                                                                            <td class="text-center">
+                                                                                <div class="form-check">
+                                                                                    <input type="checkbox"
+                                                                                           name="permission[]"
+                                                                                           value="{{ $item->name }}"
+                                                                                           {{ in_array($item->id, $rolePermissions) ? 'checked' : '' }}
+                                                                                           class="form-check-input permission-checkbox"
+                                                                                           data-module="{{ Str::slug($module) }}"
+                                                                                           data-index="{{ $index }}">
+                                                                                        <label class="form-check-label"
+                                                                                            for="permission{{ $item->id }}">{{$item->name}}
+                                                                                        </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade"
+                                                 id="tab-referensi"
+                                                 role="tabpanel"
+                                                 aria-labelledby="tab-referensi-tab">
+                                                <div class="referensi-scroll">
+                                                    @foreach ($referenceTabs as $module => $permissions)
+                                                        <h4>{{ $module }}</h4>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-unique">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 70%;">Permission</th>
+                                                                        <th style="width: 30%;" class="text-center">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($permissions as $index => $item)
+                                                                        <tr>
+                                                                            <td>{{ $item->name }}</td>
+                                                                            <td class="text-center">
+                                                                                <div class="form-check">
+                                                                                    <input type="checkbox"
+                                                                                           name="permission[]"
+                                                                                           value="{{ $item->name }}"
+                                                                                           {{ in_array($item->id, $rolePermissions) ? 'checked' : '' }}
+                                                                                           class="form-check-input permission-checkbox"
+                                                                                           data-module="{{ Str::slug($module) }}"
+                                                                                           data-index="{{ $index }}">
+                                                                                        <label class="form-check-label"
+                                                                                            for="permission{{ $item->id }}">{{$item->name}}
+                                                                                        </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade show active"
+                                                 id="tab-perencanaan"
+                                                 role="tabpanel"
+                                                 aria-labelledby="tab-perencanaan-tab">
+                                                <div class="referensi-scroll">
+                                                    @foreach ($perencanaanTabs as $module => $permissions)
                                                         <h4>{{ $module }}</h4>
                                                         <div class="table-responsive">
                                                             <table class="table table-striped table-unique">
@@ -172,8 +280,8 @@
                                 </div>
 
                                 <div class="nftmax__item-button--group mt-4">
-                                    <a class="btn btn-secondary" href="{{ url('roles') }}">Kembali</a>
-                                    <button class="btn btn-primary ml-2" type="submit">Simpan</button>
+                                    <a class="btn btn-danger" href="{{ url('roles') }}">Kembali</a>
+                                    <button class="btn btn-primary" type="submit">Simpan</button>
                                 </div>
                             </form>
                         </div>
@@ -235,22 +343,22 @@
         // Initial state setup
         updateSelectAllCheckbox();
 
-        // Enable/disable checkboxes within a module in the Advanced tab
-        $('.advanced-scroll :checkbox').change(function() {
+        // Enable/disable checkboxes within a module in the Advanced and Referensi tabs
+        $('.advanced-scroll :checkbox, .referensi-scroll :checkbox').change(function() {
             var moduleSlug = $(this).data('module');
             var index = $(this).data('index');
             if (index === 0) { // This is the "view" checkbox
-                var moduleCheckboxes = $('.advanced-scroll').find(':checkbox[data-module="' + moduleSlug + '"]').not(this);
+                var moduleCheckboxes = $(this).closest('.tab-pane').find(':checkbox[data-module="' + moduleSlug + '"]').not(this);
                 moduleCheckboxes.prop('disabled', !$(this).is(':checked'));
             }
         });
 
-        // Initial state setup for advanced scroll checkboxes
-        $('.advanced-scroll :checkbox').each(function() {
+        // Initial state setup for advanced and referensi scroll checkboxes
+        $('.advanced-scroll :checkbox, .referensi-scroll :checkbox').each(function() {
             var moduleSlug = $(this).data('module');
             var index = $(this).data('index');
-            if (index === 0 && !$(this).is(':checked')) { // If the "view" checkbox is not checked initially
-                var moduleCheckboxes = $('.advanced-scroll').find(':checkbox[data-module="' + moduleSlug + '"]').not(this);
+            if (index === 0 && !$(this).is(':checked')) { // Initial setup for "view" checkbox
+                var moduleCheckboxes = $(this).closest('.tab-pane').find(':checkbox[data-module="' + moduleSlug + '"]').not(this);
                 moduleCheckboxes.prop('disabled', true);
             }
         });

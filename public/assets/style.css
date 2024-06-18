@@ -69,7 +69,8 @@ Version:	1.0.0
 	max-height: 850px;
 }
 
-.advanced-scroll {
+.advanced-scroll,
+.referensi-scroll {
 	max-height: 400px;
 	/* Sesuaikan tinggi sesuai kebutuhan */
 	overflow-y: auto;

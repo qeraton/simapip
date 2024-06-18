@@ -133,6 +133,6 @@ class JenjangJabatanController extends Controller
     {
         jenjangJabatan::where('id', $id)->delete();
 
-        return redirect()->back()->with('deleted', 'Berhasil menghapus data!');
+        return redirect()->back()->with('success', 'Berhasil menghapus data!');
     }
 }
