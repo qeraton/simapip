@@ -136,16 +136,42 @@
                                                             @method('GET')
                                                         </form> --}}
                                                         @can('Delete RPKH')
-                                                            <form
-                                                                action="{{ url('/RPKH/delete', $item['id']) }}"
-                                                                method="post" class="d-inline">
-                                                                <button class="btn btn-danger mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dataModalDelete-{{ $item->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                                </svg>
+                                                            </button>
                                                         @endcan
 
-                                                        <!-- Modal Structure -->
+                                                        <!-- Modal Delete -->
+                                                        <div id="dataModalDelete-{{ $item->id }}" class="modal fade">
+                                                            <div class="modal-dialog modal-confirm modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header flex-column">
+                                                                        <div class="icon-box">
+                                                                            <i class="material-icons">&#xE5CD;</i>
+                                                                        </div>						
+                                                                        <h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Apakah Anda Yakin Ingin Menghapus Data Ini?.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+                                                                        <form
+                                                                            action="{{ url('/RPKH/delete', $item['id']) }}"
+                                                                            method="post" class="d-inline">
+                                                                            <button class="btn btn-danger"><span>Hapus</span></button>
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal Show -->
                                                         <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -157,7 +183,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table table-bordered no-margin custom-table">
+                                                                            <table class="table table-striped no-margin custom-table">
                                                                                 <tbody>
                                                                                     <tr>
                                                                                         <th>Nama Kegiatan</th>
@@ -209,43 +235,10 @@
                                         </tbody>
                                         <!-- End NFTMax Table Body -->
                                     </table>
-                                    {{-- <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
-                                        Data tidak ditemukan
-                                    </div> --}}
                                     <!-- End NFTMax Table -->
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="trending-action">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row nftmax-gap-sq30">
-                                        <div id="pegawai-container"></div>
-                                        <div id="pegawai-pagination-container" class="pull-left">
-                                            @if($RPKH->lastPage() > 1)
-                                                {{ $RPKH->links() }}
-                                            @else
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination">
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary"><</span>
-                                                        </li>
-                                                        <li class="page-item active" aria-current="page">
-                                                            <span class="page-link">1</span>
-                                                        </li>
-                                                        <li class="page-item disabled">
-                                                            <span class="page-link text-secondary">></span>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        
                         <!-- End Welcome CTA -->
                     </div>
                     <!-- End Dashboard Inner -->

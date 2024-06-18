@@ -14,8 +14,37 @@
 									<!-- End All Notification Heading -->
 								
 									<div class="nftmax-personals">
+										<div class="button-form-back">
+												<button id="btnCancel" class="btnCancel" data-toggle="modal" data-target="#confirmationModal">
+														<i class="fas fa-chevron-left"></i> Kembali
+												</button>
+										</div>
+
+										<!-- Modal Confirmation -->
+										<div id="confirmationModal" class="modal fade">
+											<div class="modal-dialog modal-confirm modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header flex-column">
+														<div class="icon-box">
+															<i class="material-icons">&#xE5CD;</i>
+														</div>						
+														<h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+																<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													</div>
+													<div class="modal-body">
+														<p>Yakin ingin kembali ke halaman?. Progress Anda Tidak Akan Tersimpan.</p>
+													</div>
+													<div class="modal-footer justify-content-center">
+														<button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+														<button onclick="window.location.href = '<?php echo url('/PKPT'); ?>'" class="btn btn-danger" type="submit">Ya</button>
+													</div>
+												</div>
+											</div>
+										</div>    
+
 										<h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan EDIT Data PKPT Sesuai Dengan Kriteria!</h2>
 										<p class="nftmax__item-text nftmax__item-text--single mb-4">Mohon Input Data Yang Valid!</p>
+										<hr>
 										<div class="row">
 												<div class="col-lg-3 col-md-2 col-12 nftmax-personals__list">
 														<div class="nftmax-psidebar">
@@ -105,14 +134,39 @@
                                                             <option value="{{ $value }}" {{ $PKPTEdit['jenis'] == $value ? 'selected' : '' }}>{{ $label }}</option>
                                                         @endforeach
                                                     </select>
+																										<script>
+																										document.addEventListener("DOMContentLoaded", function() {
+																												var select = document.getElementById("jenis");
+																												var selectedOption = select.options[select.selectedIndex];
+																												if (selectedOption) {
+																														var text = selectedOption.text;
+																														selectedOption.textContent = text + " (selected)";
+																														selectedOption.style.color = "rgba(0, 0, 0, 0.5)"; // Set color to be semi-transparent
+																												}
+																										});
+																									</script>
 																							</div>
 
 																							<div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Unit Kerja/SKPD/Satker</label>
-                                                <input class="nftmax__item-input" type="text" name="unit"
-                                                    id="unit" placeholder="Edit unit"
-                                                    value="{{ $PKPTEdit['unit'] }}">
-                                            </div>
+																									<label class="nftmax__item-label">Unit Kerja/SKPD/Satker</label>
+																									<select class="nftmax__item-input" name="unit" id="unit" required="required">
+																											<option value="" disabled>Pilih Unit Kerja/SKPD/Satker...</option>
+																											@foreach($units as $unit)
+																													<option value="{{ $unit->id }}" @if($unit->id == $PKPTEdit->unit_id) selected @endif>{{ $unit->nama_unit }}</option>
+																											@endforeach
+																									</select>
+																									<script>
+																										document.addEventListener("DOMContentLoaded", function() {
+																												var select = document.getElementById("unit");
+																												var selectedOption = select.options[select.selectedIndex];
+																												if (selectedOption) {
+																														var text = selectedOption.text;
+																														selectedOption.textContent = text + " (selected)";
+																														selectedOption.style.color = "rgba(0, 0, 0, 0.5)"; // Set color to be semi-transparent
+																												}
+																										});
+																									</script>
+																							</div>
 
                                             	<div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label" for="tujuan_audit">Tujuan Audit</label>
@@ -137,43 +191,67 @@
                                                         <option value="{{ $value }}" {{ $PKPTEdit['tujuan_audit'] == $value ? 'selected' : '' }}>{{ $label }}</option>
                                                     @endforeach
                                                 </select>
+																								<script>
+																										document.addEventListener("DOMContentLoaded", function() {
+																												var select = document.getElementById("tujuan_audit");
+																												var selectedOption = select.options[select.selectedIndex];
+																												if (selectedOption) {
+																														var text = selectedOption.text;
+																														selectedOption.textContent = text + " (selected)";
+																														selectedOption.style.color = "rgba(0, 0, 0, 0.5)"; // Set color to be semi-transparent
+																												}
+																										});
+																									</script>
                                             	</div>
-
 
                                             	<div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Ruang Lingkup </label>
-                                                {{-- <input class="nftmax__item-input" type="number" name="ruang_lingkup"
-                                                    id="ruang_lingkup" placeholder="Tahun..." required="required"> --}}
-                                                <input class="nftmax__item-input" type="number" placeholder="YYYY" min="1999" max="2040" name="ruang_lingkup"
-                                                id="ruang_lingkup" placeholder="Tahun..." value="{{ $PKPTEdit['ruang_lingkup'] }}">
-                                                <script>
-                                                    document.querySelector("input[type=number]")
-                                                    .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
-                                                </script>
-                                            	</div>
+																									<label class="nftmax__item-label">Ruang Lingkup</label>
+																									<select class="nftmax__item-input" name="ruang_lingkup" id="ruang_lingkup" required="required">
+																											<option value="" disabled>Pilih Tahun...</option>
+																											@php
+																													$currentYear = date('Y');
+																													$startYear = 2000;
+																											@endphp
+																											@for($year = $currentYear; $year >= $startYear; $year--)
+																													<option value="{{ $year }}" {{ $year == $PKPTEdit->ruang_lingkup ? 'selected' : '' }}>{{ $year }}</option>
+																											@endfor
+																									</select>
+																									<script>
+																										document.addEventListener("DOMContentLoaded", function() {
+																												var select = document.getElementById("ruang_lingkup");
+																												var selectedOption = select.options[select.selectedIndex];
+																												if (selectedOption) {
+																														var text = selectedOption.text;
+																														selectedOption.textContent = text + " (selected)";
+																														selectedOption.style.color = "rgba(0, 0, 0, 0.5)"; // Set color to be semi-transparent
+																												}
+																										});
+																									</script>
+																							</div>
+
 																						</div>	
 																						<div class="tab-pane fade" id="id2" role="tabpanel">
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">PJ</label>
+																										<label class="nftmax__item-label">PJ (Penanggung Jawab)</label>
                                                   <input style="width: 40%" class="nftmax__item-input rounded-0" type="number"
                                                       name="pj" id="pj" placeholder="Input Jumlah PJ"
                                                       value="{{ $PKPTEdit['pj'] }}">
 																								</div>
 
 																								<div class="nftmax__item-form--group">
-                                                  <label class="nftmax__item-label">PT/WPJ</label>
+                                                  <label class="nftmax__item-label">PT/WPJ (Pengawas Tim/Wakil Penanggung Jawab)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="pt_wpj"
                                                       id="pt_wpj" placeholder="Input Jumlah PT/WPJ" value="{{ $PKPTEdit['pt_wpj'] }}">
                                               </div>
 
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">KT</label>
+																										<label class="nftmax__item-label">KT (Ketua Tim)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="kt"
                                                       id="kt" placeholder="Input Jumlah KT" value="{{ $PKPTEdit['kt'] }}">
 																								</div>
 
 																								<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">AT</label>
+																										<label class="nftmax__item-label">AT (Anggota Tim)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="at"
                                                       id="at" placeholder="Input Jumlah AT" value="{{ $PKPTEdit['at'] }}">
 																								</div>
@@ -223,20 +301,20 @@
 
 																						<div class="tab-pane fade" id="id4" role="tabpanel">
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label">RMP</label>
+																									<label class="nftmax__item-label">RMP (Rencana Mulai Penugasan)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="rmp" id="rmp" 
                                                   placeholder="Edit RMP" step="0.01" value="{{ $PKPTEdit['rmp'] }}">
 																							</div>
 
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label">RPL</label>
+																									<label class="nftmax__item-label">RPL (Rencana Penyusunan Laporan)</label>
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="rpl" id="rpl" 
                                                   placeholder="Edit RPL" step="0.01" value="{{ $PKPTEdit['rpl'] }}">
 																							</div>
 
 
 																							<div class="nftmax__item-form--group">
-																										<label class="nftmax__item-label">LHA </label>
+																										<label class="nftmax__item-label">LHA (Laporan Hasil Audit)</label>
                                                     <input style="width: 40%" class="nftmax__item-input" type="number" name="lha"
                                                     id="lha" placeholder="Edit LHA"
                                                     value="{{ $PKPTEdit['lha'] }}">
@@ -257,10 +335,8 @@
 																							</div>
 
 																							<div class="nftmax__item-button--group">
-																									<a class="nftmax__item-button--single nftmax__item-button--cancel"
-																											href="{{ url('/PKPT') }}" type="submit">Batal</a>
 																									<button
-																											class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
+																										 class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
 																											type="submit">Perbarui</button>
 																							</div>
 																						</div>

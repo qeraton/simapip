@@ -157,10 +157,8 @@ Route::group(['middleware' => ["authenticated"]], function () {
 
     Route::group(['prefix' => 'PKPT', 'middleware' => ["authenticated"]], function () {
         Route::get('/', [PKPT::class, 'index'])->name('index');
-        // Route::get('/ref-PKPT', [PKPT::class, 'ref_index'])->name('index');
-        // Route::get('/list', [PKPT::class, 'listPKPT'])->name('list');
-        // routes/web.php
-        Route::get('/get-unit-kerja', [PKPT::class, 'getUnitKerja']);
+        Route::get('/get-unit-kerja', [PKPT::class, 'getUnitKerja'])->name('getUnitKerja');
+        // Route::post('/get-pkpt-data', [PKPT::class, 'getPKPTData'])->name('getPKPTData');
         Route::get('/create', [PKPT::class, 'create'])->name('create');
         // Route::get('/createnyoba', [PKPT::class, 'createnyoba'])->name('createnyoba');
         Route::post('/store', [PKPT::class, 'store'])->name('store');

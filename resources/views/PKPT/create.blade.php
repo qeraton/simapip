@@ -14,8 +14,38 @@
 									<!-- End All Notification Heading -->
 								
 									<div class="nftmax-personals">
+
+										<div class="button-form-back">
+												<button id="btnCancel" class="btnCancel" data-toggle="modal" data-target="#confirmationModal">
+														<i class="fas fa-chevron-left"></i> Kembali
+												</button>
+										</div>
+
+										<!-- Modal Confirmation -->
+										<div id="confirmationModal" class="modal fade">
+											<div class="modal-dialog modal-confirm modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header flex-column">
+														<div class="icon-box">
+															<i class="material-icons">&#xE5CD;</i>
+														</div>						
+														<h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+																<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													</div>
+													<div class="modal-body">
+														<p>Yakin ingin kembali ke halaman?,Progress Anda Tidak Akan Tersimpan.</p>
+													</div>
+													<div class="modal-footer justify-content-center">
+														<button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+														<button onclick="window.location.href = '<?php echo url('/PKPT'); ?>'" class="btn btn-danger" type="submit">Ya</button>
+													</div>
+												</div>
+											</div>
+										</div>    
+
 										<h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Input Data PKPT Sesuai Dengan Kriteria!</h2>
 										<p class="nftmax__item-text nftmax__item-text--single mb-4">Mohon Input Data Yang Valid!</p>
+										<hr>
 										<div class="row">
 												<div class="col-lg-3 col-md-2 col-12 nftmax-personals__list">
 														<div class="nftmax-psidebar">
@@ -100,7 +130,7 @@
 																							<div class="nftmax__item-form--group">
 																									<label class="nftmax__item-label">Unit Kerja/SKPD/Satker</label>
 																									<select class="nftmax__item-input" name="unit" id="unit" required="required">
-																											<option value="" disabled selected>Pilih Unit Kerja...</option>
+																											<option value="" disabled selected>Pilih Unit Kerja/SKPD/Satker...</option>
 																											@foreach($units as $unit)
 																													<option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
 																											@endforeach
@@ -132,7 +162,7 @@
 																										<option value="" disabled selected>Pilih Tahun...</option>
 																										<!-- Generate options dynamically with JavaScript -->
 																								</select>
-																						</div>
+																							</div>
 
 																						</div>	
 																						<div class="tab-pane fade" id="id2" role="tabpanel">
@@ -197,6 +227,8 @@
                                                   <input style="width: 40%" class="nftmax__item-input" type="number" name="biaya_lk"
                                                       id="biaya_lk" placeholder="Input Biaya LK, (jika data tidak ada / 0 tidak perlu di isi)">
                                               </div>
+
+																							
 																						</div>
 
 																						<div class="tab-pane fade" id="id4" role="tabpanel">
@@ -207,7 +239,7 @@
 																							</div>
 
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label">RPL (Rencan Penyusunan Laporan)</label>
+																									<label class="nftmax__item-label">RPL (Rencana Penyusunan Laporan)</label>
 																									<input style="width: 40%" class="nftmax__item-input" type="number" name="rpl" id="rpl" 
 																									placeholder="Input RPL" required="required" step="0.01">
 																							</div>
@@ -232,13 +264,13 @@
 																							</div>
 
 																							<div class="nftmax__item-button--group">
-																								<a class="nftmax__item-button--single nftmax__item-button--cancel"
-																										href="{{ url('/PKPT') }}" type="submit">Batal</a>
+																								{{-- <a id="btnCancel" class="nftmax__item-button--single nftmax__item-button--cancel"
+																										href="{{ url('/PKPT') }}" type="submit">Batal</a> --}}
 																								<button
-																										class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
+																										id="btnUpdate" class="nftmax__item-button--single nftmax-btn nftmax-btn__bordered bg radius nftmax-item__btn"
 																										type="submit" id="submitBtn">Tambah</button>
 																							</div>
-																						</div>
+																						</div> 	
 																				</div>
 																		</div>
 																</form>

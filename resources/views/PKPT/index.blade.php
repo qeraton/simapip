@@ -28,16 +28,6 @@
                                 <h3 class="nftmax-table__title mb-0">Data PKPT
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
-                                {{-- <div class="nftmax-marketplace__bar-right">
-                                    <div class="nftmax-marketplace__bar-one">
-                                        <div class="nftmax-marketplace__bar-search">
-                                            <button id="btn-search" class="search-btn" type="button"><img
-                                                    src="/assets/img/search.png" alt="#"></button>
-                                            <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Ketikan Kode, Nama atau Jenis...">
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
@@ -186,16 +176,42 @@
                                                             </a>
                                                         @endcan
                                                         @can('Delete PKPT')
-                                                            <form
-                                                                action="{{ url('/PKPT/delete', $item['id']) }}"
-                                                                method="post" class="d-inline">
-                                                                <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg></button>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dataModalDelete-{{ $item->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                                </svg>
+                                                            </button>
                                                         @endcan
 
-                                                        <!-- Modal Structure -->
+                                                        <!-- Modal Delete -->
+                                                        <div id="dataModalDelete-{{ $item->id }}" class="modal fade">
+                                                            <div class="modal-dialog modal-confirm modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header flex-column">
+                                                                        <div class="icon-box">
+                                                                            <i class="material-icons">&#xE5CD;</i>
+                                                                        </div>						
+                                                                        <h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Apakah Anda Yakin Ingin Menghapus Data Ini?.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+                                                                        <form
+                                                                            action="{{ url('/PKPT/delete', $item['id']) }}"
+                                                                            method="post" class="d-inline">
+                                                                            <button class="btn btn-danger"><span>Hapus</span></button>
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal Show -->
                                                         <div class="modal fade custom-modal" id="dataModal-{{ $item->id }}" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -207,38 +223,38 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table table-bordered no-margin custom-table">
+                                                                            <table class="table table-striped table-hover no-margin custom-table">
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        <th>Kode </th>
+                                                                                        <td><b>Kode</b></td>
                                                                                         <td><span>{{ $item->kode }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Nama PKPT</th>
+                                                                                        <td><b>Nama PKPT</b></td>
                                                                                         <td><span>{{ $item->nama }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Jenis PKPT</th>
+                                                                                        <td><b>Jenis PKPT</b></td>
                                                                                         <td><span>{{ $item->jenis }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Unit Kerja/SKPD/Satker</th>
+                                                                                        <td><b>Unit Kerja/SKPD/Satker</b></td>
                                                                                         <td><span>{{ $item->unit }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Tujuan Audit</th>
+                                                                                        <td><b>Tujuan Audit</b></td>
                                                                                         <td><span>{{ $item->tujuan_audit }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Ruang Lingkup</th>
+                                                                                        <td><b>Ruang Lingkup</b></td>
                                                                                         <td><span>{{ $item->ruang_lingkup }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Susunan Tim</th>
+                                                                                        <td><b>Susunan Tim</b></td>
                                                                                         <td><span>{{ $item->susunan_tim }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Anggaran Waktu</th>
+                                                                                        <td><b>Anggaran Waktu</b></td>
                                                                                         <td>DK:<span>{{ isset($item['waktu_dk']) ? $item['waktu_dk'] : 0 }}</span><br>
                                                                                             LK:<span>{{ isset($item['waktu_lk']) ? $item['waktu_lk'] : 0 }}</span><br>
                                                                                             HP:<span>{{ isset($item['waktu_hp']) ? $item['waktu_hp'] : 0 }}</span>
@@ -246,7 +262,7 @@
                                                                                         
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Anggaran Biaya</th>
+                                                                                        <td><b>Anggaran Biaya</b></td>
                                                                                         <td>DK: <span>{{ isset($item['biaya_dk']) ? number_format($item['biaya_dk'], 0, ',', '.') : 0 }}</span><br>
                                                                                             LK: <span>DK: {{ isset($item['biaya_lk']) ? number_format($item['biaya_lk'], 0, ',', '.') : 0 }}</span><br>
                                                                                             @php
@@ -256,23 +272,23 @@
                                                                                         </td>     
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Rencana Mulai Penugasan</th>
+                                                                                        <td><b>Rencana Mulai Penugasan (RMP)</b></td>
                                                                                         <td><span>{{ $item->rmp }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Rencana Penyusunan Laporan</th>
+                                                                                        <td><b>Rencana Penyusunan Laporan (RPL)</b></td>
                                                                                         <td><span>{{ $item->rpl }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Laporan Hasil Audit (LHA)</th>
+                                                                                        <td><b>Laporan Hasil Audit (LHA)</b></td>
                                                                                         <td><span>{{ $item->lha }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Peralatan</th>
+                                                                                        <td><b>Peralatan</b></td>
                                                                                         <td><span>{{ $item->peralatan }}</span></td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <th>Keterangan</th>
+                                                                                        <td><b>Keterangan</b></td>
                                                                                         <td><span>{{ $item->keterangan }}</span></td>
                                                                                     </tr>
                                                                                 </tbody>
@@ -293,9 +309,6 @@
                                         </tbody>
                                         <!-- End NFTMax Table Body -->
                                     </table>
-                                    {{-- <div id="no-data-message" style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
-                                        Data tidak ditemukan
-                                    </div> --}}
                                     <!-- End NFTMax Table -->
                                 </div>
                             </div>

@@ -30,11 +30,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 	$(document).ready(function () {
     $("#myTable").DataTable({
-			// processing: true,
+			processing: true,
 			responsive: true,
 		 	scrollY: 400,
-    	deferRender: true,
-    	scroller: true,
+    	    deferRender: true,
+    	    scroller: true,
 			// serverSide: true,
 			// ajax: 'RPKH/json'
 			// paging: true, 
@@ -45,16 +45,16 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </script>
 
 <script>
-  const select = document.getElementById('ruang_lingkup');
-  const startYear = 1999;
-  const endYear = 2040;
-        
-  for (let year = startYear; year <= endYear; year++) {
-    const option = document.createElement('option');
-    option.value = year;
-    option.textContent = year;
-    select.appendChild(option);
-  }
+    // JavaScript to generate years dynamically
+    var select = document.getElementById("ruang_lingkup");
+    var currentYear = new Date().getFullYear();
+    var startYear = 2000; // Change this if you want a different start year
+    for (var year = currentYear; year >= startYear; year--) {
+        var option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        select.appendChild(option);
+    }
 </script>
 
 <script>
@@ -70,11 +70,46 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
           select.appendChild(option);
         });
       })
-    .catch(error => console.error('Error fetching unit kerja:', error));
+      .catch(error => console.error('Error fetching unit kerja:', error));
   });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil semua input yang wajib diisi
+        const requiredInputs = document.querySelectorAll('input[required]');
+        const btnBatal = document.getElementById('btnCancel');
+        const btnPerbarui = document.getElementById('btnUpdate');
 
+        // Fungsi untuk memeriksa apakah semua input wajib sudah diisi
+        function checkRequiredInputs() {
+            let allFilled = true;
+            requiredInputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    allFilled = false;
+                }
+            });
+            return allFilled;
+        }
+
+        // Fungsi untuk menampilkan atau menyembunyikan tombol Perbarui
+        function toggleUpdateButton() {
+            if (checkRequiredInputs()) {
+                btnPerbarui.style.display = 'inline-block'; // Tampilkan tombol Perbarui
+            } else {
+                btnPerbarui.style.display = 'none'; // Sembunyikan tombol Perbarui
+            }
+        }
+
+        // Panggil fungsi saat input berubah
+        requiredInputs.forEach(input => {
+            input.addEventListener('input', toggleUpdateButton);
+        });
+
+        // Sembunyikan tombol Perbarui saat halaman dimuat
+        toggleUpdateButton();
+    });
+</script>
 
 <script>
 jQuery(document).ready(function($) {
@@ -116,26 +151,46 @@ jQuery(document).ready(function($) {
 		</script>
 	@endif
 
+	@if (session()->get('error'))
+	
+		<script>
+			iziToast.error({
+				title: 'error',
+				position: 'topRight',
+				animateInside: true,
+				pauseOnHover: true,
+				progressBar: true,
+				progressBarEasing: 'linear',
+				theme: 'light',
+				message: '{{session()->get('error')}}'
+			});
+		</script>
+	@endif
+
 <!-- End Izi Toast-->
 
 <!-- Add Permissions Filter -->
-	<script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
-        const modules = document.querySelectorAll('.module-section');
+        const modules = document.querySelectorAll('.tab-pane'); // Assuming each module group has the class 'tab-pane'
 
         modules.forEach(module => {
-            const firstCheckbox = module.querySelector('.permission-first');
-            const restCheckboxes = module.querySelectorAll('.permission-rest');
+            const checkboxes = module.querySelectorAll('input[type="checkbox"]');
+            const viewCheckbox = module.querySelector('.permission-first'); // Assuming the first checkbox is the 'view' permission
 
-            firstCheckbox.addEventListener('change', function () {
-                restCheckboxes.forEach(checkbox => {
-                    checkbox.disabled = !this.checked;
+            viewCheckbox.addEventListener('change', function () {
+                checkboxes.forEach(checkbox => {
+                    if (checkbox !== viewCheckbox) {
+                        checkbox.disabled = !viewCheckbox.checked;
+                    }
                 });
             });
 
             // Initial state check
-            restCheckboxes.forEach(checkbox => {
-                checkbox.disabled = !firstCheckbox.checked;
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== viewCheckbox) {
+                    checkbox.disabled = !viewCheckbox.checked;
+                }
             });
         });
     });

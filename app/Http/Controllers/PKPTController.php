@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Hash;
 use Session;
 use App\Models\{
-    Obyek,
+    UnitKerja,
     PKPT,
 };
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +23,7 @@ class PKPTController extends Controller
         $this->middleware('permission:Edit PKPT', ['only' => ['update', 'edit']]);
         $this->middleware('permission:Delete PKPT', ['only' => ['destroy']]);
     }
+    
     public function index()
     {
         $PKPT = PKPT::get();
@@ -30,7 +31,6 @@ class PKPTController extends Controller
 
         return view('PKPT.index', compact('PKPT', 'total'));
     }
-
     public function ref_index(){
         $PKPT = PKPT::get();
         return view('PKPT.ref-PKPT', compact('PKPT'));
@@ -55,10 +55,9 @@ class PKPTController extends Controller
             'kode' => 'required|string|max:10',
             'nama' => 'required|string|max:225',
             'jenis' => 'required|string|max:225',
-            'unit' => 'required|string|max:225',
+            'unit' => 'required|exists:unit_kerja,id',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
-            // 'susunan_tim' => 'required|string|max:225',
             'pj' => 'required|numeric',
             'pt_wpj' => 'required|numeric',
             'kt' => 'required|numeric',
@@ -68,65 +67,39 @@ class PKPTController extends Controller
             'waktu_hp' => 'nullable|numeric',
             'biaya_dk' => 'nullable|numeric',
             'biaya_lk' => 'nullable|numeric',
-            // 'total' => 'required|numeric',
             'rmp' => 'required|numeric',
             'rpl' => 'required|numeric',
             'lha' => 'required|numeric',
             'peralatan' => 'required|string|max:225',
             'keterangan' => 'nullable|string|max:225',
-
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Gabungkan nilai dari 'pj', 'pt_wpj', 'kt', dan 'at' ke dalam 'susunan_tim' dengan format yang diinginkan
+        // Fetch the unit name based on the ID
+        $unit = UnitKerja::findOrFail($request->unit);
+        $unit_name = $unit->nama_unit;
+
+        // Prepare the 'susunan_tim' value
         $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
 
-        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'pj', 'pt_wpj', 'kt', 'at','tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
-
-        // Tambahkan 'susunan_tim' ke dalam data
+        // Prepare the data array for saving
+        $data = $request->only(['kode', 'nama', 'jenis', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+        $data['unit'] = $unit_name; // Use the unit name instead of the ID
         $data['susunan_tim'] = $susunanTim;
-
-        // $data = $request->only(['kode', 'nama', 'jenis', 'unit' ,'tujuan_audit', 'ruang_lingkup', 'pj', 'pt_wpj', 'kt', 'at' ,'susunan_tim', 'rmp', 'rpl', 'lha', 'peralatan']);
-
-        // Handling waktu_dk
-        if ($request->filled('waktu_dk')) {
-            $data['waktu_dk'] = $request->waktu_dk;
-        } else {
-            $data['waktu_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling waktu_hp
-        if ($request->filled('waktu_hp')) {
-            $data['waktu_hp'] = $request->waktu_hp;
-        } else {
-            $data['waktu_hp'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling biaya_dk
-        if ($request->filled('biaya_dk')) {
-            $data['biaya_dk'] = $request->biaya_dk;
-        } else {
-            $data['biaya_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling biaya_lk
-        if ($request->filled('biaya_lk')) {
-            $data['biaya_lk'] = $request->biaya_lk;
-        } else {
-            $data['biaya_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling keterangan
-        $data['keterangan'] = $request->keterangan ?? ''; // Menggunakan null coalescing operator untuk nilai default kosong jika tidak ada input
+        $data['waktu_dk'] = $request->filled('waktu_dk') ? $request->waktu_dk : 0;
+        $data['waktu_lk'] = $request->filled('waktu_lk') ? $request->waktu_lk : 0;
+        $data['waktu_hp'] = $request->filled('waktu_hp') ? $request->waktu_hp : 0;
+        $data['biaya_dk'] = $request->filled('biaya_dk') ? $request->biaya_dk : 0;
+        $data['biaya_lk'] = $request->filled('biaya_lk') ? $request->biaya_lk : 0;
+        $data['keterangan'] = $request->keterangan ?? '';
 
         try {
             PKPT::create($data);
             return Redirect::to('/PKPT')->with('success', 'Berhasil Menambahkan data!');
         } catch (\Exception $e) {
-            dd($e->getMessage()); // Menampilkan pesan error pada pengecualian
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
         }
     }
@@ -151,10 +124,9 @@ class PKPTController extends Controller
             'kode' => 'required|string|max:10',
             'nama' => 'required|string|max:225',
             'jenis' => 'required|string|max:225',
-            'unit' => 'required|string|max:225',
+            'unit' => 'required|exists:unit_kerja,id',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
-            // 'susunan_tim' => 'required|string|max:225',
             'pj' => 'required|numeric',
             'pt_wpj' => 'required|numeric',
             'kt' => 'required|numeric',
@@ -164,7 +136,6 @@ class PKPTController extends Controller
             'waktu_hp' => 'nullable|numeric',
             'biaya_dk' => 'nullable|numeric',
             'biaya_lk' => 'nullable|numeric',
-            // 'total' => 'required|numeric',
             'rmp' => 'required|numeric',
             'rpl' => 'required|numeric',
             'lha' => 'required|numeric',
@@ -176,58 +147,30 @@ class PKPTController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Gabungkan nilai dari 'pj', 'pt_wpj', 'kt', dan 'at' ke dalam 'susunan_tim' dengan format yang diinginkan
+        // Fetch the unit name based on the ID
+        $unit = UnitKerja::findOrFail($request->unit);
+        $unit_name = $unit->nama_unit;
+
+        // Prepare the 'susunan_tim' value
         $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
 
-        $data = $request->only(['kode', 'nama', 'jenis', 'unit', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
-
-        // Tambahkan 'susunan_tim' ke dalam data
+        // Prepare the data array for saving
+        $data = $request->only(['kode', 'nama', 'jenis', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+        $data['unit'] = $unit_name; // Use the unit name instead of the ID
         $data['susunan_tim'] = $susunanTim;
-
-        // Handling waktu_dk
-        if ($request->filled('waktu_dk')) {
-            $data['waktu_dk'] = $request->waktu_dk;
-        } else {
-            $data['waktu_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling waktu_lk
-        if ($request->filled('waktu_lk')) {
-            $data['waktu_lk'] = $request->waktu_lk;
-        } else {
-            $data['waktu_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling waktu_hp
-        if ($request->filled('waktu_hp')) {
-            $data['waktu_hp'] = $request->waktu_hp;
-        } else {
-            $data['waktu_hp'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling biaya_dk
-        if ($request->filled('biaya_dk')) {
-            $data['biaya_dk'] = $request->biaya_dk;
-        } else {
-            $data['biaya_dk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling biaya_lk
-        if ($request->filled('biaya_lk')) {
-            $data['biaya_lk'] = $request->biaya_lk;
-        } else {
-            $data['biaya_lk'] = 0; // Atau nilai default lainnya sesuai kebutuhan
-        }
-
-        // Handling keterangan
-        $data['keterangan'] = $request->keterangan ?? ''; // Menggunakan null coalescing operator untuk nilai default kosong jika tidak ada input
+        $data['waktu_dk'] = $request->filled('waktu_dk') ? $request->waktu_dk : 0;
+        $data['waktu_lk'] = $request->filled('waktu_lk') ? $request->waktu_lk : 0;
+        $data['waktu_hp'] = $request->filled('waktu_hp') ? $request->waktu_hp : 0;
+        $data['biaya_dk'] = $request->filled('biaya_dk') ? $request->biaya_dk : 0;
+        $data['biaya_lk'] = $request->filled('biaya_lk') ? $request->biaya_lk : 0;
+        $data['keterangan'] = $request->keterangan ?? '';
 
         try {
             PKPT::where('id', $id)->update($data);
             return Redirect::to('/PKPT')->with('success', 'Berhasil mengubah data!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
-        }
+        } 
     }
 
 
