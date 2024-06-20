@@ -19,19 +19,20 @@
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Inputkan Jenis Role</h2>
                                 <p class="nftmax__item-text nftmax__item-text--single">Mohon Input Data Yang Valid!</p>
                             </div>
+                            <hr>
                             <form class="form" method="POST" action="{{ url('roles') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="nftmax__item-box">
                                             <div class="nftmax__item-form--group">
-                                                <label class="nftmax__item-label">Role Name </label>
-                                                <input class="nftmax__item-input" type="text" name="name" placeholder="Input name" required="required">
+                                                <label class="nftmax__item-label">Nama Role </label>
+                                                <input class="nftmax__item-input" type="text" name="name" placeholder="Input Nama Role, Contoh : 'Super Admin Role'" required="required">
                                                 
                                             </div>
                                             <div class="nftmax__item-form--group">
                                                 <label class="nftmax__item-label">Description </label>
-                                                <input class="nftmax__item-input" type="text" name="description" placeholder="Input description" required="required">
+                                                <input class="nftmax__item-input" type="text" name="description" placeholder="Input Deskripsi Role" required="required">
                                                 
                                             </div>
                                         </div>

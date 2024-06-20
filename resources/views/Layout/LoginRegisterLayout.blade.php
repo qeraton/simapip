@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="{{asset('assets/css/slickslider.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/reset.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/style.css')}}">
+		<script src="{{asset('assets/js/iziToast.min.js')}}"></script>
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -64,6 +65,7 @@
 		
 		<!-- NFTMax Scripts -->
 		<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+		<link rel="stylesheet" href="{{asset('assets/css/iziToast.min.css')}}">
 		<script src="{{asset('assets/js/jquery-migrate.js')}}"></script>
 		<script src="{{asset('assets/js/popper.min.js')}}"></script>
 		<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -76,3 +78,4 @@
 		
 	</body>
 </html>
+@include('Layout.Footer')

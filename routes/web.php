@@ -21,22 +21,6 @@ use App\Http\Controllers\{
     KartuPenugasanController as KartuPenugasan,
 };
 
-Route::group(['middleware' => ['isAdmin']], function(){
-
-    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
-    Route::delete('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
-
-    Route::resource('roles', App\Http\Controllers\RoleController::class);
-    Route::delete('roles/{rolesId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
-        // ->middleware('permission::Delete Role');
-    Route::get('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
-    Route::put('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
-
-    Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::delete('users/{usersId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
-
-});
-
 
 /*
 |--------------------------------------------------------------------------
@@ -51,23 +35,31 @@ Route::group(['middleware' => ['isAdmin']], function(){
 
 Route::get('/', [Auth::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [Auth::class, 'login'])->name('login.call');
+Route::post('/logout', [Auth::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ["authenticated"]], function () {
+Route::get('/login', function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
+});
+
+Route::group(['middleware' => ['authenticated']], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/logout', [Auth::class, 'logout'])->name('logout');
 
-    Route::group(['prefix' => 'user', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'user'], function () {
         Route::get('/ubah-password', [Users::class, 'showChangePasswordForm'])->name('showChangePassword');
         Route::patch('/mengubah-password', [Users::class, 'changePassword'])->name('changePassword');
     })->name('user');
 
-    Route::group(['prefix' => 'pegawai', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'pegawai'], function () {
         Route::get('/', [DataPegawai::class, 'index'])->name('index');
         Route::get('/list', [DataPegawai::class, 'listPegawai'])->name('list');
         Route::get('/{id}/profile', [DataPegawai::class, 'profilePegawai'])->name('profile');
     })->name('pegawai');
 
-    Route::group(['prefix' => 'jenis-pengawasan', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'jenis-pengawasan'], function () {
         Route::get('/', [JenisPengawasan::class, 'index'])->name('index');
         Route::get('/create', [JenisPengawasan::class, 'create'])->name('create');
         Route::get('/list', [JenisPengawasan::class, 'list'])->name('list');
@@ -77,7 +69,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('delete/{id}', [JenisPengawasan::class, 'destroy'])->name('delete');
     })->name('jenis-pengawasan');
 
-    Route::group(['prefix' => 'daftar-penugasan', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'daftar-penugasan'], function () {
         Route::get('/', [DaftarPenugasan::class, 'index'])->name('index');
         Route::get('/create', [DaftarPenugasan::class, 'create'])->name('create');
         Route::post('/store', [DaftarPenugasan::class, 'store'])->name('store');
@@ -86,7 +78,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [DaftarPenugasan::class, 'destroy'])->name('delete');
     })->name('daftar-penugasan');
 
-    Route::group(['prefix' => 'obyek', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'obyek'], function () {
         Route::get('/', [Obyek::class, 'index'])->name('index');
         Route::get('/list', [Obyek::class, 'listObyek'])->name('list');
         Route::get('/create', [Obyek::class, 'create'])->name('create');
@@ -96,7 +88,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [Obyek::class, 'destroy'])->name('delete');
     })->name('obyek');
 
-    Route::group(['prefix' => 'strata-pendidikan', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'strata-pendidikan'], function () {
         Route::get('/', [StrataPendidikan::class, 'index'])->name('index');
         Route::get('/create', [StrataPendidikan::class, 'create'])->name('create');
         Route::post('/store', [StrataPendidikan::class, 'store'])->name('store');
@@ -105,7 +97,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('delete/{id}', [StrataPendidikan::class, 'destroy'])->name('delete');
     })->name('strata-pendidikan');
 
-    Route::group(['prefix' => 'unit-kerja', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'unit-kerja'], function () {
         Route::get('/', [UnitKerja::class, 'index'])->name('index');
         Route::get('/create', [UnitKerja::class, 'create'])->name('create');
         Route::post('/store', [UnitKerja::class, 'store'])->name('store');
@@ -113,8 +105,8 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::patch('update/{id}', [UnitKerja::class, 'update'])->name('update');
         Route::delete('delete/{id}', [UnitKerja::class, 'destroy'])->name('delete');
     })->name('unit-kerja');
-    
-    Route::group(['prefix' => 'jenjangJabatan', 'middleware' => ["authenticated"]], function () {
+
+    Route::group(['prefix' => 'jenjangJabatan'], function () {
         Route::get('/', [jenJabatan::class, 'index'])->name('index');
         Route::get('/list', [jenJabatan::class, 'listjenjangJabatan'])->name('list');
         Route::get('/create', [jenJabatan::class, 'create'])->name('create');
@@ -125,7 +117,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [jenJabatan::class, 'destroy'])->name('delete');
     })->name('jenjangJabatan');
 
-    Route::group(['prefix' => 'jabatan', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'jabatan'], function () {
         Route::get('/', [jabatan::class, 'index'])->name('index');
         Route::get('/list', [jabatan::class, 'listJabatan'])->name('list');
         Route::get('/create', [jabatan::class, 'create'])->name('create');
@@ -135,7 +127,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [jabatan::class, 'destroy'])->name('delete');
     })->name('jabatan');
 
-    Route::group(['prefix' => 'pangkat', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'pangkat'], function () {
         Route::get('/', [pangkat::class, 'index'])->name('index');
         Route::get('/list', [pangkat::class, 'listPangkat'])->name('list');
         Route::get('/create', [pangkat::class, 'create'])->name('create');
@@ -145,7 +137,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [pangkat::class, 'destroy'])->name('delete');
     })->name('pangkat');
 
-    Route::group(['prefix' => 'kartu-penugasan', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'kartu-penugasan'], function () {
         Route::get('/', [KartuPenugasan::class, 'index'])->name('index');
         Route::get('/kartu-penugasan/{id}', [KartuPenugasan::class, 'show'])->name('show');
         Route::get('/create', [KartuPenugasan::class, 'create'])->name('create');
@@ -155,19 +147,17 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [KartuPenugasan::class, 'destroy'])->name('delete');
     })->name('kartu-penugasan');
 
-    Route::group(['prefix' => 'PKPT', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'PKPT'], function () {
         Route::get('/', [PKPT::class, 'index'])->name('index');
         Route::get('/get-unit-kerja', [PKPT::class, 'getUnitKerja'])->name('getUnitKerja');
-        // Route::post('/get-pkpt-data', [PKPT::class, 'getPKPTData'])->name('getPKPTData');
         Route::get('/create', [PKPT::class, 'create'])->name('create');
-        // Route::get('/createnyoba', [PKPT::class, 'createnyoba'])->name('createnyoba');
         Route::post('/store', [PKPT::class, 'store'])->name('store');
         Route::get('/edit/{id}/', [PKPT::class, 'edit'])->name('edit');
         Route::patch('/update/{id}/', [PKPT::class, 'update'])->name('update');
         Route::delete('/delete/{id}/', [PKPT::class, 'destroy'])->name('delete');
     })->name('PKPT');
 
-    Route::group(['prefix' => 'RPKH', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'RPKH'], function () {
         Route::get('/', [RPKH::class, 'index'])->name('index');
         Route::get('/RPKH/{id}', [RPKH::class, 'show'])->name('show');
         Route::get('/list', [RPKH::class, 'listRPKH'])->name('list');
@@ -178,10 +168,9 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [RPKH::class, 'destroy'])->name('delete');
     })->name('RPKH');
 
-    Route::group(['prefix' => 'Reviu', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'Reviu'], function () {
         Route::get('/', [Reviu::class, 'index'])->name('index');
         Route::get('/Reviu/{id}', [Reviu::class, 'show'])->name('show');
-        // Route::get('/list', [Reviu::class, 'listReviu'])->name('list');
         Route::get('/create', [Reviu::class, 'create'])->name('create');
         Route::post('/store', [Reviu::class, 'store'])->name('store');
         Route::get('/edit/{id}', [Reviu::class, 'edit'])->name('edit');
@@ -189,7 +178,7 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [Reviu::class, 'destroy'])->name('delete');
     })->name('Reviu');
 
-    Route::group(['prefix' => 'my-profile', 'middleware' => ["authenticated"]], function () {
+    Route::group(['prefix' => 'my-profile'], function () {
         Route::get('/', [profile::class, 'index'])->name('index');
         Route::get('/list', [profile::class, 'listPangkat'])->name('list');
         Route::get('/create', [profile::class, 'create'])->name('create');
@@ -199,4 +188,17 @@ Route::group(['middleware' => ["authenticated"]], function () {
         Route::delete('/delete/{id}', [profile::class, 'destroy'])->name('delete');
     })->name('my-profile');
 
+    Route::group(['middleware' => ['isAdmin']], function () {
+        Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+        Route::delete('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
+
+        Route::resource('roles', App\Http\Controllers\RoleController::class);
+        Route::delete('roles/{rolesId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+        // ->middleware('permission::Delete Role');
+        Route::get('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
+        Route::put('roles/{rolesId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+
+        Route::resource('users', App\Http\Controllers\UserController::class);
+        Route::delete('users/{usersId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+    });
 })->name("simapip");

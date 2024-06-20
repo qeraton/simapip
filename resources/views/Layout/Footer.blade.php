@@ -23,18 +23,37 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Data Tables -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap4.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 
 <script>
 	$(document).ready(function () {
-    $("#myTable").DataTable({
+        $("#myTable").DataTable({
 			processing: true,
 			responsive: true,
 		 	scrollY: 400,
     	    deferRender: true,
     	    scroller: true,
+            layout: {
+                topStart: {
+                    pageLength: {
+                        menu: [ 10, 25, 50, 100 ]
+                    }
+                },
+                topEnd: {
+                    search: {
+                        placeholder: 'Cari data disini'
+                    }
+                },
+                bottomEnd: {
+                    paging: {
+                        numbers: 5
+                    }
+                }
+            }
+            
 			// serverSide: true,
 			// ajax: 'RPKH/json'
 			// paging: true, 
@@ -151,8 +170,22 @@ jQuery(document).ready(function($) {
 		</script>
 	@endif
 
-	@if (session()->get('error'))
-	
+    @if (session()->get('loginAlert'))
+        <script>
+            iziToast.error({
+                title: 'Belum Login',
+                position: 'topRight',
+                animateInside: true,
+                pauseOnHover: true,
+                progressBar: true,
+                progressBarEasing: 'linear',
+                theme: 'light',
+                message: '{{ session()->get('loginAlert') }}'
+            });
+        </script>
+    @endif
+
+	@if (session()->get('error'))	
 		<script>
 			iziToast.error({
 				title: 'error',

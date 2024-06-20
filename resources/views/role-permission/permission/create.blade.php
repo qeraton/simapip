@@ -83,7 +83,7 @@
                                                 <div class="tab-pane fade show active" id="id1" role="tabpanel">
                                                     <div class="nftmax__item-box">
                                                         <div class="nftmax__item-form--group">
-                                                            <label class="nftmax__item-label">Permission Name </label>
+                                                            <label class="nftmax__item-label">Nama Permission </label>
                                                             <input class="nftmax__item-input" type="text" name="name" placeholder="Input Nama Permission" required>
                                                             
                                                         </div>

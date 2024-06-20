@@ -1,9 +1,4 @@
 @include('Layout.Header')
-@if (session()->has('success'))
-    <script>
-        toastr.success("{{ session('success') }}");
-    </script>
-@endif
 <section class="nftmax-adashboard nftmax-show">
     <div class="container">
         <div class="row">
@@ -30,22 +25,12 @@
                                 <h3 class="nftmax-table__title mb-0">Data Role
                                     {{-- <span class="nftmax-table__badge"></span> --}}
                                 </h3>
-                                {{-- <div class="nftmax-marketplace__bar-right">
-                                    <div class="nftmax-marketplace__bar-one">
-                                        <div class="nftmax-marketplace__bar-search">
-                                            <button id="btn-search" class="search-btn" type="button"><img
-                                                    src="/assets/img/search.png" alt="#"></button>
-                                            <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Search ...">
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
                                     aria-labelledby="table_1">
                                     <!-- NFTMax Table -->
-                                    <table id="myTable" class="nftmax-table__main nftmax-table__main-v1">
+                                    <table id="myTable" class="table-striped nftmax-table__main nftmax-table__main-v1">
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>
@@ -81,13 +66,6 @@
                                                             {{ $item['description'] }}
                                                         </p>
                                                     </td>
-                                                    {{-- <td class="nftmax-table__column-3 nftmax-table__data-2" id="search1">
-                                                        <p class="nftmax-table__text nftmax-table__up-down nftmax-bcolor">
-                                                            @foreach ($item['permissions'] as $permission)
-                                                                {{ $permission['name'] }}
-                                                            @endforeach
-                                                        </p>
-                                                    </td> --}}
                                                     <td class="nftmax-table__column-10 nftmax-table__data-10">
                                                         @can('Give Permission To Users')
                                                             <a href="{{ url('roles/'.$item->id.'/give-permissions') }}" class="btn btn-warning ml-0">Add / Edit Role Permission</a>
@@ -102,7 +80,7 @@
                                                                         d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                                     <path fill-rule="evenodd"
                                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                                                </svg>
+                                                                </svg> Edit
                                                             </a>
                                                         @endcan
                                                         @can('Delete Role')

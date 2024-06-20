@@ -117,6 +117,16 @@ Version:	1.0.0
 	max-height: 850px;
 }
 
+.create-permissions-body{
+	min-height: 800px;
+	max-height: 850px;
+}
+
+.nftmax-ptabs-create-permissions-box {
+	min-height: 200px;
+	max-height: 200px;
+}
+
 .change-password-body {
 	min-height: 800px;
 	max-height: 850px;
@@ -4480,7 +4490,7 @@ button.nftmax-item__btn{
 .nftmax-ptabs {
 	/* height: 700px; */
 	min-height: 590px;
-	max-height: 800px;
+	max-height: 850px;
 	border-left: 1px solid rgba(83, 86, 251, 0.16);
 	padding-left: 40px;
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
 use \Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Hash;
@@ -43,20 +45,38 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'unique:roles,name,description'
-            ]
-        ]);
+        try {
+            $request->validate([
+                'name' => [
+                    'required',
+                    'string',
+                    'unique:roles,name'
+                ],
+                'description' => [
+                    'required',
+                    'string'
+                ]
+            ]);
 
-        Role::create([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+            $name = ucwords(strtolower($request->name));
+            $description = ucwords(strtolower($request->description));
+            Role::create([
+                'name' => $name,
+                'description' => $description
+            ]);
 
-        return Redirect::to('roles')->with('success', 'Berhasil Menambah Data Role!');
+            return Redirect::to('roles')->with('success', 'Berhasil Menambah Data Role!');
+        } catch (ValidationException $e) {
+            // Periksa apakah kesalahan berasal dari field 'name'
+            if ($e->validator->errors()->has('name')) {
+                return Redirect::back()
+                    ->withErrors(['name' => 'Role dengan nama ini sudah ada. Silakan gunakan nama lain.'])
+                    ->withInput();
+            }
+
+            // Tangani validasi lainnya jika ada
+            return Redirect::back()->withErrors($e->validator)->withInput();
+        }
     }
 
     public function edit(Role $role)
@@ -68,22 +88,48 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                // 'unique:roles,name,description,'.$role->id
-                Rule::unique('roles')->where(function ($query) use ($role) {
-                    return $query->where('name', $role->name)->where('description', $role->description);
-                })->ignore($role->id),
-            ]
-        ]);
+        try {
+            $request->validate([
+                'name' => [
+                    'required',
+                    'string',
+                    Rule::unique('roles')->ignore($role->id)
+                ],
+                'description' => [
+                    'required',
+                    'string'
+                ]
+            ]);
 
-        $role->update([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
-        return Redirect::to('roles')->with('success', 'Berhasil MengUpdate Data Role!');
+            $name = ucwords(strtolower($request->name));
+            $description = ucwords(strtolower($request->description));
+            $role->update([
+                'name' => $name,
+                'description' => $description
+            ]);
+
+            return Redirect::to('roles')->with('success', 'Berhasil Mengupdate Data Role!');
+        } catch (ValidationException $e) {
+            // Periksa apakah kesalahan berasal dari field 'name'
+            if ($e->validator->errors()->has('name')) {
+                return Redirect::back()
+                    ->withErrors(['name' => 'Role dengan nama ini sudah ada. Silakan gunakan nama lain.'])
+                    ->withInput();
+            }
+
+            // Tangani validasi lainnya jika ada
+            return Redirect::back()->withErrors($e->validator)->withInput();
+        } catch (QueryException $e) {
+            // Tangani pelanggaran constraint unik secara umum
+            if ($e->getCode() == 23000) { // 23000 adalah kode error untuk pelanggaran constraint unik
+                return Redirect::back()
+                    ->withErrors(['name' => 'Role dengan nama ini sudah ada. Silakan gunakan nama lain.'])
+                    ->withInput();
+            }
+
+            // Tangani exception database lainnya jika ada
+            return Redirect::back()->withErrors($e->getMessage())->withInput();
+        }
     }
 
     public function destroy($roleId)

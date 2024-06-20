@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 use Session;
 use App\Models\{
     User,
@@ -48,24 +49,43 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|max:20',
-            'roles' => 'required',
-        ]);
+        try {
+            $request->validate([
+                'username' => 'required|string|max:255|unique:users,username',
+                'email' => 'required|email|max:255|unique:users,email',
+                'password' => 'required|string|min:8|max:20',
+                'roles' => 'required',
+            ]);
 
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            $user = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        $user->syncRoles($request->roles);
+            $user->syncRoles($request->roles);
 
-        return redirect('/users')->with('success', 'User Berhasil DiBuat Dengan Role!');
+            return redirect('/users')->with('success', 'User Berhasil DiBuat Dengan Role!');
+        } catch (ValidationException $e) {
+            // Tangani validasi khusus untuk username dan email
+            $errors = $e->validator->errors();
+            if ($errors->has('username')) {
+                return Redirect::back()
+                    ->withErrors(['username' => 'Username sudah digunakan oleh user lain. Silakan gunakan username lain.'])
+                    ->withInput();
+            }
+
+            if ($errors->has('email')) {
+                return Redirect::back()
+                    ->withErrors(['email' => 'Email sudah digunakan oleh user lain. Silakan gunakan email lain.'])
+                    ->withInput();
+            }
+
+            // Tangani validasi lainnya jika ada
+            return Redirect::back()->withErrors($e->validator)->withInput();
+        }
     }
 
     public function edit(User $user)
@@ -82,27 +102,54 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'username' => 'required|string|max:255',
-            'password' => 'nullable|string|min:8|max:20',
-            'roles' => 'required',
-        ]);
+        try {
+            $request->validate([
+                'username' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('users')->ignore($user->id)
+                ],
+                'email' => [
+                    'required',
+                    'email',
+                    'max:255',
+                    Rule::unique('users')->ignore($user->id)
+                ],
+                'password' => 'nullable|string|min:8|max:20',
+                'roles' => 'required',
+            ]);
 
-        $data = [
-            'username' => $request->username,
-            'email' => $request->email,
-        ];
-
-        if(!empty($request->password)){
-            $data += [
-                'password' => Hash::make($request->password),
+            $data = [
+                'username' => $request->username,
+                'email' => $request->email,
             ];
+
+            if (!empty($request->password)) {
+                $data['password'] = Hash::make($request->password);
+            }
+
+            $user->update($data);
+            $user->syncRoles($request->roles);
+
+            return redirect('/users')->with('success', 'Berhasil Update Data User!');
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors();
+
+            if ($errors->has('username')) {
+                return Redirect::back()
+                    ->withErrors(['username' => 'Username sudah digunakan oleh user lain. Silakan gunakan username lain.'])
+                    ->withInput();
+            }
+
+            if ($errors->has('email')) {
+                return Redirect::back()
+                    ->withErrors(['email' => 'Email sudah digunakan oleh user lain. Silakan gunakan email lain.'])
+                    ->withInput();
+            }
+
+            return Redirect::back()->withErrors($e->validator)->withInput();
         }
-
-        $user->update($data);
-        $user->syncRoles($request->roles);
-
-        return redirect('/users')->with('success', 'Berhasil Update Data User!');
     }
 
     public function destroy($userId)

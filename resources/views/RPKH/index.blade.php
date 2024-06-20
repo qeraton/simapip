@@ -44,7 +44,7 @@
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
                                     aria-labelledby="table_1">
                                     <!-- NFTMax Table -->
-                                    <table id="myTable" class="nftmax-table__main nftmax-table__main-v1">
+                                    <table id="myTable" class="table-striped nftmax-table__main nftmax-table__main-v1">
                                         <!-- NFTMax Table Head -->
                                         <thead class="nftmax-table__head">
                                             <tr>

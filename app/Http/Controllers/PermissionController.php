@@ -13,6 +13,8 @@ use App\Models\{
 };
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 class PermissionController extends Controller
 {
@@ -37,19 +39,32 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'unique:permissions,name'
-            ]
-        ]);
+        try {
+            $request->validate([
+                'name' => [
+                    'required',
+                    'string',
+                    'unique:permissions,name'
+                ]
+            ]);
 
-        Permission::create([
-            'name' => $request->name
-        ]);
+            $name = ucwords(strtolower($request->name)); // Mengubah nama permission menjadi format yang diinginkan
+            Permission::create([
+                'name' => $name
+            ]);
 
-        return Redirect::to('permissions')->with('success', 'Berhasil Menambah Data Permission!');
+            return Redirect::to('permissions')->with('success', 'Berhasil Menambah Data Permission!');
+        } catch (ValidationException $e) {
+            // Periksa apakah kesalahan berasal dari field 'name'
+            if ($e->validator->errors()->has('name')) {
+                return Redirect::back()
+                    ->withErrors(['name' => 'Permission dengan nama ini sudah ada. Silakan gunakan nama lain.'])
+                    ->withInput();
+            }
+
+            // Tangani validasi lainnya jika ada
+            return Redirect::back()->withErrors($e->validator)->withInput();
+        }
     }
 
     public function edit(Permission $permission)
@@ -61,24 +76,38 @@ class PermissionController extends Controller
 
     public function update(Request $request, Permission $permission)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'unique:permissions,name,'.$permission->id
-            ]
-        ]);
+        try {
+            $request->validate([
+                'name' => [
+                    'required',
+                    'string',
+                    Rule::unique('permissions')->ignore($permission->id)
+                ]
+            ]);
 
-        $permission->update([
-            'name' => $request->name
-        ]);
-        return Redirect::to('permissions')->with('success', 'Berhasil MengUpdate Data Permission!');
+            $name = ucwords(strtolower($request->name)); // Mengubah nama permission menjadi format yang diinginkan
+            $permission->update([
+                'name' => $name
+            ]);
+
+            return Redirect::to('permissions')->with('success', 'Berhasil MengUpdate Data Permission!');
+        } catch (ValidationException $e) {
+            // Periksa apakah kesalahan berasal dari field 'name'
+            if ($e->validator->errors()->has('name')) {
+                return Redirect::back()
+                    ->withErrors(['name' => 'Permission dengan nama ini sudah ada. Silakan gunakan nama lain.'])
+                    ->withInput();
+            }
+
+            // Tangani validasi lainnya jika ada
+            return Redirect::back()->withErrors($e->validator)->withInput();
+        }
     }
 
     public function destroy($permissionId)
     {
         $permission = Permission::find($permissionId);
         $permission->delete();
-        return Redirect::to('permissions')->with('success', 'Berhasil MengHapus Data Permission!');
+        return Redirect::to('permissions')->with('success', 'Berhasil Menghapus Data Permission!');
     }
 }
