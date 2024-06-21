@@ -104,10 +104,10 @@
 									<li class="{{ Request::is('kartu-penugasan') || Request::is('kartu-penugasan/create') || Request::is('kartu-penugasan/edit/*') ? 'active' : '' }}"><a href="{{url('/kartu-penugasan')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-paper-fill" viewBox="0 0 16 16"><path d="M6.5 9.5 3 7.5v-6A1.5 1.5 0 0 1 4.5 0h7A1.5 1.5 0 0 1 13 1.5v6l-3.5 2L8 8.75zM1.059 3.635 2 3.133v3.753L0 5.713V5.4a2 2 0 0 1 1.059-1.765M16 5.713l-2 1.173V3.133l.941.502A2 2 0 0 1 16 5.4zm0 1.16-5.693 3.337L16 13.372v-6.5Zm-8 3.199 7.941 4.412A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516zm-8 3.3 5.693-3.162L0 6.873v6.5Z"/></svg></span><span class="menu-bar__name">Kartu Penugasan</span></span></a></li>
 								{{-- @endcan --}}
 								@can('View PKPT')
-									<li class="{{ Request::is('PKPT') || Request::is('PKPT/create') || Request::is('PKPT/edit/*') ? 'active' : '' }}"><a href="{{url('/PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon pkpt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-puzzle-fill" viewBox="0 0 16 16"><path d="M3.112 3.645A1.5 1.5 0 0 1 4.605 2H7a.5.5 0 0 1 .5.5v.382c0 .696-.497 1.182-.872 1.469a.5.5 0 0 0-.115.118l-.012.025L6.5 4.5v.003l.003.01q.005.015.036.053a.9.9 0 0 0 .27.194C7.09 4.9 7.51 5 8 5c.492 0 .912-.1 1.19-.24a.9.9 0 0 0 .271-.194.2.2 0 0 0 .036-.054l.003-.01v-.008l-.012-.025a.5.5 0 0 0-.115-.118c-.375-.287-.872-.773-.872-1.469V2.5A.5.5 0 0 1 9 2h2.395a1.5 1.5 0 0 1 1.493 1.645L12.645 6.5h.237c.195 0 .42-.147.675-.48.21-.274.528-.52.943-.52.568 0 .947.447 1.154.862C15.877 6.807 16 7.387 16 8s-.123 1.193-.346 1.638c-.207.415-.586.862-1.154.862-.415 0-.733-.246-.943-.52-.255-.333-.48-.48-.675-.48h-.237l.243 2.855A1.5 1.5 0 0 1 11.395 14H9a.5.5 0 0 1-.5-.5v-.382c0-.696.497-1.182.872-1.469a.5.5 0 0 0 .115-.118l.012-.025.001-.006v-.003l-.003-.01a.2.2 0 0 0-.036-.053.9.9 0 0 0-.27-.194C8.91 11.1 8.49 11 8 11s-.912.1-1.19.24a.9.9 0 0 0-.271.194.2.2 0 0 0-.036.054l-.003.01v.002l.001.006.012.025c.016.027.05.068.115.118.375.287.872.773.872 1.469v.382a.5.5 0 0 1-.5.5H4.605a1.5 1.5 0 0 1-1.493-1.645L3.356 9.5h-.238c-.195 0-.42.147-.675.48-.21.274-.528.52-.943.52-.568 0-.947-.447-1.154-.862C.123 9.193 0 8.613 0 8s.123-1.193.346-1.638C.553 5.947.932 5.5 1.5 5.5c.415 0 .733.246.943.52.255.333.48.48.675.48h.238z"/></svg></span><span class="menu-bar__name">PKPT</span><span class="menu-bar__count ntfmax__bgc--2">{{ $SidebarInf['market_place'] }}</span></span></a></li>
+									<li class="{{ Request::is('PKPT') || Request::is('PKPT/create') || Request::is('PKPT/edit/*') ? 'active' : '' }}"><a href="{{url('/PKPT')}}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon PKPT-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-puzzle-fill" viewBox="0 0 16 16"><path d="M3.112 3.645A1.5 1.5 0 0 1 4.605 2H7a.5.5 0 0 1 .5.5v.382c0 .696-.497 1.182-.872 1.469a.5.5 0 0 0-.115.118l-.012.025L6.5 4.5v.003l.003.01q.005.015.036.053a.9.9 0 0 0 .27.194C7.09 4.9 7.51 5 8 5c.492 0 .912-.1 1.19-.24a.9.9 0 0 0 .271-.194.2.2 0 0 0 .036-.054l.003-.01v-.008l-.012-.025a.5.5 0 0 0-.115-.118c-.375-.287-.872-.773-.872-1.469V2.5A.5.5 0 0 1 9 2h2.395a1.5 1.5 0 0 1 1.493 1.645L12.645 6.5h.237c.195 0 .42-.147.675-.48.21-.274.528-.52.943-.52.568 0 .947.447 1.154.862C15.877 6.807 16 7.387 16 8s-.123 1.193-.346 1.638c-.207.415-.586.862-1.154.862-.415 0-.733-.246-.943-.52-.255-.333-.48-.48-.675-.48h-.237l.243 2.855A1.5 1.5 0 0 1 11.395 14H9a.5.5 0 0 1-.5-.5v-.382c0-.696.497-1.182.872-1.469a.5.5 0 0 0 .115-.118l.012-.025.001-.006v-.003l-.003-.01a.2.2 0 0 0-.036-.053.9.9 0 0 0-.27-.194C8.91 11.1 8.49 11 8 11s-.912.1-1.19.24a.9.9 0 0 0-.271.194.2.2 0 0 0-.036.054l-.003.01v.002l.001.006.012.025c.016.027.05.068.115.118.375.287.872.773.872 1.469v.382a.5.5 0 0 1-.5.5H4.605a1.5 1.5 0 0 1-1.493-1.645L3.356 9.5h-.238c-.195 0-.42.147-.675.48-.21.274-.528.52-.943.52-.568 0-.947-.447-1.154-.862C.123 9.193 0 8.613 0 8s.123-1.193.346-1.638C.553 5.947.932 5.5 1.5 5.5c.415 0 .733.246.943.52.255.333.48.48.675.48h.238z"/></svg></span><span class="menu-bar__name">PKPT</span><span class="menu-bar__count ntfmax__bgc--7">{{ $SidebarInf['market_place'] }}</span></span></a></li>
 								@endcan
 								@can('View RPKH')
-									<li class="{{ Request::is('RPKH') || Request::is('RPKH/create') || Request::is('RPKH/edit/*') ? 'active' : '' }}"><a href="{{url('/RPKH') }}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon rpkh-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/></svg></span><span class="menu-bar__name">RPKH</span></span></a></li>
+									<li class="{{ Request::is('RPKH') || Request::is('RPKH/create') || Request::is('RPKH/edit/*') ? 'active' : '' }}"><a href="{{url('/RPKH') }}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon RPKH-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/></svg></span><span class="menu-bar__name">RPKH</span></span></a></li>
 								@endcan
 								@can('View Reviu')
 									<li class="{{ Request::is('Reviu') || Request::is('Reviu/create') || Request::is('Reviu/edit/*') ? 'active' : '' }}"><a href="{{url('/Reviu') }}"><span class="menu-bar__text"><span class="nftmax-menu-icon nftmax-svg-icon__v8"><svg class="nftmax-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-quote-fill" viewBox="0 0 16 16"><path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM7.194 4.766q.13.188.227.401c.428.948.393 2.377-.942 3.706a.446.446 0 0 1-.612.01.405.405 0 0 1-.011-.59c.419-.416.672-.831.809-1.22-.269.165-.588.26-.93.26C4.775 7.333 4 6.587 4 5.667S4.776 4 5.734 4c.271 0 .528.06.756.166l.008.004c.169.07.327.182.469.324q.128.125.227.272M11 7.073c-.269.165-.588.26-.93.26-.958 0-1.735-.746-1.735-1.666S9.112 4 10.069 4c.271 0 .528.06.756.166l.008.004c.17.07.327.182.469.324q.128.125.227.272.131.188.228.401c.428.948.392 2.377-.942 3.706a.446.446 0 0 1-.613.01.405.405 0 0 1-.011-.59c.42-.416.672-.831.81-1.22z"/></svg></span><span class="menu-bar__name">Reviu</span></span></a></li>
@@ -188,9 +188,9 @@
 					
 
 					<!-- Logout Button -->
-					{{-- <div class="logout-button">
-						<a class="nftmax-btn primary" data-bs-toggle="modal" data-bs-target="#logout_modal"><div class="logo-button__icon"><img src="assets/img/logout.png" alt="#"></div><span class="menu-bar__name">Signout</span></a>
-					</div> --}}
+					<div class="logout-button">
+						<a class="nftmax-btn primary mb-3" data-bs-toggle="modal" data-bs-target="#logout_modal"><div class="logo-button__icon"><img src="assets/img/logout.png" alt="#"></div><span class="menu-bar__name">Signout</span></a>
+					</div>
 				</div>
 				<!-- End Admin Menu -->
 			</div>
@@ -230,12 +230,12 @@
 								<div class="nftmax__sicon close-icon d-xl-none"><img src="/assets/img/menu-toggle.svg" alt="#"></div>
 								<div class="nftmax-header__left">
 									<!-- Search Form -->
-									{{-- <div class="nftmax-header__form">
-										<form class="nftmax-header__form-inner" action="#">
-											<button class="search-btn" type="submit"><img src="/assets/img/search.png" alt="#"></button>
-											<input name="s" value="" type="text" placeholder="Search items, collections...">
-										</form>
-									</div> --}}
+									<div class="nftmax-header__form">
+											<form id="searchForm" class="nftmax-header__form-inner" action="#" method="GET">
+													<button class="search-btn" type="submit" name="submit"><img src="/assets/img/search.png" alt="#"></button>
+													<input name="s" id="searchInput" value="" type="text" placeholder="Cari Modul Tertentu...">
+											</form>
+									</div>
 									<!-- End Search Form -->
 								</div>
 								<div class="nftmax-header__right">
@@ -249,7 +249,7 @@
 													<div class="nftmax-balance nftmax-alarm__hover">
 														<h3 class="nftmax-balance__title">Recent Notification</h3>
 														<!-- NFTMax Balance List -->
-														{{-- <ul class="nftmax-balance_list">
+														<ul class="nftmax-balance_list">
 															@foreach($RecentNotification as $RecentNotification)
 															<li>
 																<div class="nftmax-balance-info">
@@ -261,7 +261,7 @@
 																</div>
 															</li>
 															@endforeach
-														</ul> --}}
+														</ul>
 														<!-- NFTMax Balance Button -->
 														<div class="nftmax-balance__button"><a href="{{ url('/notification') }}" class="nftmax-balance__sell-all">See all Notification</a></div>
 													</div>
@@ -318,25 +318,92 @@
 			</header>
 			<!-- End Header -->
 
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var selectedMenu = document.querySelector('.menu-bar__one .active');
+		
+		if (selectedMenu) {
+			var rect = selectedMenu.getBoundingClientRect();
 			
+			var isInViewport = (
+				rect.top >= 0 &&
+				rect.left >= 0 &&
+				rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+				rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+			);
+			
+			if (!isInViewport) {
+				selectedMenu.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+			}
+		}
+	});
+</script>			
 
-			<script>
-				document.addEventListener('DOMContentLoaded', function() {
-					var selectedMenu = document.querySelector('.menu-bar__one .active');
-					
-					if (selectedMenu) {
-						var rect = selectedMenu.getBoundingClientRect();
-						
-						var isInViewport = (
-							rect.top >= 0 &&
-							rect.left >= 0 &&
-							rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-							rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-						);
-						
-						if (!isInViewport) {
-							selectedMenu.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
-						}
+<script>
+	document.getElementById('searchForm').addEventListener('submit', function(event) {
+			event.preventDefault(); // Menghentikan pengiriman formulir default
+
+			var searchInputValue = document.getElementById('searchInput').value.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, ''); // Mengambil nilai input dan menghilangkan karakter non-alfanumerik
+
+			// Mengirimkan permintaan AJAX ke server untuk mendapatkan daftar nama rute
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', '/getRoutes', true);
+			xhr.onreadystatechange = function() {
+					if (xhr.readyState === XMLHttpRequest.DONE) {
+							if (xhr.status === 200) {
+									var availableModules = JSON.parse(xhr.responseText);
+
+									// Periksa apakah input mirip dengan salah satu nama modul
+									var foundModule = availableModules.find(function(module) {
+											var moduleLowerCase = module.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+											// Cek apakah input pengguna ditemukan di dalam nama modul atau sebaliknya
+											return moduleLowerCase.includes(searchInputValue) || searchInputValue.includes(moduleLowerCase);
+									});
+
+									if (foundModule) {
+											// Jika modul ditemukan, arahkan ke rute modul tersebut
+											window.location.href = '/' + foundModule.replace(/\./g, '/');
+									} else {
+											// Jika tidak ditemukan, tampilkan pesan
+											alert('Modul tidak ditemukan');
+									}
+							} else {
+									console.log('Error: ' + xhr.status);
+							}
 					}
-				});
-			</script>			
+			};
+			xhr.send();
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+    // Memilih menu aktif berdasarkan URL
+    var path = window.location.pathname;
+    $('.menu-bar__one a').each(function() {
+        var href = $(this).attr('href');
+        if (path.includes(href)) {
+            $(this).closest('li').addClass('active');
+        }
+    });
+
+    // Menambahkan animasi saat menu di klik
+    $('.menu-bar__one a').on('click', function(e) {
+        e.preventDefault();
+        var $li = $(this).closest('li');
+
+        // Menghapus kelas active dari semua elemen
+        $('.menu-bar__one li').removeClass('active');
+        
+        // Menambahkan kelas active pada elemen yang diklik
+        $li.addClass('active');
+
+        // Simulasi perpindahan halaman (contoh)
+        var href = $(this).attr('href');
+        setTimeout(function() {
+            window.location.href = href; // Pindahkan halaman
+        }, 300); // Waktu animasi CSS (300ms) sesuai dengan transition
+    });
+});
+
+</script>

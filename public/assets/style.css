@@ -863,9 +863,13 @@ option[selected] {
 .menu-bar li .menu-bar__text i{
 	transition:all 0.3s ease;
 }
-.menu-bar li:hover .menu-bar__name,
+
+.menu-bar li:hover .menu-bar__name {
+	color: #5356FB;
+}
+
 .menu-bar li.active  .menu-bar__name{
-	color:#5356FB;
+	color:#fff;
 } 
 .menu-bar li.active-icon:before{
 	opacity:1;
@@ -936,19 +940,28 @@ option[selected] {
 	transition: all 0.3s ease;
 	color: #374557;
 }
-.menu-bar li:hover .menu-bar__text .nftmax-menu-icon,
-.menu-bar li.active .menu-bar__text .nftmax-menu-icon{
-	background:#5356FB;
+
+.menu-bar li:hover .menu-bar__text .nftmax-menu-icon {
+	background: #5356FB;
 }
+
+.menu-bar li.active .menu-bar__text .nftmax-menu-icon{
+	background:#EEEEEE;		
+	color: #3572EF;
+}
+
 .menu-bar__text .nftmax-menu-icon .nftmax-svg-icon {
 	width: 16px;
 	height: 16px;
 	fill: currentColor;
 	color: #374557;
 }
-.menu-bar li:hover .nftmax-menu-icon .nftmax-svg-icon,
+.menu-bar li:hover .nftmax-menu-icon .nftmax-svg-icon {
+	fill: #fff;
+}
+
 .menu-bar li.active .nftmax-menu-icon .nftmax-svg-icon{
-	fill:#fff;
+	fill: #3572EF;
 }
 
 .menu-bar__text .nftmax-menu-icon.nftmax-svg-icon__v3 .nftmax-svg-icon {
@@ -977,6 +990,26 @@ option[selected] {
 	width: 14px;
 	height: 16px;
 }
+
+.menu-bar__one .active {
+	background-color: #615EFC;
+	/* Warna biru */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	/* Shadow tipis */
+	border-radius: 8px;
+	/* Border radius untuk ujung tidak tajam */
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	/* Animasi smooth */
+	padding-left: 20px;
+}
+
+.menu-bar__one .active a {
+	color: #fff;
+	/* Warna teks putih */
+	transition: color 0.3s ease;
+	/* Animasi smooth untuk teks */
+}
+
 .menu-bar img {
 	margin-right: 10px;
 }

@@ -33,6 +33,16 @@ use App\Http\Controllers\{
 |
 */
 
+Route::get('/getRoutes', function () {
+    $routes = collect(Route::getRoutes())->map(function ($route) {
+        return $route->getName();
+    })->filter(function ($name) {
+        return !is_null($name) && $name != 'getRoutes'; // Menghindari rute tanpa nama dan rute /getRoutes sendiri
+    })->values();
+
+    return response()->json($routes);
+});
+
 Route::get('/', [Auth::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [Auth::class, 'login'])->name('login.call');
 Route::post('/logout', [Auth::class, 'logout'])->name('logout');

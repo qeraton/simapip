@@ -135,10 +135,7 @@
                                         </tbody>
                                         <!-- End NFTMax Table Body -->
                                     </table>
-                                    {{-- <div id="no-data-message"
-                                        style="display: none; background-color: #f44336; color: white; padding: 10px; margin-top: 10px; border-radius: 5px; font-size: 16px;">
-                                        Data tidak ditemukan
-                                    </div> --}}
+
                                     <!-- End NFTMax Table -->
                                 </div>
                             </div>
