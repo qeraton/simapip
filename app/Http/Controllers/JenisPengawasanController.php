@@ -91,16 +91,5 @@ class JenisPengawasanController extends Controller
         return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 
-    public function list(Request $request)
-    {
-        $data = JenisPengawasan::query();
-
-        if ($request->pageSize == "all") {
-            return $this->returnJsonSuccess("Userlist retrieved successfully", $data->get());
-        }
-
-        $data = $data->paginate($request->pageSize ?? 1);
-
-        return $this->returnJsonSuccess("Userlist retrieved successfully", $data);
-    }
+    //  
 }

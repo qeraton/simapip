@@ -10,6 +10,7 @@ use Session;
 use App\Models\{
     UnitKerja,
     PKPT,
+    JenisPengawasan
 };
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,11 +43,11 @@ class PKPTController extends Controller
         return response()->json($units);
     }
 
-
     public function create()
     {
         $units = DB::table('unit_kerja')->select('id', 'nama_unit')->get();
-        return view('PKPT.create', compact('units'));
+        $jenisPengawasan = DB::table('ref_jenis_pengawasan')->select('id', 'nama')->get();
+        return view('PKPT.create', compact('units', 'jenisPengawasan'));
     }
 
     public function store(Request $request)
@@ -54,7 +55,7 @@ class PKPTController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required|string|max:10',
             'nama' => 'required|string|max:225',
-            'jenis' => 'required|string|max:225',
+            'jenis' => 'required|exists:ref_jenis_pengawasan,id',
             'unit' => 'required|exists:unit_kerja,id',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
@@ -82,12 +83,18 @@ class PKPTController extends Controller
         $unit = UnitKerja::findOrFail($request->unit);
         $unit_name = $unit->nama_unit;
 
+        // Fetch the jenis pengawasan name based on the ID
+        $jenisPengawasan = JenisPengawasan::findOrFail($request->jenis);
+        $jenis_name = $jenisPengawasan->nama;
+
         // Prepare the 'susunan_tim' value
         $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
 
         // Prepare the data array for saving
-        $data = $request->only(['kode', 'nama', 'jenis', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+        // $data = $request->only(['kode', 'nama', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+        $data = $request->only(['kode', 'nama', 'tujuan_audit', 'pj', 'pt_wpj', 'kt', 'at', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
         $data['unit'] = $unit_name; // Use the unit name instead of the ID
+        $data['jenis'] = $jenis_name; // Use the jenis pengawasan name instead of the ID
         $data['susunan_tim'] = $susunanTim;
         $data['waktu_dk'] = $request->filled('waktu_dk') ? $request->waktu_dk : 0;
         $data['waktu_lk'] = $request->filled('waktu_lk') ? $request->waktu_lk : 0;
@@ -98,7 +105,7 @@ class PKPTController extends Controller
 
         try {
             PKPT::create($data);
-            return Redirect::to('/PKPT')->with('success', 'Berhasil Menambahkan data!');
+            return Redirect::to('/PKPT')->with('success', 'Berhasil Menambahkan Data!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal Menambahkan Data: ' . $e->getMessage());
         }
@@ -115,7 +122,8 @@ class PKPTController extends Controller
     {
         $PKPTEdit = PKPT::find($id);
         $units = DB::table('unit_kerja')->select('id', 'nama_unit')->get();
-        return view('PKPT.edit', compact('PKPTEdit', 'units'));
+        $jenisPengawasan = DB::table('ref_jenis_pengawasan')->select('id', 'nama')->get();
+        return view('PKPT.edit', compact('PKPTEdit', 'units', 'jenisPengawasan'));
     }
 
     public function update(Request $request, $id)
@@ -123,7 +131,7 @@ class PKPTController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required|string|max:10',
             'nama' => 'required|string|max:225',
-            'jenis' => 'required|string|max:225',
+            'jenis' => 'required|exists:ref_jenis_pengawasan,id',
             'unit' => 'required|exists:unit_kerja,id',
             'tujuan_audit' => 'required|string|max:225',
             'ruang_lingkup' => 'required|string|max:4',
@@ -151,12 +159,17 @@ class PKPTController extends Controller
         $unit = UnitKerja::findOrFail($request->unit);
         $unit_name = $unit->nama_unit;
 
+        // Fetch the jenis pengawasan name based on the ID
+        $jenisPengawasan = JenisPengawasan::findOrFail($request->jenis);
+        $jenis_name = $jenisPengawasan->nama;
+
         // Prepare the 'susunan_tim' value
         $susunanTim = $request->input('pj') . ' PJ, ' . $request->input('pt_wpj') . ' PT/WPJ, ' . $request->input('kt') . ' KT, ' . $request->input('at') . ' AT';
 
-        // Prepare the data array for saving
-        $data = $request->only(['kode', 'nama', 'jenis', 'pj', 'pt_wpj', 'kt', 'at', 'tujuan_audit', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
+        // Prepare the data array for updating
+        $data = $request->only(['kode', 'nama', 'tujuan_audit', 'pj', 'pt_wpj', 'kt', 'at', 'ruang_lingkup', 'rmp', 'rpl', 'lha', 'peralatan']);
         $data['unit'] = $unit_name; // Use the unit name instead of the ID
+        $data['jenis'] = $jenis_name; // Use the jenis pengawasan name instead of the ID
         $data['susunan_tim'] = $susunanTim;
         $data['waktu_dk'] = $request->filled('waktu_dk') ? $request->waktu_dk : 0;
         $data['waktu_lk'] = $request->filled('waktu_lk') ? $request->waktu_lk : 0;
@@ -166,12 +179,14 @@ class PKPTController extends Controller
         $data['keterangan'] = $request->keterangan ?? '';
 
         try {
-            PKPT::where('id', $id)->update($data);
-            return Redirect::to('/PKPT')->with('success', 'Berhasil mengubah data!');
+            $pkpt = PKPT::findOrFail($id);
+            $pkpt->update($data);
+            return Redirect::to('/PKPT')->with('success', 'Berhasil Memperbarui data!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
-        } 
+            return redirect()->back()->with('error', 'Gagal Memperbarui Data: ' . $e->getMessage());
+        }
     }
+
 
 
     public function destroy(PKPT $PKPTController, $id)

@@ -5,6 +5,9 @@
             <div class="row">	
                 <div class="col-lg-9 col-12 nftmax-main__column">
                     <div class="nftmax-body">
+                        <section class="breadcrumbs">
+                            @include('Layout._includes.breadcrumbs')
+                        </section>
                         <!-- Dashboard Inner -->
                         <div class="nftmax-dsinner">
                         

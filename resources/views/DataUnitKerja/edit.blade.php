@@ -4,6 +4,9 @@
     <div class="container">
         <div class="col-lg-9 col-12 nftmax-main__column">
             <div class="nftmax-body">
+                <section class="breadcrumbs">
+                        @include('Layout._includes.breadcrumbs')
+                    </section>
                 <!-- Dashboard Inner -->
                 <div class="nftmax-dsinner">
                     <!-- All Notification Heading -->

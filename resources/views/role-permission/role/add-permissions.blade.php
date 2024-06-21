@@ -5,8 +5,12 @@
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
                 <div class="nftmax-body strata-body">
+                    <section class="breadcrumbs">
+                        @include('Layout._includes.breadcrumbs')
+                    </section>
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
+
                         <!-- All Notification Heading -->
                         <div class="nftmax-inner__heading">
                             <h2 class="nftmax-inner__page-title">Create, Read(view), Update, Delete</h2>
@@ -14,6 +18,33 @@
                         <!-- End All Notification Heading -->
 
                         <div class="nftmax__item">
+                            <div class="button-form-back">
+                                <button id="btnCancel" class="btnCancel" data-toggle="modal" data-target="#confirmationModal">
+                                        <i class="fas fa-chevron-left"></i> Kembali
+                                </button>
+                            </div>
+
+                            <!-- Modal Confirmation -->
+                            <div id="confirmationModal" class="modal fade">
+                                <div class="modal-dialog modal-confirm modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header flex-column">
+                                            <div class="icon-box">
+                                                <i class="material-icons">&#xE5CD;</i>
+                                            </div>						
+                                            <h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Yakin ingin kembali ke halaman?, Progress Anda Tidak Akan Tersimpan.</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" data-dismiss="modal" aria-label="btn-cancel" class="btn btn-secondary btn-cancel">Tidak</button>
+                                            <button onclick="window.location.href = '<?php echo url('/roles '); ?>'" class="btn btn-danger" type="submit">Ya</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
                             <div class="nftmax__item-heading">
                                 <h2 class="nftmax__item-title nftmax__item-title--psingle">
                                     Beri Permission Untuk Role : <b class="badge bg-primary"><i>{{ $role->name }}</i></b>
@@ -279,8 +310,11 @@
                                     </div>
                                 </div>
 
-                                <div class="nftmax__item-button--group mt-4">
-                                    <a class="btn btn-danger" href="{{ url('roles') }}">Kembali</a>
+                                <hr>
+                                <div class="nftmax__item-button--group mt-3">
+                                    {{-- <a class="btn btn-danger" href="{{ url('roles') }}">Kembali</a> --}}
+                                    {{-- <a id="btnCancel" class="nftmax__item-button--single nftmax__item-button--cancel"
+									    href="{{ url('/PKPT') }}" type="submit">Batal</a> --}}
                                     <button class="btn btn-primary" type="submit">Simpan</button>
                                 </div>
                             </form>

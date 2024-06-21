@@ -5,6 +5,9 @@
 					<div class="row">	
 						<div class="col-lg-9 col-12 nftmax-main__column">
 							<div class="nftmax-body">
+								<section class="breadcrumbs">
+									@include('Layout._includes.breadcrumbs')
+								</section>
 								<!-- Dashboard Inner -->
 								<div class="nftmax-dsinner">
 									<!-- All Notification Heading -->
@@ -46,6 +49,7 @@
 										<h2 class="nftmax__item-title nftmax__item-title--psingle">Silahkan Input Data PKPT Sesuai Dengan Kriteria!</h2>
 										<p class="nftmax__item-text nftmax__item-text--single mb-4">Mohon Input Data Yang Valid!</p>
 										<hr>
+										
 										<div class="row">
 												<div class="col-lg-3 col-md-2 col-12 nftmax-personals__list">
 														<div class="nftmax-psidebar">
@@ -113,17 +117,12 @@
                                               </div>
                                               
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label" for="jenis">Jenis PKPT</label>
+																									<label class="nftmax__item-label" for="jenis">Jenis Pengawasan</label>
 																									<select class="nftmax__item-input" name="jenis" id="jenis" required="required">
-																											<option value="" disabled selected>Pilih Jenis</option>
-																											<option value="Reviu">Reviu</option>
-																											<option value="Evaluasi">Evaluasi</option>
-																											<option value="Monitoring">Monitoring</option>
-																											<option value="Evaluasi dan Monitoring">Evaluasi dan Monitoring</option>
-																											<option value="Pemeriksaan Khusus">Pemeriksaan Khusus</option>
-																											<option value="Audit">Audit</option>
-																											<option value="Audit Operasional">Audit Operasional</option>
-																											<!-- Add more options as needed -->
+																											<option value="" disabled selected>Pilih Jenis Pengawasan</option>
+																											@foreach($jenisPengawasan as $jenis)
+																													<option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
+																											@endforeach
 																									</select>
 																							</div>
 

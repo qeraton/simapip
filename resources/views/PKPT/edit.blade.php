@@ -5,6 +5,9 @@
 					<div class="row">	
 						<div class="col-lg-9 col-12 nftmax-main__column">
 							<div class="nftmax-body">
+								<section class="breadcrumbs">
+									@include('Layout._includes.breadcrumbs')
+								</section>
 								<!-- Dashboard Inner -->
 								<div class="nftmax-dsinner">
 									<!-- All Notification Heading -->
@@ -116,25 +119,14 @@
                                               </div>
                                               
 																							<div class="nftmax__item-form--group">
-																									<label class="nftmax__item-label" for="jenis">Jenis PKPT</label>
-                                                    <select class="nftmax__item-input" name="jenis" id="jenis">
-                                                        @php
-                                                            $jenisOptions = [
-                                                                'Reviu' => 'Reviu',
-                                                                'Evaluasi' => 'Evaluasi',
-                                                                'Monitoring' => 'Monitoring',
-                                                                'Evaluasi dan Monitoring' => 'Evaluasi dan Monitoring',
-                                                                'Pemeriksaan Khusus' => 'Pemeriksaan Khusus',
-                                                                'Audit' => 'Audit',
-                                                                'Audit Operasional' => 'Audit Operasional',
-                                                                // Add more options as needed
-                                                            ];
-                                                        @endphp
-                                                        @foreach ($jenisOptions as $value => $label)
-                                                            <option value="{{ $value }}" {{ $PKPTEdit['jenis'] == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                                        @endforeach
-                                                    </select>
-																										<script>
+																									<label class="nftmax__item-label" for="jenis">Jenis Pengawasan</label>
+																									<select class="nftmax__item-input" name="jenis" id="jenis" required="required">
+																											<option value="" disabled selected>Pilih Jenis Pengawasan</option>
+																											@foreach($jenisPengawasan as $jenis)
+																													<option value="{{ $jenis->id }}" {{ $PKPTEdit->jenis == $jenis->nama ? 'selected' : '' }}>{{ $jenis->nama }}</option>
+																											@endforeach
+																									</select>
+																									<script>
 																										document.addEventListener("DOMContentLoaded", function() {
 																												var select = document.getElementById("jenis");
 																												var selectedOption = select.options[select.selectedIndex];

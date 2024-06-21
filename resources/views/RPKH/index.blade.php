@@ -5,6 +5,9 @@
         <div class="row">
             <div class="col-lg-9 col-12 nftmax-main__column">
                 <div class="nftmax-body">
+                    <section class="breadcrumbs">
+                        @include('Layout._includes.breadcrumbs')
+                    </section>
                     <!-- Dashboard Inner -->
                     <div class="nftmax-dsinner">
 
@@ -29,16 +32,6 @@
                                 <h3 class="nftmax-table__title mb-0">DATA RPKH
                                     {{-- <span class="nftmax-table__badge">{{ $total }}</span> --}}
                                 </h3>
-                                {{-- <div class="nftmax-marketplace__bar-right">
-                                    <div class="nftmax-marketplace__bar-one">
-                                        <div class="nftmax-marketplace__bar-search">
-                                            <button id="btn-search" class="search-btn" type="button"><img
-                                                    src="/assets/img/search.png" alt="#"></button>
-                                            <input name="txt-search" id="txt-search" value="" type="text"
-                                                placeholder="Search...">
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="table_1" role="tabpanel"
